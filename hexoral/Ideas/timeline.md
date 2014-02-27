@@ -1,4 +1,4 @@
-#Hexóral
+#Hexoral
 ##A game developed by group *ptoma*
 
 - Map generation
