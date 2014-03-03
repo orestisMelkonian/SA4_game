@@ -16,6 +16,7 @@ public class Map {
 		this.sizeY = 30;
 		
 		/*
+		 just in case brothers
 		for (int i=0; i<=this.sizeX; i++) {
 			for (int j=0; j<=this.sizeY; j++) {
 				this.list.add(new Hexagon(Hexagon.type.LAND)); 
