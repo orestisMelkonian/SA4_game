@@ -1,5 +1,10 @@
 package ptoma.hexoral;
 
+/**
+ * Hexagon tiles
+ * @author Stefanos
+ *
+ */
 public class Hexagon {
 	static public enum directions {TOP_LEFT,TOP_RIGHT,RIGHT,BOTTOM_RIGHT,BOTTOM_LEFT,LEFT};
 	static public enum type {SEA,LAND};
@@ -7,10 +12,29 @@ public class Hexagon {
 	 * Type of terrain
 	 */
 	private type terrainType;
+	/**
+	 * Coordinates of hexagon
+	 */
+	private Coords w;
 	
-	
+	/**
+	 * Basic Constructor of Hexagon
+	 * Coords are (0,0)
+	 * @param terrainType for type of terrain
+	 */
 	public Hexagon(type terrainType) {
 		this.terrainType = terrainType;
+		this.w = new Coords(0, 0);
+	}
+	
+	/**
+	 * Constructor for hexagon based on terrain and location
+	 * @param terrainType for type of terrain
+	 * @param w for the location of the hexagon
+	 */
+	public Hexagon(type terrainType,Coords w) {
+		this.terrainType = terrainType;
+		this.w = w;
 	}
 	
 	@Override
@@ -35,5 +59,22 @@ public class Hexagon {
 	 */
 	public void setType(type terrainType) {
 		this.terrainType = terrainType;
+	}
+	
+	/**
+	 * Getter for coords of hexagon
+	 * @return Coords of Hexagon
+	 */
+	public Coords getCoords() {
+		return this.w;
+	}
+	
+	/**
+	 * Setter for coordinates for hexagon
+	 * @param x X coordinate
+	 * @param y Y coordinate
+	 */
+	public void setCoords(int x,int y) {
+		this.w = new Coords(x,y);
 	}
 }
