@@ -76,6 +76,7 @@ public class Map {
 		this.sizeY = y;
 	}
 	
+	
 	/**
 	 *	@author Orestis
 	 * @return String Map dimension
