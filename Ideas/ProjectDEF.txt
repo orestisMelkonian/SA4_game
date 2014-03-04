@@ -1,0 +1,72 @@
+Project Name: Lanza Wars
+
+Main Goal of the game:
+Destroy Enemies' base.
+
+-Main Base
+This is where you start the game, here you can build anything that you want and manage your game. if you lose this base you lose the game.
+
+-Currency
+The currency of the game are the soldiers. Each player start the game with an amount of soldier and then they can create Dynamic/Static units on the map to conquer the territory and then work towards the main goal of the game. Every turn each player receive an amount of soldiers.
+*Begin Match: 100 Soldiers
+*Turn: 10 Soldiers
+
+-Units
+The units are getting "free" according to the time of the game.
+There are different types of units:
+	-Dynamic
+		-Sea
+			Ships of 3 different sizes
+			Small -> Faster but Weaker (cost: 2 soldiers)
+			Medium -> Speed and Strenght equal (cost: 4~6 soldiers)
+			Big -> Slow but Stronger (cost: 6~10 soldiers)
+		-Air
+			Planes of 3 different sizes
+			Small -> Faster but Weaker (cost: 2 soldiers)
+			Medium -> Speed and Strenght equal (cost: 4~6 soldiers)
+			Big -> Slow but Stronger (cost: 6~10 soldiers)
+		-Land 
+			Automobiles of 3 different sizes
+			Small -> Faster but Weaker (cost: 2 soldiers)
+			Medium -> Speed and Strenght equal (cost: 4~6 soldiers)
+			Big -> Slow but Stronger (cost: 6~10 soldiers)
+	-Static
+		-Sea
+			Dock -> Create the ships and put their in the map
+			Lighttower -> increase the view of the "sea" by an radius.
+			SeaBase -> Create ships but this base is located in the middle of the sea.
+
+		-Air
+			Satelite -> increase your fog view (visibility in the map)
+			Drones -> increase your fog view for land dynamic units.
+			Transportation of soldiers
+		-Land 
+			Towers -> can hold 2 soldiers
+			HQ -> To Create units
+			Scouts -> a view of the map for x turns. (other scouts can spot they)
+
+-Neutral Bases
+This bases are distributed in the map randonly and they have no use untill someone conquers it or destroy it. After conquer a base, this base becomes an copy of the main base and you can manage the game from two bases, changing the objective of the game. in this case where you have 2 bases you can only loose if both of them are dominated or destroyed. The life of the neutral bases are half of the main. 
+
+-Fog
+Fog is the amount of visibility that you have of the map. for each unit you have an range of visibility. Each Dynamic unit has a fog view 1 hexagon bigger than the movement of that unit.
+
+-Turn Based
+First turn is just based to create your units, after the first turn you can just move your units throug the map, an unit that was created cannot be moved at the same turn. 
+In each turn you can make one action per unit and create how many units you can create.
+
+-Battle
+Battle is the way where the players can get an advantage on game againts the other players. 
+A Battle happens everytime that two opposite units reach on side of each other. (some tanks has a bigger area of attack)
+We have just two ways to begin a battle one is forced and the other is on strategic way.
+If an unit see the enemy unit in his range of view he can just click to attack that unit and if the enemy unit does not run away in the maximum range of the tank they cant fight.
+An forced battle happen by proximity, everytime that two opposite units getter is a distance less than one hexagon or reach the same hexagon a fight occurs. 
+
+The battles are calculated in the following way.
+Lets assume that we have an Unit called Alfa with 6 Soldiers inside, and the enemy one called Beta with 6 enemy soldiers.
+When a battle begin dont matter who begins the fight, both units will fight. and for this works like this we have 6 soldiers inside each tank so we throw 6 dices creating a "fight" between each soldier inside both tanks. then when its finished we take the min value of the survivors of (both tanks) and then we do a fight again, and again untill one of the tanks reach 0 soldiers. 
+
+The calculations are a dice of 10 sides and by the points of his attributes and how many soldiers they have in field the calculation can give a bonus for one of the players.
+
+
+
