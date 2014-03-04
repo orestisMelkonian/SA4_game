@@ -31,13 +31,14 @@ public class Coords {
 	@Override
 	public boolean equals(Object obj) {
 		Coords c = (Coords) obj;
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
 		if (obj == this) {
 			return true;
-		} else if (obj == null) {
-			return false;
 		} else {
 			return this.x == c.x && this.y == c.y;
 		}
 	}
-	
+
 }
