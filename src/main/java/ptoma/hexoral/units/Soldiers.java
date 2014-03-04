@@ -1,4 +1,4 @@
-package ptoma.hexoral;
+package ptoma.hexoral.units;
 
 /**
  * Use of Soldiers as currency

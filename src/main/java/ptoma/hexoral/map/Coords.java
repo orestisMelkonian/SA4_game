@@ -1,4 +1,4 @@
-package ptoma.hexoral;
+package ptoma.hexoral.map;
 
 public class Coords {
 	/**

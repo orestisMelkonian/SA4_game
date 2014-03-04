@@ -1,4 +1,6 @@
-package ptoma.hexoral;
+package ptoma.hexoral.units;
+
+import ptoma.hexoral.map.Coords;
 
 public interface Unit {
 	//boolean isDestroyed;

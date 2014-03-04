@@ -1,4 +1,6 @@
-package ptoma.hexoral;
+package ptoma.hexoral.map;
+
+import ptoma.hexoral.map.Hexagon.type;
 
 //import java.util.ArrayList;
 //import SHIT
