@@ -39,4 +39,5 @@ public class Coords {
 			return this.x == c.x && this.y == c.y;
 		}
 	}
+	
 }
