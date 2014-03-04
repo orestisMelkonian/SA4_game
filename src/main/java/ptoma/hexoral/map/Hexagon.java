@@ -1,4 +1,5 @@
-package ptoma.hexoral;
+package ptoma.hexoral.map;
+
 
 // TODO Add more types to enum type
 
