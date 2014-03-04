@@ -62,6 +62,20 @@ public class Hexagon {
 		this.w = w;
 	}
 
+	/**
+	 * Constructor for Hexagons based on location represented in ints.
+	 * 
+	 * @param terrainType
+	 *            type of terrain.
+	 * @param x
+	 *            X coordinate.
+	 * @param y
+	 *            Y coordinate.
+	 */
+	public Hexagon(type terrainType, int x, int y) {
+
+	}
+
 	@Override
 	public String toString() {
 		return "Hello world from Hexagon";
