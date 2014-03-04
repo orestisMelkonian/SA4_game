@@ -5,7 +5,7 @@
 
 package ptoma.hexoral;
 
-public class Fog implements Unit{
+public class Fog{
 	
 	
 	

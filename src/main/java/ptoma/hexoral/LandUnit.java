@@ -1,6 +1,6 @@
 package ptoma.hexoral;
 
-public class LandUnit implements Unit{
+public class LandUnit {
 	
 	
 	public LandUnit(){
