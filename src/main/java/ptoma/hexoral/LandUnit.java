@@ -1,12 +1,7 @@
 package ptoma.hexoral;
 
-public class LandUnit {
+public interface LandUnit extends Unit{
 	
-	
-	public LandUnit(){
-		
-		
-		
-	}
+
 
 }

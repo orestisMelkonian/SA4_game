@@ -1,11 +1,6 @@
 package ptoma.hexoral;
 
-public class SeaUnit{
+public interface SeaUnit extends Unit{
 	
-	
-	public SeaUnit() {
-		
-		
-	}
 
 }
