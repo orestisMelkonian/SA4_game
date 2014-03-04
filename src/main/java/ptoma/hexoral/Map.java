@@ -1,7 +1,8 @@
 package ptoma.hexoral;
 
-//import java.util.ArrayList;
-//import SHIT
+import java.io.*;
+import java.util.Scanner;
+
 public class Map {
 	private int sizeX;
 	private int sizeY;
@@ -16,11 +17,6 @@ public class Map {
 		this.sizeY = 30;
 		
 		matrix = new Hexagon [sizeX][sizeY];
-		for (int i=0; i<this.sizeX; i++) {
-			for (int j=0; j<this.sizeY; j++) {
-				 matrix[i][j] = new Hexagon(Hexagon.type.LAND);
-			}
-		}
 	}
 	
 	/**
@@ -35,7 +31,7 @@ public class Map {
 		matrix = new Hexagon [sizeX][sizeY];
 		for (int i=0; i<this.sizeX; i++) {
 			for (int j=0; j<this.sizeY; j++) {
-				 matrix[i][j] = new Hexagon(Hexagon.type.LAND);
+				matrix[i][j] = new Hexagon(Hexagon.type.LAND);
 			}
 		}
 	}
@@ -50,18 +46,18 @@ public class Map {
 	}
 	
 	/**
-	 * sizeX setter
-	 * @author Orestis
-	 * @param the new sizeX value
+	 * sizeX setter.
+	 * @author Orestis.
+	 * @param the new sizeX value.
 	 */
 	public void setSizeX(int x) {
 		this.sizeX = x;
 	}
 	
 	/**
-	 * sizeY getter
-	 *	@author Orestis
-	 * @return int sizeY
+	 * sizeY getter.
+	 *	@author Orestis.
+	 * @return int sizeY.
 	 */
 	public int getSizeY() {
 		return (this.sizeY);
@@ -83,5 +79,41 @@ public class Map {
 	 */
 	public String getDimension() {
 		return (this.sizeX+"x"+this.sizeY);
+	}
+	
+	/**
+	 * prints type of terrain.
+	 * @param x horizontal coordinate.
+	 * @param y vertical coordinate.
+	 */
+	public void getTerrainType(int x,int y) {
+		System.out.println(matrix[x][y].getType());
+	}
+	
+	public void fillInMap() {
+		
+        File text = new File("/Users/usi/Desktop/MAP_01.txt");
+
+        Scanner scnr = null;
+		try {
+			scnr = new Scanner(text);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        int lineNumber = 0;
+        while(lineNumber < this.sizeY){
+            String line = scnr.nextLine();
+            for (int i = 0; i < this.sizeX; i++) {
+            	if (line.charAt(i) == 'S') {
+            		matrix[i][lineNumber] = new Hexagon(Hexagon.type.SEA);
+            	}
+            	else if (line.charAt(i) == 'L') {
+            		matrix[i][lineNumber] = new Hexagon(Hexagon.type.LAND);
+            	}
+            }
+            lineNumber++;
+        }	
 	}
 }

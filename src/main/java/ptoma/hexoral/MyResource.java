@@ -4,7 +4,9 @@ package ptoma.hexoral;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+
 import java.*;
+import java.io.FileNotFoundException;
 import java.lang.*;
 
 /** Example resource class hosted at the URI path "/myresource"
@@ -22,7 +24,9 @@ public class MyResource {
         return "Hi there!";
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
     	System.out.println("Hello World");
+    	Map temp = new Map();
+    	temp.fillInMap();
     }
 }
