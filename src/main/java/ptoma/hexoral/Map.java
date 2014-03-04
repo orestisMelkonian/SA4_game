@@ -1,11 +1,11 @@
 package ptoma.hexoral;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Map {
-	private ArrayList<Hexagon> list = new ArrayList<Hexagon>();
 	private int sizeX;
 	private int sizeY;
+	private Hexagon [][] matrix;
 	
 	/**
 	 * @author Orestis
@@ -15,14 +15,12 @@ public class Map {
 		this.sizeX = 30;
 		this.sizeY = 30;
 		
-		/*
-		 just in case brothers
-		for (int i=0; i<=this.sizeX; i++) {
-			for (int j=0; j<=this.sizeY; j++) {
-				this.list.add(new Hexagon(Hexagon.type.LAND)); 
+		matrix = new Hexagon [sizeX][sizeY];
+		for (int i=0; i<this.sizeX; i++) {
+			for (int j=0; j<this.sizeY; j++) {
+				 matrix[i][j] = new Hexagon(Hexagon.type.LAND);
 			}
 		}
-		*/
 	}
 	
 	/**
@@ -34,13 +32,12 @@ public class Map {
 		this.sizeX = x;
 		this.sizeY = y;
 		
-		/*
-		for (int i=0; i<=this.sizeX; i++) {
-			for (int j=0; j<=this.sizeY; j++) {
-				this.list.add(new Hexagon(Hexagon.type.LAND)); 
+		matrix = new Hexagon [sizeX][sizeY];
+		for (int i=0; i<this.sizeX; i++) {
+			for (int j=0; j<this.sizeY; j++) {
+				 matrix[i][j] = new Hexagon(Hexagon.type.LAND);
 			}
 		}
-		*/
 	}
 	
 	/**
@@ -86,7 +83,4 @@ public class Map {
 	public String getDimension() {
 		return (this.sizeX+"x"+this.sizeY);
 	}
-	
-	
-	
 }
