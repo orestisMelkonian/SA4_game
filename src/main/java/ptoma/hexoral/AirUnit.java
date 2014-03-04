@@ -1,10 +1,7 @@
 package ptoma.hexoral;
 
-public class AirUnit {
+public interface AirUnit extends Unit{
 	
-	
-	public AirUnit(){
-		
-	}
+
 
 }
