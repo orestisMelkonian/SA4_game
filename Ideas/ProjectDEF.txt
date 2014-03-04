@@ -3,7 +3,7 @@ Project Name: Lanza Wars
 Main Goal of the game:
 Destroy Enemies' base.
 
--Main Base
+-Main Base.
 This is where you start the game, here you can build anything that you want and manage your game. if you lose this base you lose the game.
 
 -Currency
