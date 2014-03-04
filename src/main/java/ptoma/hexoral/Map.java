@@ -1,7 +1,7 @@
 package ptoma.hexoral;
 
 //import java.util.ArrayList;
-
+//import SHIT
 public class Map {
 	private int sizeX;
 	private int sizeY;
