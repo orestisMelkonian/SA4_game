@@ -4,7 +4,7 @@ package ptoma.hexoral;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-
+import ptoma.hexoral.map.*;
 import ptoma.hexoral.map.*;
 
 import java.*;
