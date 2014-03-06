@@ -71,3 +71,16 @@
 	* Type : Non-functional (Performance).
 	* Summary : After players submit their moves, server should implemenet the action in maximum of 30 seconds.
 	* Description : When the actions are submited the server must make all computations (moves,change of values,attacks and battle outcomes) within a logical time. e.g. (per say 30 seconds)
+
+
+##Map Generation  _Stefanos Gatsios_
+1. Develop Basic templates for map, different sizes 
+2. Random generated maps based on templates //Complex
+3. Algorithm for valid moves, accessability from each hexagon ,units cannot pass thru sea for example
+4. Range based searching on based based on points.
+
+##Server Side _Stefanos Gatsios & Hanieh_
+1. Notification on users.
+2. Logging of actions, online record
+3. Account management, friends
+4. Resolutions for inactive players and network errors
