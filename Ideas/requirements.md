@@ -55,7 +55,7 @@
 6. Combat.
 	* Type : Functional.
 	* Summary : Players can attack other players.
-	* Description : By using
+	* Description : By using the attack units the players will be able to attack the opponent player, but the combat is triggered only when the units are next to each other and both.
 
 7. Server.
 	* Type : Functional.

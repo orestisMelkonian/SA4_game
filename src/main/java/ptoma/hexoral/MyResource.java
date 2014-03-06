@@ -5,6 +5,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import ptoma.hexoral.map.*;
+
 import java.*;
 import java.io.FileNotFoundException;
 import java.lang.*;
@@ -27,6 +29,6 @@ public class MyResource {
     public static void main(String[] args) throws FileNotFoundException {
     	System.out.println("Hello World");
     	Map temp = new Map();
-    	temp.fillInMap();
+    	//temp.fillInMap();
     }
 }
