@@ -142,4 +142,9 @@ public class Map {
 		}
 		return ret;
 	}
+
+	public void fillInMap() {
+		// TODO Auto-generated method stub
+		
+	}
 }
