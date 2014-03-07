@@ -9,9 +9,9 @@
 | Unit generation | Vitor
 | UI | Hanieh
 | Combat Mechanics | Lokesh
-| Server side | Stefanos & Hanieh
+| Server side | Lokesh & Hanieh
 | Game Logic | Orestis
-| Multiplayer | Lokesh
+| Multiplayer | Stefanos
 | RPG Elements | Orestis 
 
 ##Core Requirements
