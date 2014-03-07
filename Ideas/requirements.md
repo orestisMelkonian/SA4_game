@@ -20,7 +20,7 @@
 - Currency
 - Turn based Logic
 - Combat
-- Asychronous Multiplayer Aspect
+- Asynchronous Multiplayer Aspect
 - Server
 - Ethical Constraints
 - Legislative Issues
@@ -49,7 +49,7 @@
 	* Summary : The player will play in turns.
 	* Description : Each player has a restricted amount of time to perform his actions. 
 
-5. Asynchronus Multiplayer Aspects.
+5. Asynchronous Multiplayer Aspects.
 	* Type : Functional.
 	* Summary : The game supports many players playing together and no artificial intelligence is involved.
 	* Description : Every player has a limited amount of time to coordinate his moves, once every player has completed their moves, the turn is performed, with the exception of a player exceeding the available time.
@@ -71,8 +71,8 @@
 
 9. Server Response Time.
 	* Type : Non-functional (Performance).
-	* Summary : After players submit their moves, server should implemenet the action in maximum of 30 seconds.
-	* Description : When the actions are submited the server must make all computations (moves,change of values,attacks and battle outcomes) within a logical time. e.g. (per say 30 seconds)
+	* Summary : After players submit their moves, server should implement the action in maximum of 30 seconds.
+	* Description : When the actions are submitted the server must make all computations (moves,change of values,attacks and battle outcomes) within a logical time. e.g. (per say 30 seconds)
 
 10. Ethical Constraints
 	* Type : Non-functional
@@ -122,15 +122,15 @@
 	* Summary: Reducing game mechanics complexity
 	* Description: If the game mechanics are difficult to comprehend players will immediately get bored. This involves a limited amount of unit types(three), clear combat mechanics, etc. 
 	
-- Offence-Defence Aspect
+- Offense-Defense Aspect
 	* Type: Non-functional
-	* Summary: Clear differentiation of attack and defence.
+	* Summary: Clear differentiation of attack and defense.
 	* Description: When a combat occurs, one player is attacking and the other one is defending. This has impact on the damage factors, soldiers at stake. This will be decided by the previous movement (that brought the units to the point of battle) and the position on the map (according to headquarters location).
 	
 - Punishment for non-strategic play
 	*Type: Non-functional
 	*Summary: Strategy is mandatory!
-	*Description: When a thoughtless move is made by a player, bad concequancies will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
+	*Description: When a thoughtless move is made by a player, bad consequences will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
 
 ####Advanced Requirements
 
@@ -156,15 +156,15 @@
 	
 - Restricted player knowledge
 	* Type: Functional	 
-	* Summary: Conceiling implementations of the system and certain elements of the environment.
-	* Description: For interest to be continously present in the game flow, information should appear in different time positions (e.g. fog of war to conceil map / reveal when units provide visibility ).
+	* Summary: Concealing implementations of the system and certain elements of the environment.
+	* Description: For interest to be continuously present in the game flow, information should appear in different time positions (e.g. fog of war to conceal map / reveal when units provide visibility ).
 
 ####Complex Requirements
 
 - Diversity VS Homogeny
 	* Type: Functional / Non-functional
-	* Summary: Stable/unstable element in the availbale paths.
-	* Description: Supported by the rpg elements of the game, each player will be able to create a unique path that will have a huge roll on team-based battles (e.g. a team  of a navy admiral and an explosives expert would benefit from an economy expert and achive great balance). There will be stable paths that can withstand any diverse situations and unstable ones, which will provide the player freedom to decide how he will adapt to different situations.
+	* Summary: Stable/unstable element in the available paths.
+	* Description: Supported by the rpg elements of the game, each player will be able to create a unique path that will have a huge roll on team-based battles (e.g. a team  of a navy admiral and an explosives expert would benefit from an economy expert and achieve great balance). There will be stable paths that can withstand any diverse situations and unstable ones, which will provide the player freedom to decide how he will adapt to different situations.
 
 - Long-term Goals
 	* Type: Functional / Non-functional
@@ -184,7 +184,7 @@
 	* Description: If a player has a single option for one thing, it shouldn't be an option, but implemented by the system.
 
 - Clear feedback of choices
-	* Type: Funtional
+	* Type: Functional
 	* Summary: Positive/negative feedback to player choices
 	* Description: A choice must provide feedback in short time, so players will be able to develop a concrete,a assured strategy.
 	
@@ -214,12 +214,12 @@
 - Unique player paths
 	* Type: Funcional
 	* Summary: Different talent trees
-	* Description: When a player levels up, talent points will be awarded that can be spent for evolution in a different tree. That will provide many possible talent trees with different pros and cons. It also produce great interest in team-based games where the choice a which players should cooperate will provide many meaningful aspects to analyse.
+	* Description: When a player levels up, talent points will be awarded that can be spent for evolution in a different tree. That will provide many possible talent trees with different pros and cons. It also produce great interest in team-based games where the choice a which players should cooperate will provide many meaningful aspects to analyze.
 
 - Player-Character Identification
 	* Type: Non-functional
 	* Summary: Make the user play the role of his character
-	* Description: The player should identify hiself with his character, so as more sentimental connection is present in the game. Gaining levels will be equivalent to improving oneself's personality (restricted by ethical constraints)
+	* Description: The player should identify himself with his character, so as more sentimental connection is present in the game. Gaining levels will be equivalent to improving oneself's personality (restricted by ethical constraints)
 
 - Unique hero units
  	* Type: Functional	
@@ -232,4 +232,4 @@
 - Unique appearance
 	* Type: Non-functional
 	* Summary: Player can parametrize the visual aspect of the game
-	* Description: The player is able to decide the appearance of his units,biulding,etc... completely independent from the gameplay. This is an additional patch to the requirement 'Player-Character Identification'
+	* Description: The player is able to decide the appearance of his units,building,etc... completely independent from the gameplay. This is an additional patch to the requirement 'Player-Character Identification'
