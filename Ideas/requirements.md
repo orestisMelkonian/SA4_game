@@ -183,7 +183,7 @@
 	* Description: If the game mechanics are difficult to comprehend players will immediately get bored. This involves a limited amount of unit types(three), clear combat mechanics, etc. 
 	
 3. Offence-Defence Aspect
-	* Type: Non-functional
+	* Type: Functional
 	* Summary: Clear differentiation of attack and defence.
 	* Description: When a combat occurs, one player is attacking and the other one is defending. This has impact on the damage factors, soldiers at stake. This will be decided by the previous movement (that brought the units to the point of battle) and the position on the map (according to headquarters location).
 	
