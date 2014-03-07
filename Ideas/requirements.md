@@ -337,7 +337,7 @@
 	* Description: After each battle the winner of the battle will receive a prize(i.e., more currency) which will act as motivation factor in the game.
 
 
-###Server _Lokesh and Hanieh_
+###Server Side _Lokesh and Hanieh_
 
 ####Basic Requirements
 
