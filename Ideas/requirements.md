@@ -293,3 +293,96 @@
 	* Type: Non-functional
 	* Summary: Player can parametrize the visual aspect of the game
 	* Description: The player is able to decide the appearance of his units,biulding,etc... completely independent from the gameplay. This is an additional patch to the requirement 'Player-Character Identification'
+
+
+###Combat Mechanics _Lokesh_
+
+####Basic Requirements
+
+1. Winner/Loser Decision
+	* Type: Functional
+	* Summary: When a combat has ended the player with more soldiers wins and the other players loose.
+	* Description: Each player involved in a combat will have an amount of soldiers, according to their unit, and each one will be lost each time the player looses a round in the combat. Therefore the player remaining with soldiers will be the winner and the other players will be the loosers. The decision of the loss of soldiers is computed by the dice algorithm.
+	
+2. Combat initialization
+	* Type: Functional
+	* Summary: When two or more players are in a certain range a combat is initialized.
+	* Description: When two or more players are within a certain range(i.e., in the same hexagon), each player will be notified that they are about to participate in a combat.
+
+3. Attacker/Defender choice
+	* Type: Functional
+	* Summary: When a combat is initialized one player will be the attacker and one will be the defender.
+	* Description: Depending on some factors(i.e., map position, which player is more closer to his base, and previous movements) it will be chosen which player is defender and which is the attacker and the dice algorithm will be run to decide which player loses a soldier as this algorithm will be partially random.
+
+####Advanced Requirements
+
+1. Attack to bases
+	* Type: Functional
+	* Summary: A player can attack an opponent player's base.
+	* Description: If a player has the base of an opponet player's base within the range of their attack unit, then the player will be able to attack the base and again the dice algorithm will be runned to decide who looses a soldier.
+
+####Complex Requirements
+
+1. Alliance option (TBD)
+	* Type: Funcional
+	* Summary: During the start of a combat if there are more than 2 players involved then alliances can be made.
+	* Description: If more than 2 players are involved in a combat then all the players will have an option to choose for an alliance and if 2 players choose each other as their alliances then they both will attack or defend as a team.
+
+
+####Optional Requirements
+
+1. Prize(currency) if a battle is won
+	* Type: Non-functional
+	* Summary: The player winning a battle will receive a prize.
+	* Description: After each battle the winner of the battle will receive a prize(i.e., more currency) which will act as motivation factor in the game.
+
+
+###Server _Lokesh and Hanieh_
+
+####Basic Requirements
+
+1. Player statistics (LOKESH)
+	* Type: Functional
+	* Summary: All information about each player will be stored.
+	* Description: All information(i.e., the player's battles, combats, current experience level and personal details) about each player will be stored in a database on the server. The statistics regarding the gameplay about each player will be public so that other players can see for example the rank of a player or the number of battles won by a player.
+
+
+2. User Notification (LOKESH)
+	* Type: Functional
+	* Summary: Players will receive a notification about the game.
+	* Description: Players will receive notification(i.e., by email, facebook or whatsapp) informing them when ever a movement or acction is taken place in the game.
+
+
+3. Performing moves and actions (LOKESH)
+	* Type: Functional
+	* Summary: All moves and actions submitted by the players will be carried out by the server.
+	* Description: So after each turn all the submitted moves and acction will be perforemed by the server(i.e., destroying a unit if a player has lost a combat, moving units and etc...)
+
+4. Mantaining Server up all the time (HANIEH)
+	* Type: Functional
+	* Summary: keep the server in the stand-up mode .
+	* Description: since this game is asynchronous, the server should be kept in this mode for ever if not players will face difficulties.
+
+####Advanced Requirements
+
+1. Login/Account management (HANIEH)
+	* Type: Functional
+	* Summary: having the user login.
+	* Description: Each user can register by creating username and password.
+
+2. Battle replays storage (HANIEH)
+	* Type: Functional
+	* Summary: Battles will be recorded to be replayed
+	* Description: Since the beginning of the battle until the end, the whole battle will recorded saved with all its statistics.
+
+####Complex Requirements
+
+1. Inactive Accounts (LOKESH)
+	* Type: Funcional
+	* Summary: If accounts that have not been logged in since a long time will be declared inactive. 
+	* Description: Users that don't logg in their accounts for a long time, then this account will be declared inactive and no details about this account(player) will be public. 
+
+
+####Optional Requirements
+
+
