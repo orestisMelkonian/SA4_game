@@ -188,9 +188,9 @@
 	* Description: When a combat occurs, one player is attacking and the other one is defending. This has impact on the damage factors, soldiers at stake. This will be decided by the previous movement (that brought the units to the point of battle) and the position on the map (according to headquarters location).
 	
 4. Punishment for non-strategic play
-	*Type: Non-functional
-	*Summary: Strategy is mandatory!
-	*Description: When a thoughtless move is made by a player, bad concequancies will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
+	* Type: Non-functional
+	* Summary: Strategy is mandatory!
+	* Description: When a thoughtless move is made by a player, bad concequancies will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
 
 ####Advanced Requirements
 
