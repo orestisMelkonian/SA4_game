@@ -22,6 +22,8 @@
 - Combat
 - Asychronous Multiplayer Aspect
 - Server
+- Ethical Constraints
+- Legislative Issues
 
 ---------------
 ##Core Requirements in Detail
@@ -71,6 +73,16 @@
 	* Type : Non-functional (Performance).
 	* Summary : After players submit their moves, server should implemenet the action in maximum of 30 seconds.
 	* Description : When the actions are submited the server must make all computations (moves,change of values,attacks and battle outcomes) within a logical time. e.g. (per say 30 seconds)
+
+10. Ethical Constraints
+	* Type : Non-functional
+	* Summary : The game should comply with the current ethical standards of the society.
+	* Description : The game must not conflict with any ethical constraints of today's society (e.g. PEGI content rating system so as children can be users).
+
+11. Legislative Issues
+	* Type : Non-functional
+	* Summary : Avoid all law violations.
+	* Description : The game should not violate any law, such as copyrights etc.
 
 
 ##Map Generation  _Stefanos Gatsios_
