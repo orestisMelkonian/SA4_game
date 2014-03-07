@@ -106,26 +106,26 @@
 	* Description : In order for meaningful strategy to exist, multiple choices must be present.It provides motivation and,above all, fun.
 	
 - Understandable game mechanics
-	* Type:Non-functional
-	* Summary:Reducing game mechanics complexity
-	* Description:If the game mechanics are difficult to comprehend players will immediately get bored. This involves a limited amount of unit types(three), clear combat mechanics, etc. 
+	* Type: Non-functional
+	* Summary: Reducing game mechanics complexity
+	* Description: If the game mechanics are difficult to comprehend players will immediately get bored. This involves a limited amount of unit types(three), clear combat mechanics, etc. 
 	
 - Offence-Defence Aspect
-	* Type:Non-functional
-	* Summary:Clear differentiation of attack and defence.
-	* Description:When a combat occurs, one player is attacking and the other one is defending. This has impact on the damage factors, soldiers at stake. This will be decided by the previous movement (that brought the units to the point of battle) and the position on the map (according to headquarters location).
+	* Type: Non-functional
+	* Summary: Clear differentiation of attack and defence.
+	* Description: When a combat occurs, one player is attacking and the other one is defending. This has impact on the damage factors, soldiers at stake. This will be decided by the previous movement (that brought the units to the point of battle) and the position on the map (according to headquarters location).
 	
 - Punishment for non-strategic play
-	*Type:Non-functional
-	*Summary:Strategy is mandatory!
-	*Description:When a thoughtless move is made by a player, bad concequancies will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
+	*Type: Non-functional
+	*Summary: Strategy is mandatory!
+	*Description: When a thoughtless move is made by a player, bad concequancies will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
 
 ####Advanced Requirements
 
 - Risk/Reward Aspect
-	* Type:Non-functional
-	* Summary:Every decision has its price
-	* Description:When a player is brought to the point of a choice (e.g. selecting between two equally priced units), this decision will help him only in a few situations, but prove a drawback in others.
+	* Type: Non-functional
+	* Summary: Every decision has its price
+	* Description: When a player is brought to the point of a choice (e.g. selecting between two equally priced units), this decision will help him only in a few situations, but prove a drawback in others.
 	
 - Strategy VS luck
 	* Type: Functional 
