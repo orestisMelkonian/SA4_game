@@ -333,7 +333,7 @@
 
 1. Prize(currency) if a battle is won
 	* Type: Non-functional
-	* Summary: The player winning a battle will receive a prize.
+	* Summary: The player who wins a battle will receive a prize.
 	* Description: After each battle the winner of the battle will receive a prize(i.e., more currency) which will act as motivation factor in the game.
 
 
