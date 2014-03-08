@@ -166,7 +166,7 @@
 ##Orestis
 --------------------------------------------------------
 
-###Game Logic _Orestis_
+###Game Logic
 --------------------------------------------------------
 
 
@@ -190,7 +190,7 @@
 4. Punishment for non-strategic play
 	* Type: Non-functional
 	* Summary: Strategy is mandatory!
-	* Description: When a thoughtless move is made by a player, bad concequancies will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
+	* Description: When a thoughtless move is made by a player, bad consequences will arise. For example, if a player just produce tanks with no forethought and sends them to slaughter, the other player will just produce a few anti-tank units and win.
 
 ####Advanced Requirements
 
@@ -216,14 +216,14 @@
 	
 5. Restricted player knowledge
 	* Type: Functional	 
-	* Summary: Conceiling implementations of the system and certain elements of the environment.
-	* Description: For interest to be continously present in the game flow, information should appear in different time positions (e.g. fog of war to conceil map / reveal when units provide visibility ).
+	* Summary: Concealing implementations of the system and certain elements of the environment.
+	* Description: For interest to be continuously present in the game flow, information should appear in different time positions (e.g. fog of war to conceil map / reveal when units provide visibility ).
 
 ####Complex Requirements
 
 1. Diversity VS Homogeny
 	* Type: Functional / Non-functional
-	* Summary: Stable/unstable element in the availbale paths.
+	* Summary: Stable/unstable element in the available paths.
 	* Description: Supported by the rpg elements of the game, each player will be able to create a unique path that will have a huge roll on team-based battles (e.g. a team  of a navy admiral and an explosives expert would benefit from an economy expert and achive great balance). There will be stable paths that can withstand any diverse situations and unstable ones, which will provide the player freedom to decide how he will adapt to different situations.
 
 2. Long-term Goals
@@ -240,16 +240,17 @@
 
 2. No obvious choices
 	* Type: Functional
-	* Summary: Omission of totally determined paramenters
+	* Summary: Omission of totally determined parameters
 	* Description: If a player has a single option for one thing, it shouldn't be an option, but implemented by the system.
 
 3. Clear feedback of choices
-	* Type: Funtional
+	* Type: Functional
 	* Summary: Positive/negative feedback to player choices
 	* Description: A choice must provide feedback in short time, so players will be able to develop a concrete,a assured strategy.
 	
-###RPG Elements _Orestis_
-
+---------------------
+###RPG Elements 
+----------------------
 ####Basic Requirements
 
 1. Unit experience
@@ -272,14 +273,14 @@
 ####Complex Requirements
 
 1. Unique player paths
-	* Type: Funcional
+	* Type: Functional
 	* Summary: Different talent trees
 	* Description: When a player levels up, talent points will be awarded that can be spent for evolution in a different tree. That will provide many possible talent trees with different pros and cons. It also produce great interest in team-based games where the choice a which players should cooperate will provide many meaningful aspects to analyse.
 
 2. Player-Character Identification
 	* Type: Non-functional
 	* Summary: Make the user play the role of his character
-	* Description: The player should identify hiself with his character, so as more sentimental connection is present in the game. Gaining levels will be equivalent to improving oneself's personality (restricted by ethical constraints)
+	* Description: The player should identify himself with his character, so as more sentimental connection is present in the game. Gaining levels will be equivalent to improving oneself's personality (restricted by ethical constraints)
 
 3. Unique hero units
  	* Type: Functional	
@@ -292,11 +293,12 @@
 1. Unique appearance
 	* Type: Non-functional
 	* Summary: Player can parametrize the visual aspect of the game
-	* Description: The player is able to decide the appearance of his units,biulding,etc... completely independent from the gameplay. This is an additional patch to the requirement 'Player-Character Identification'
+	* Description: The player is able to decide the appearance of his units,building,etc... completely independent from the gameplay. This is an additional patch to the requirement 'Player-Character Identification'
 
-
-###Combat Mechanics _Lokesh_
-
+## Lokesh
+---------------------------------
+###Combat Mechanics
+-----------------------------------
 ####Basic Requirements
 
 1. Winner/Loser Decision
@@ -319,26 +321,28 @@
 1. Attack to bases
 	* Type: Functional
 	* Summary: A player can attack an opponent player's base.
-	* Description: If a player has the base of an opponet player's base within the range of their attack unit, then the player will be able to attack the base and again the dice algorithm will be runned to decide who looses a soldier.
+	* Description: If a player has the base of an opponent player's base within the range of their attack unit, then the player will be able to attack the base and again the dice algorithm will be runned to decide who looses a soldier.
 
 ####Complex Requirements
 
 1. Alliance option (TBD)
-	* Type: Funcional
+	* Type: Functional
 	* Summary: During the start of a combat if there are more than 2 players involved then alliances can be made.
 	* Description: If more than 2 players are involved in a combat then all the players will have an option to choose for an alliance and if 2 players choose each other as their alliances then they both will attack or defend as a team.
 
 
 ####Optional Requirements
 
-1. Prize(currency) if a battle is won
+1. Prize(currency) if a battle is won.
 	* Type: Non-functional
 	* Summary: The player who wins a battle will receive a prize.
 	* Description: After each battle the winner of the battle will receive a prize(i.e., more currency) which will act as motivation factor in the game.
 
 
-###Server Side _Lokesh and Hanieh_
-
+## Lokesh and Hanieh
+----------------------------
+###Server Side
+----------------------------
 ####Basic Requirements
 
 1. Player statistics (LOKESH)
@@ -350,15 +354,15 @@
 2. User Notification (LOKESH)
 	* Type: Functional
 	* Summary: Players will receive a notification about the game.
-	* Description: Players will receive notification(i.e., by email, facebook or whatsapp) informing them when ever a movement or acction is taken place in the game.
+	* Description: Players will receive notification(i.e., by email, facebook or whatsapp) informing them when ever a movement or action is taken place in the game.
 
 
 3. Performing moves and actions (LOKESH)
 	* Type: Functional
 	* Summary: All moves and actions submitted by the players will be carried out by the server.
-	* Description: So after each turn all the submitted moves and acction will be perforemed by the server(i.e., destroying a unit if a player has lost a combat, moving units and etc...)
+	* Description: So after each turn all the submitted moves and action will be performed by the server(i.e., destroying a unit if a player has lost a combat, moving units and etc...)
 
-4. Mantaining Server up all the time (HANIEH)
+4. Maintaining Server up all the time (HANIEH)
 	* Type: Functional
 	* Summary: keep the server in the stand-up mode .
 	* Description: since this game is asynchronous, the server should be kept in this mode for ever if not players will face difficulties.
@@ -378,9 +382,9 @@
 ####Complex Requirements
 
 1. Inactive Accounts (LOKESH)
-	* Type: Funcional
+	* Type: Functional
 	* Summary: If accounts that have not been logged in since a long time will be declared inactive. 
-	* Description: Users that don't logg in their accounts for a long time, then this account will be declared inactive and no details about this account(player) will be public. 
+	* Description: Users that don't log in their accounts for a long time, then this account will be declared inactive and no details about this account(player) will be public. 
 
 
 ####Optional Requirements
@@ -410,20 +414,20 @@
 3.Graphics
   		* Type: Non-functional
   		* Summary: visualization of the game.
-  		* Description: each entity is a sort of image.this reqiurment is consisted of all 
-      		units according to their resources have specific grapghic view.
+  		* Description: each entity is a sort of image.this requirement is consisted of all 
+      		units according to their resources have specific graphic view.
       		for example building(metal), forest(woods), sea and lake(water). 
       		
 4.Basic user interface window
   		* Type: functional
   		* summary: revealing basic information about each unit.  
-  		* Description: when user creates units from his headquarter and main base, he can see all of the available actions of unit according to that specific unit. 
+  		* Description: when user creates units from his headquarters and main base, he can see all of the available actions of unit according to that specific unit. 
   		
   		
 5.Animation of performed actions
   		* Type: Functional
-  		* Summary: visualization of exection of turns.
-  		* Description: when both players have submmitted their moves,the server implements all necessary actions and
+  		* Summary: visualization of execution of turns.
+  		* Description: when both players have submitted their moves,the server implements all necessary actions and
   			animates them in front of the user's eyes.
   			
   			
@@ -451,7 +455,7 @@
 3.main menu
   		* Type: Functional
   		* Summary: basic operations of the game, such as: quit,resume, change controls.
-        * Description: at any moment of the game user can quit the game, change controlers and resume the game.
+        * Description: at any moment of the game user can quit the game, change controllers and resume the game.
 
 
 
@@ -487,7 +491,7 @@
   		* Type: functional
   		* Summary: having the menu by hovering the mouse pointer above a unit. 
   		* Description: user can see all the informations and all the properties of the  unit which the mouse pointer is over on.
-          (for example: amount of soldires, types of unit) 
+          (for example: amount of soldiers, types of unit) 
 
 
 
