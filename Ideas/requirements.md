@@ -386,3 +386,113 @@
 ####Optional Requirements
 
 
+
+##Hanieh
+--------------------------------------------------------
+
+###User Interface
+--------------------------------------------------------
+
+####Basic Requirements
+
+1.keyboard control
+  		* Type : Functional
+  		* Summary : is one way to provide input to this video game.
+  		* Description :typically to control an object or character in the game. When a user presses the button corresponding to a certain movement, the system shall bring her to that position.
+  		
+  		
+2.mouse control
+  		* Type: Functional
+  		* Summary: ability to play the game with mouse.
+  		* Description: user can move and control his game by mouse.
+      user can pinpoint his/her shots better and with a high performance.
+      
+3.Graphics
+  		* Type: Non-functional
+  		* Summary: visualization of the game.
+  		* Description: each entity is a sort of image.this reqiurment is consisted of all 
+      		units according to their resources have specific grapghic view.
+      		for example building(metal), forest(woods), sea and lake(water). 
+      		
+4.Basic user interface window
+  		* Type: functional
+  		* summary: revealing basic information about each unit.  
+  		* Description: when user creates units from his headquarter and main base, he can see all of the available actions of unit according to that specific unit. 
+  		
+  		
+5.Animation of performed actions
+  		* Type: Functional
+  		* Summary: visualization of exection of turns.
+  		* Description: when both players have submmitted their moves,the server implements all necessary actions and
+  			animates them in front of the user's eyes.
+  			
+  			
+6.Map screen
+      	* Type: Functional
+      	* Summary: user can see the whole map of the game.
+        * Description: user can have the whole map during the game, then he has general overview of the tactical situation.It allows user to jump to every position where he clicks on the map.
+        
+        
+####Advanced Requirements
+
+
+1.sounds
+  	    * Type: Functional
+  		* Summary: put sounds in every functionality in the game.
+  		* Description: Audio feedback of user interaction.
+  		  for example: when a player clicks on a building its unique sound is heard.
+  		  
+2.background music
+  		* Type: functional
+  		* Summary: having music on the background while the game is running.
+  		* Description: to create a nice atmosphere for the user ambient music should discretely exist.
+
+
+3.main menu
+  		* Type: Functional
+  		* Summary: basic operations of the game, such as: quit,resume, change controls.
+        * Description: at any moment of the game user can quit the game, change controlers and resume the game.
+
+
+
+4.Usability 
+		* Type: non-functional
+		* Summary: user friendly.
+		* Description: delivering a better and deeper experience with less unnecessary interruptions for user during the game.
+		  and make playing more fun for users. 
+
+
+
+
+####Complex Requirements:
+
+
+1.Unit grouping
+        * Type: Functional
+        * Summary: Visual grouping of many kinds of units.
+        * Description: if user selects many kinds of units, he can have the set of all these units in one group.
+      
+
+
+####Optional Requirements:
+
+
+1.Help menu
+  		* Type: Functional
+  		* Summary: allows user to solve his doubts about game. 
+  		* Description: allows the user to search the all rules in order how to play the game.
+
+
+2.pop-up window
+  		* Type: functional
+  		* Summary: having the menu by hovering the mouse pointer above a unit. 
+  		* Description: user can see all the informations and all the properties of the  unit which the mouse pointer is over on.
+          (for example: amount of soldires, types of unit) 
+
+
+
+
+
+
+
+
