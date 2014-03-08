@@ -7,5 +7,5 @@
 |Stefanos|Gatsios|
 |Orestis|Melkonian|
 |Lokesh | Menghani Khiani|
-|Hanieh| Soleimani Bindhi|
+|Hanieh| Soleimani |
 |Gay | Carmo Vannuchi|
