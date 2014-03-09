@@ -123,7 +123,67 @@
 	* Summary : Generating the map without any use of prototype.
 	* Description : Pure random map generation without any prototype influence.
 
-----------------
+
+----------------------
+##Vitor Vannuchi
+------------------
+###Unit Generation
+--------------------
+
+####Basic
+1. Types of units
+	* Type : Functional.
+	* Summary : The units will be separated into dynamic unit and static unit
+	* Description : When create an unit you can just choose between dynamic or static unit. Dynamic are all the units that you can move through the map, while the static are the fixed one that give you an kind of bonus per turn.
+
+1.1 Types of units
+	* Type : Functional.
+	* Summary : After being separated between dynamic and static units, the units will be "separated" into air unit, land unit and sea unit.
+	* Description : Each unit will have an specific type, that will limit this unit actions to his kind of terrain/type of hexagon. 
+
+2. Size of units
+	* Type : Functional.
+	* Summary : The units will be separated into small, medium, big units.
+	* Description : you can have three sizes of dynamic units. Small that will have good movimentation and bad power of attack (soldier capacity). Medium that will will have relevant movementation and relevant attack power (soldier capacity) and Big that will have bad movimentation and good power of attack(soldier capacity). 
+
+3. Creation of Unit
+	* Type : Functional.
+	* Summary : Each unit will be created from some especial hexagon in the map.
+	* Description : The units to be generated on the map, need to be created based on an special hexagon considered the main base of the player, Every unit need and minimal ammount of soldiers and an specific value of resource.
+
+4. Movement of Unit
+	* Type : Functional.
+	* Summary : Each unit can move inside an radius by turn.
+	* Description : After an unit be created you need to wait one turn and then youre able to move this unit in the radius of this unit only once by turn.
+
+5. Attack
+	* Type : Functional.
+	* Summary : Each unit can attack an enemy unit in an small radius.
+	* Description : Each turn the player has the option to attack an enemy, if one of the rules of the combat happen. If two units are placed at the same hexagon on the map an attack occurs. If two units get neighboor in the hexagon a battle also occurs. if one enemy is inside the attack range of an unit is option of the player start an attack or not.
+
+
+####Advanced
+1. Merge Of Units
+	* Type : Functional
+	* Summary : If you have two units damaged (without all the soldier) you can merge both.
+	* Description : If you have two units inside the range of each other of movement and both are damaged (with less soldiers) and the capacity of one of this units if big enought to hold the sum of both units soldiers you can just merge this units and then "destroy" the "smaller" unit.
+
+2. Refill Units
+	* Type : Functional.
+	* Summary : Refill an damaged unit with more soldiers to recover the power of each single unit. 
+	* Description : When an damaged unit has at least one soldier inside and the player want to keep that position he can just refill the tank with more soldier, and with an small ammount of resource, this action cost more than one turn because is the time of send an helicopter with soldiers to refill the tank with how many soldiers the player want and then keep playing.
+
+
+####Complex
+1. Follow and destroy (Attack 2.0)
+	* Type : Functional/Non-functional
+	* Summary : To engage an battle with an enemy unit that run away.  
+	* Description :  Every unit can attacl an enemy unit if the enemy unit is inside his range of attack, but sometimes the enemy can just run away to any other direction, avoiding the enemy and leaving the fog/attack area of the "attacker" unit. For this we create an Follow command, that if you find an enemy unit inside your range of attack you can just say follow, and then your tank will move over the enemys unit or to the maximum of his movement range, in the direction that the other unit has moved to run away. If the enemy stay inside the attack area an battle occurs.
+
+
+----------------------
+##Stefanos Gatsios
+------------------
 ###Multiplayer
 ----------------
 
