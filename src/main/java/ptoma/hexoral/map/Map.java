@@ -7,17 +7,17 @@ import java.util.ArrayList;
 //import java.util.ArrayList;
 //import SHIT
 public class Map {
-	private int sizeX;
-	private int sizeY;
-	private Hexagon[][] matrix;
+	protected int sizeX;
+	protected int sizeY;
+	protected Hexagon[][] matrix;
 
 	/**
 	 * @author Orestis Default constructor
 	 */
 	public Map() {
 		this.sizeX = 30;
-		this.sizeY = 30;
-
+		this.sizeY = 30;	
+		
 		matrix = new Hexagon[sizeX][sizeY];
 		for (int i = 0; i < this.sizeX; i++) {
 			for (int j = 0; j < this.sizeY; j++) {
@@ -38,13 +38,16 @@ public class Map {
 	public Map(int x, int y) {
 		this.sizeX = x;
 		this.sizeY = y;
-
+		
 		this.matrix = new Hexagon[sizeX][sizeY];
+		/*BEFORE ASSIGNMENT
 		for (int i = 0; i < this.sizeX; i++) {
 			for (int j = 0; j < this.sizeY; j++) {
 				matrix[i][j] = new Hexagon(Hexagon.type.LAND, i, j);
 			}
 		}
+		*/
+		/*ASSIGNMENT*/
 	}
 
 	/**
