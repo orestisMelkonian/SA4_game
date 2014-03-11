@@ -6,7 +6,8 @@ public class Main {
     {
         System.out.println( "Hello World Hellow!" );
         
-        MyCanvas mycan = new MyCanvas();
+        //MyCanvas mycan = new MyCanvas();
+  
     }
 
 }
