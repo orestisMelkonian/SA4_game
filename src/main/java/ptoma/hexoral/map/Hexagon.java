@@ -74,7 +74,8 @@ public class Hexagon {
 	 *            Y coordinate.
 	 */
 	public Hexagon(type terrainType, int x, int y) {
-
+		this.terrainType = terrainType;
+		this.w = new Coords(x, y);
 	}
 
 	@Override
