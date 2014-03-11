@@ -14,7 +14,7 @@ public class MapGenerator {
 		long seed = (long) (Math.random()*1000000000);
 		
 		//PerlinNoise perlinTest = new PerlinNoise(seed, ((myMap.sizeX+myMap.sizeY)/2)/10 );
-		PerlinNoise perlinTest = new PerlinNoise(seed, 7 );
+		PerlinNoise perlinTest = new PerlinNoise(seed, 7);
 
 		for (int i = 0; i < myMap.sizeX; i++) {
 			for (int j = 0; j < myMap.sizeY; j++) {
