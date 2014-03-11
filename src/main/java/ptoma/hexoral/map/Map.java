@@ -2,6 +2,12 @@ package ptoma.hexoral.map;
 
 import ptoma.hexoral.map.Hexagon.type;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 //import java.util.ArrayList;
@@ -40,14 +46,13 @@ public class Map {
 		this.sizeY = y;
 		
 		this.matrix = new Hexagon[sizeX][sizeY];
-		/*BEFORE ASSIGNMENT
+
 		for (int i = 0; i < this.sizeX; i++) {
 			for (int j = 0; j < this.sizeY; j++) {
-				matrix[i][j] = new Hexagon(Hexagon.type.LAND, i, j);
+				matrix[i][j] = new Hexagon(Hexagon.type.SEA);
 			}
 		}
-		*/
-		/*ASSIGNMENT*/
+		
 	}
 
 	/**
@@ -146,8 +151,45 @@ public class Map {
 		return ret;
 	}
 
-	public void fillInMap() {
+	public void printMap() {
 		// TODO Auto-generated method stub
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("myPNmap.txt", "UTF-8");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < this.sizeX; i++) {
+			for (int j = 0; j < this.sizeY; j++) {
+				if (this.matrix[i][j].getType() == "SEA")
+					writer.print('S');
+				else 
+					writer.print('L');
+			}
+			writer.println();
+		}
+		writer.close();
+		
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader("myPNmap.txt"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 String line = null;
+		 try {
+			while ((line = br.readLine()) != null) {
+			   System.out.println(line);
+			 }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }
