@@ -1,74 +1,115 @@
 
+
+/*author :Hanieh */
+
+ 
 package Assignment4;
 
+import javax.swing.*;
 import java.awt.*;
-import java.lang.Object;
-import java.awt.Color;
+import java.awt.event.*;
 
-import javax.swing.JFrame;
+public class MyCanvas extends Canvas  {
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.Random;
-
-import javax.swing.JFrame;
-
-public class MyCanvas extends Canvas {
-	
-	 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static final int WIDTH = 1000;
-    private static final int HEIGHT = 1000;
-    //private static final Random random = new Random();
-    //public Noise noise = new Noise(null, 1.0f, WIDTH, HEIGHT);
-    //public PerlinNoiseGenerator perlinNoise = new PerlinNoiseGenerator();
-    public PerlinNoise n = new PerlinNoise((long) (Math.random() * 1000), 80);
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    // Just so that the buttonEventhandler has easy access to the values in the Spinners:
+    private JSpinner spnWidth;
+    private JSpinner spnHeight;
+    private JSpinner spnWater;
+    private JSpinner spnTerrain;
+    private JSpinner spnTerHeight;    
     
-    public MyCanvas(){
-    	
-    	//noise.initialise();
-    	
+    
+    MyCanvas() {        
+        JFrame AppWin = new JFrame("Map Generator");
+        AppWin.setBackground(Color.WHITE );
+        AppWin.setSize(800, 600);
+        AppWin.setVisible(true);
+        AppWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        AppWin.setLayout(new GridLayout(1,2));
+        
+        JPanel leftSide = new JPanel( new BorderLayout() );        
+        JPanel panelLabel = new JPanel( new GridLayout(5,1) );       
+        
+        //Container con = AppWin.getContentPane();
+        JLabel lableWidth = new JLabel("Width");
+        JLabel lableHeight = new JLabel("Height");
+        JLabel lableWater = new JLabel("%Water");
+        JLabel lableTerrain = new JLabel("%Terrain");
+        JLabel lableTerHeight = new JLabel("Height of Terrain");
+        
+        SpinnerNumberModel numModelWi = new SpinnerNumberModel( 50, 20, 1000, 1 ); // Number, min, max, step
+        SpinnerNumberModel numModelHe = new SpinnerNumberModel( 50, 20, 1000, 1 ); // Number, min, max, step
+        SpinnerNumberModel numModelWa = new SpinnerNumberModel( 30, 0, 100, 1 ); // Number, min, max, step
+        SpinnerNumberModel numModelTe = new SpinnerNumberModel( 65, 0, 100, 1 ); // Number, min, max, step
+        SpinnerNumberModel numModelTH = new SpinnerNumberModel( 2, 0, 5, 1 ); // Number, min, max, step
+        
+        spnWidth = new JSpinner(numModelWi);
+        JSpinner spnHeight = new JSpinner(numModelHe);
+        JSpinner spnWater = new JSpinner(numModelWa);
+        JSpinner spnTerrain = new JSpinner(numModelTe);
+        JSpinner spnTerHeight = new JSpinner(numModelTH);        
+        
+        // Add the label on the left and the corresponding spinner on the right:
+        panelLabel.add(lableWidth);
+        panelLabel.add(spnWidth);
+        
+        panelLabel.add(lableHeight);
+        panelLabel.add(spnHeight);
+        
+        panelLabel.add(lableWater);
+        panelLabel.add(spnWater);        
+        
+        panelLabel.add(lableTerrain);
+        panelLabel.add(spnTerrain);        
+        
+        panelLabel.add(lableTerHeight);
+        panelLabel.add(spnTerHeight);        
+        
+        leftSide.add( panelLabel, BorderLayout.CENTER );
+        
+        // now the button on the left bottom:
+        JButton button = new JButton("Map Generator");
+        leftSide.add( button, BorderLayout.SOUTH );
+        
+        // **** Display map in here: ****
+        JPanel panelMap = new JPanel( );
+        
+        // AppWin.add(panelLabel, BorderLayout.WEST);
+        AppWin.add(leftSide, BorderLayout.WEST);
+        AppWin.add(panelMap, BorderLayout.EAST);
+        
+        setVisible(true);       
     }
     
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-
-        for(int x = 0; x < WIDTH; x++) {
-            for(int y = 0; y < HEIGHT; y++) {
-            	//float noise = perlinNoise.noise2((float) x,(float) y); 
-            	double noise = n.getNoiseLevelAt(x, y);
-            	//System.out.println(noise);
-                g.setColor(randomColor(noise));
-                g.drawLine(x, y, x, y);
-            }
-        }
+    private void addButtonListener(JButton b) {
+        b.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent ae) {
+                // For now ignore the exact actionCommand:
+                // createWorld( ae.getActionCommand() );
+                createWorld( );
+            }     
+        });
+    }
+    
+    private void createWorld( ) {
+    	 JSpinner _spiNumOfAIs = null;
+		((Integer)_spiNumOfAIs.getValue()).intValue();
     }
 
-    private Color randomColor(double noise) {
-    	Color colors[] = {Color.BLUE, Color.YELLOW, Color.GREEN}; 
-        if(noise <= 0.30){
-        	return colors[0];
-        } else if(noise > 0.30 && noise < 0.6666666666){
-        	return colors[1];
-        } else{
-        	return colors[2];
-        }
-    	
-    }
 
-    public static void main(String[] args) {
-    	MyCanvas can = new MyCanvas();
-        JFrame frame = new JFrame();
+	public JSpinner getSpnHeight() {
+		return spnHeight;
+	}
 
-        frame.setSize(WIDTH, HEIGHT);
-        frame.add(can);
 
-        frame.setVisible(true);
-    }
+	public void setSpnHeight(JSpinner spnHeight) {
+		this.spnHeight = spnHeight;
+	}
 }
