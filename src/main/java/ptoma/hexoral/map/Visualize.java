@@ -54,8 +54,8 @@ public class Visualize extends Canvas {
 		BufferedImage sea = null;
 		BufferedImage land = null;
 		try {
-			File s = new File("src/main/resources/sea2.png");
-			File d = new File("src/main/resources/grass2.png");
+			File s = new File("src/main/resources/seastroke.png");
+			File d = new File("src/main/resources/grassstroke.png");
 			sea = ImageIO.read(s);
 			land = ImageIO.read(d);
 		} catch (IOException e) {
@@ -68,7 +68,7 @@ public class Visualize extends Canvas {
 				int offsetY = j * hexagonSize / 4;// j*4;//
 				if (map.matrix[i][j].getType() == "SEA") {
 					g.drawImage(sea, i * hexagonSize + offsetX, j
-							* hexagonSize - offsetY, this.hexagonSize,
+							* hexagonSize - offsetY, hexagonSize,
 							hexagonSize, null);
 				} else {
 					g.drawImage(land, i * hexagonSize + offsetX, j
@@ -79,7 +79,7 @@ public class Visualize extends Canvas {
 			}
 		}
 	}
-
+	@Override
 	public void paint(Graphics g) {
 		this.internalPaint(g);
 	}
