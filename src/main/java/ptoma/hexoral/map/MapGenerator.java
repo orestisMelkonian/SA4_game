@@ -8,8 +8,8 @@ public class MapGenerator {
 		Biome bio = new Biome("test.bio", myMap);
 		Random rand = new Random();
 
-		PerlinNoiseParameters perlinParameters = new PerlinNoiseParameters(1,
-				0.01, 1, 7, rand.nextInt());
+		PerlinNoiseParameters perlinParameters = new PerlinNoiseParameters(0.65,
+				0.1, 1,7, rand.nextInt());
 		PerlinNoiseGenerator myNoise = new PerlinNoiseGenerator(
 				perlinParameters);
 
@@ -18,7 +18,7 @@ public class MapGenerator {
 			for (int j = 0; j < myMap.sizeY; j++) {
 				double m = myNoise.get(i, j);
 				myMap.matrix[i][j] = new Hexagon(bio.getType(m,
-						myMap.distFromEdges(i, j)), i, j);
+						myMap.distFromCenter(i, j)), i, j);
 			}
 		}
 	}
