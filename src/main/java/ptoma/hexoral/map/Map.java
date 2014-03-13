@@ -206,6 +206,7 @@ public class Map {
 		distE = this.sizeY - 1 - y;
 		distS = this.sizeX - 1 - x;
 		distW = y;
+		
 		return Math.min(distW, Math.min(distE, Math.min(distN, distS)));
 	}
 	
@@ -222,7 +223,15 @@ public class Map {
 		
 		return Math.min(distSW, Math.min(distSE, Math.min(distNW, distNE)));	
 	}
-
+	
+	public int distFromCenter(int x, int y)	{
+		int a = (int) ( Math.pow( Math.abs(y - (this.sizeY-1)/2 ), 2) );
+		int b = (int) ( Math.pow( Math.abs(x - (this.sizeX-1)/2 ), 2) );
+		return (int) ( Math.sqrt(a + b) );
+		
+	}
+	
+	
 	
 	/**
 	 * 
