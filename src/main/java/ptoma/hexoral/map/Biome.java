@@ -2,12 +2,10 @@ package ptoma.hexoral.map;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-
-import org.apache.tools.ant.types.resources.First;
+import ptoma.hexoral.map.Hexagon;
+import ptoma.hexoral.map.Map;
 
 /**
  * A class for representing the biome of the world. i.e. the properties of the
@@ -42,6 +40,11 @@ public class Biome {
 	 * The matrix holding the biome elements represented as chars.
 	 */
 	private char matrix[][];
+	
+	/**
+	 * A pointer for the map
+	 */
+	protected Map pMap;
 
 	/**
 	 * Basic biome class.
@@ -51,7 +54,8 @@ public class Biome {
 	 *            system
 	 * 
 	 */
-	public Biome(String filename) {
+	public Biome(String filename, Map map) {
+		this.pMap = map;
 		inBiome = new File(Biome.PATH + filename);
 		try {
 			BufferedReader scan = new BufferedReader(new FileReader(inBiome));
@@ -65,21 +69,53 @@ public class Biome {
 			}
 			scan.close();
 		} catch (IOException e) {
-			System.err.println("Didn't found Biome File in " + this.PATH);
+			System.err.println("Didn't found Biome File in " + Biome.PATH);
 			e.printStackTrace();
 		}
 
 	}
 	
 	/**
-	 * Quantizes a float to the depth of the quantization according
-	 * to to the min and max value and the size of the biome.
-	 * @param value to be mapped
-	 * @param min range of values
-	 * @param max range of values 
+	 * Map a value from a range to a range, actually copied from arduino library
+	 * @param x value to be mapped
+	 * @param in_min from Range of numbers lower bound
+	 * @param in_max from range of numbers upper bound
+	 * @param out_min to range of numbers lower bound
+	 * @param out_max to range of numbesr upper bound
 	 * @return
 	 */
-	private int quantize(double value, double min, double max) {
-		return 0;
+	private int map(double x, int in_min, int in_max, int out_min, int out_max) {
+		return (int) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
 	}
+	
+	/**
+	 * 
+	 * @param perlinNoise the value of the noise for the current cell
+	 * @param distance max from the sides of the table
+	 * @return Hexagon.type the type of the cell
+	 */
+	public Hexagon.type getType(double perlinNoise, int distance) {
+		int maxSideMap = Math.max(this.pMap.sizeX, this.pMap.sizeY);
+		int axisX = map(distance,0,maxSideMap/2,0,this.size-1); //Subtruction because it's zero based
+		int axisY = map(perlinNoise,-1,1,0,this.size-1);
+		if(axisY<0 || axisY < 0) {
+			System.out.print("Hello");
+		}
+		Hexagon.type ret;
+		switch (this.matrix[axisX][axisY]) {
+		case 'S':
+			ret = Hexagon.type.SEA;
+			break;
+		case 'L':
+			ret = Hexagon.type.LAND;
+			break;
+		case 'M':
+			ret = Hexagon.type.MOUNTAIN;
+		default:
+			ret = null;
+			break;
+		}
+		return ret;
+	}
+	
 }

@@ -27,7 +27,7 @@ public class Hexagon {
 	 * 
 	 */
 	static public enum type {
-		SEA, LAND
+		SEA, LAND, MOUNTAIN
 	};
 
 	/**
