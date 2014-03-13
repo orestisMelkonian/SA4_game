@@ -192,4 +192,20 @@ public class Map {
 		}
 		
 	}
+	
+	/**
+	 * Compute distance from closest border.
+	 * @param x	horizontal coordinate.
+	 * @param y	vertical coordinate.
+	 * @return	number of cells between point and border
+	 */
+	public int distFromBorder (int x, int y) {
+		int distN=0, distE=0, distS=0, distW=0;
+
+		distN = x;
+		distE = this.sizeY - 1 - y;
+		distS = this.sizeX - 1 - x;
+		distW = y;
+		return Math.min(distW, Math.min(distE, Math.min(distN, distS)));
+	}
 }

@@ -1,22 +1,50 @@
 package ptoma.hexoral.map;
 
+import java.util.Random;
+
 
 public class MapGenerator {
 	public void generateMap (Map myMap, int groundPercentage) {
 		
+		Random rand = new Random();
+		
+		PerlinNoiseParameters perlinParameters = new PerlinNoiseParameters(0.5 , 1 , 1 , 25 , rand.nextInt());
+		PerlinNoiseGenerator myNoise = new PerlinNoiseGenerator(perlinParameters);
+		
+		int countPos = 0, countNeg = 0;
+		for (int i = 0; i < myMap.sizeX; i++) {
+			for (int j = 0; j < myMap.sizeY; j++) {
+				double m = myNoise.get(i, j);
+				
+				//System.out.println(m);
+				/*
+				if (m < 0 )  
+					myMap.matrix[i][j] = new Hexagon(Hexagon.type.LAND);
+				else
+					myMap.matrix[i][j] = new Hexagon(Hexagon.type.SEA);
+				*/
+					
+			}
+		}
+		System.out.println("countPos = " + countPos + " countNeg = " + countNeg);
+		
+	/*	
 		//-----------------USING PERLIN NOISE------------------------
 		
 		//Decide number of ground hexagons
-		int hexagonNo = myMap.sizeX * myMap.sizeY, countL=0, countS=0;
-		//System.out.println("Number of total hexagons is " + hexagonNo);
-		//int groundHexNo = (int) ((groundPercentage) * (hexagonNo/100));
-		//System.out.println("Number of ground hexagons is " + groundHexNo);
+		//int hexagonNo = myMap.sizeX * myMap.sizeY, countL=0, countS=0;
+		int countL=0, countS=0;
+		
 		
 		//long seed = (long) (Math.random()*1000000000);
 		//int seed = (int) (Math.random());
+		
 		float groundPer = (float) (1.6 * (groundPercentage/100));
+		
 		//PerlinNoise perlinTest = new PerlinNoise(seed, ((myMap.sizeX+myMap.sizeY)/2)/10 );
+		
 		PerlinNoise perlinTest = new PerlinNoise();
+		
 		//PerlinNoise perlinTest = new PerlinNoise(seed, 100);
 		
 		//float x = myMap.sizeX/100;
@@ -24,12 +52,45 @@ public class MapGenerator {
 		//float tempGen2 = perlinTest.noise2(x,y);
 		//System.out.println(tempGen2);
 		
+		
+		
+		float total = 0.0f;
+		float temp = 0.0f;
+		float hgrid = myMap.sizeX;
+		float frequency = 1.0f/(float)hgrid;
+		float persistence = (float) 0.65;
+		float amplitude = persistence;
+		int octaves = 1;
+		
 		for (int i = 0; i < myMap.sizeX; i++) {
 			for (int j = 0; j < myMap.sizeY; j++) {
 				
-				float tempGen = perlinTest.turbulence2((float)(i+Math.random()),(float)(j+Math.random()),(float) 0.09);
+				
+				
+				
+				
+				/*     VALUE NOISE
+				total = 0.0f;  
+				
+				for (i = 0; i < octaves; ++i)
+				{
+						temp = perlinTest.noise2((float)i * frequency, (float)j * frequency) * amplitude;
+						System.out.println(temp);
+				        //total += perlinTest.noise2((float)i * frequency, (float)j * frequency) * amplitude;         
+				        frequency *= 2;
+				        amplitude *= persistence;
+				}
+				                        
+			
+				if ( (total > 0.5) || (total < -0.5) )
+					System.out.println(total);
+				*/
 				
 				//System.out.println(tempGen);
+				
+				
+				/* FIRST IMPLEMENTATION
+				float tempGen = perlinTest.noise2((float)(i+Math.random()),(float)(j+Math.random()));
 				if (tempGen > 0.0) {
 					myMap.matrix[i][j] = new Hexagon(Hexagon.type.SEA);
 				 	countL++;
@@ -38,12 +99,18 @@ public class MapGenerator {
 					myMap.matrix[i][j] = new Hexagon(Hexagon.type.LAND);
 					countS++;
 				}
+	
+				*/
+		/*
 			}
 		}
 		
 		//myMap.printMap();
 		
-		//System.out.println("ENDED  Lands=" + countL + " Seas=" + countS);
+		System.out.println("ENDED  Lands=" + countL + " Seas=" + countS);
+		
+		
+		*/
 	}
 	
 	
