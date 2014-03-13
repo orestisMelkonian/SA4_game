@@ -104,7 +104,7 @@ public class Biome {
 	 */
 	public Hexagon.type getType(double perlinNoise, int distance) {
 		Biome.max = Math.max(Biome.max, perlinNoise);
-		int maxSideMap = Math.max(this.pMap.sizeX, this.pMap.sizeY);
+		int maxSideMap = (int)Math.sqrt(Math.pow(this.pMap.sizeX, 2)+Math.pow(this.pMap.sizeY, 2));
 		int axisX = map(distance,0,4*maxSideMap/5,0,this.size-1); //Subtruction because it's zero based
 		int axisY = map(perlinNoise,-1,1,0,this.size-1);
 		if(axisY<0 || axisY < 0) {
