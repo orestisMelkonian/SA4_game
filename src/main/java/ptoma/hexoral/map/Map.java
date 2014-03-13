@@ -200,12 +200,25 @@ public class Map {
 	 * @return	number of cells between point and border
 	 */
 	public int distFromBorder (int x, int y) {
-		int distN=0, distE=0, distS=0, distW=0;
-
-		distN = x;
-		distE = this.sizeY - 1 - y;
-		distS = this.sizeX - 1 - x;
-		distW = y;
+		int distN = x;
+		int distE = this.sizeY - 1 - y;
+		int distS = this.sizeX - 1 - x;
+		int distW = y;
+		
 		return Math.min(distW, Math.min(distE, Math.min(distN, distS)));
+	}
+	
+	public int distFromEdges (int x, int y) 	{
+		int distN = x;
+		int distE = this.sizeY - 1 - y;
+		int distS = this.sizeX - 1 - x;
+		int distW = y;
+		
+		int distNW = distN + distW;
+		int distNE = distN + distE;
+		int distSW = distS + distW;
+		int distSE = distS + distE;
+		
+		return Math.min(distSW, Math.min(distSE, Math.min(distNW, distNE)));	
 	}
 }
