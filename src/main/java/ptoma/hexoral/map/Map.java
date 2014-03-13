@@ -208,4 +208,14 @@ public class Map {
 		distW = y;
 		return Math.min(distW, Math.min(distE, Math.min(distN, distS)));
 	}
+	
+	/**
+	 * 
+	 * @param i is the X coordinate 
+	 * @param j is the Y coordinate
+	 * @return a strinf of the type of the hexagon
+	 */
+	public String getType(int i, int j) {
+		return this.matrix[i][j].getType();
+	}
 }

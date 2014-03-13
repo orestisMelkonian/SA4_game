@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.apache.jasper.runtime.PerThreadTagHandlerPool;
+
 import ptoma.hexoral.map.Hexagon;
 import ptoma.hexoral.map.Map;
 
@@ -16,6 +19,8 @@ import ptoma.hexoral.map.Map;
  */
 public class Biome {
 
+	
+	public static double max = -100;
 	/**
 	 * The path of the biome resources.
 	 */
@@ -85,7 +90,10 @@ public class Biome {
 	 * @return
 	 */
 	private int map(double x, int in_min, int in_max, int out_min, int out_max) {
-		return (int) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+		int ret =  (int) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+		ret = (ret > out_max) ? out_max : ret;
+		ret = (ret < out_min) ? out_min : ret;
+		return ret;
 	}
 	
 	/**
@@ -95,6 +103,7 @@ public class Biome {
 	 * @return Hexagon.type the type of the cell
 	 */
 	public Hexagon.type getType(double perlinNoise, int distance) {
+		Biome.max = Math.max(Biome.max, perlinNoise);
 		int maxSideMap = Math.max(this.pMap.sizeX, this.pMap.sizeY);
 		int axisX = map(distance,0,maxSideMap/2,0,this.size-1); //Subtruction because it's zero based
 		int axisY = map(perlinNoise,-1,1,0,this.size-1);
@@ -102,6 +111,7 @@ public class Biome {
 			System.out.print("Hello");
 		}
 		Hexagon.type ret;
+		System.out.println(perlinNoise);
 		switch (this.matrix[axisX][axisY]) {
 		case 'S':
 			ret = Hexagon.type.SEA;
