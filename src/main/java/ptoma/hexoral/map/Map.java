@@ -209,6 +209,21 @@ public class Map {
 		return Math.min(distW, Math.min(distE, Math.min(distN, distS)));
 	}
 	
+	public int distFromEdges (int x, int y) 	{
+		int distN = x;
+		int distE = this.sizeY - 1 - y;
+		int distS = this.sizeX - 1 - x;
+		int distW = y;
+		
+		int distNW = distN + distW;
+		int distNE = distN + distE;
+		int distSW = distS + distW;
+		int distSE = distS + distE;
+		
+		return Math.min(distSW, Math.min(distSE, Math.min(distNW, distNE)));	
+	}
+
+	
 	/**
 	 * 
 	 * @param i is the X coordinate 
