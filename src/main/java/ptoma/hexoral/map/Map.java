@@ -219,13 +219,14 @@ public class Map {
 		distW = y;
 		
 		int distMin = Math.min(distW, Math.min(distE, Math.min(distN, distS)));
+		
 		if (distMin == distN)
 			return 'N';
-		else if (distMin == distN)
+		else if (distMin == distE)
 			return 'E';
-		else if (distMin == distN)
+		else if (distMin == distS)
 			return 'S';
-		else if (distMin == distN)
+		else if (distMin == distW)
 			return 'W';
 		else 
 			return 'R';
