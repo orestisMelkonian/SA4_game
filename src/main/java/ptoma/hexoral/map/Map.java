@@ -210,6 +210,27 @@ public class Map {
 		return Math.min(distW, Math.min(distE, Math.min(distN, distS)));
 	}
 	
+	public char distFromBorderNESW (int x, int y) {
+		int distN=0, distE=0, distS=0, distW=0;
+
+		distN = x;
+		distE = this.sizeY - 1 - y;
+		distS = this.sizeX - 1 - x;
+		distW = y;
+		
+		int distMin = Math.min(distW, Math.min(distE, Math.min(distN, distS)));
+		if (distMin == distN)
+			return 'N';
+		else if (distMin == distN)
+			return 'E';
+		else if (distMin == distN)
+			return 'S';
+		else if (distMin == distN)
+			return 'W';
+		else 
+			return 'R';
+	}
+	
 	public int distFromEdges (int x, int y) 	{
 		int distN = x;
 		int distE = this.sizeY - 1 - y;
@@ -224,13 +245,43 @@ public class Map {
 		return Math.min(distSW, Math.min(distSE, Math.min(distNW, distNE)));	
 	}
 	
-	public int distFromCenter(int x, int y)	{
+	public int distFromCenterEdges(int x, int y)	{
 		int a = (int) ( Math.pow( Math.abs(y - (this.sizeY-1)/2 ), 2) );
 		int b = (int) ( Math.pow( Math.abs(x - (this.sizeX-1)/2 ), 2) );
 		return (int) ( Math.sqrt(a + b) );
-		
 	}
 	
+	public int distFromCenter(int x, int y)	{
+		return ( (int) (Math.sqrt((Math.pow(this.sizeX/2 - x, 2))+(Math.pow(this.sizeY/2 - y, 2))))	);
+	}
+	
+	
+	public int distFromMiddles(int x, int y)	{
+		if ( x < (this.sizeX -1)/2)		{
+			if ( y < (this.sizeX-1)/2 ) //NW
+				if (distFromBorderNESW(x, y) == 'N')
+					return (x + (this.sizeY-1)/2 - y);
+				else
+					return (y + (this.sizeX-1)/2 - x);
+			else //NE
+				if (distFromBorderNESW(x, y) == 'N')
+					return (x + y - (this.sizeY-1));
+				else
+					return ((this.sizeY-1) - y + (this.sizeX-1)/2 - x);
+		}
+		else	{
+			if ( y < (this.sizeX-1)/2 ) //SW
+				if (distFromBorderNESW(x, y) == 'S')
+					return ((this.sizeX-1) - x + (this.sizeY-1)/2 - y);
+				else
+					return (y + (this.sizeX-1) - x);
+			else //SE
+				if (distFromBorderNESW(x, y) == 'S')
+					return ((this.sizeX-1) - x + y - (this.sizeY-1)/2);
+				else
+					return ((this.sizeY-1) - y + x - (this.sizeX-1));
+		}
+	}
 	
 	
 	/**
