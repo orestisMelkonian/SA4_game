@@ -53,11 +53,14 @@ public class Visualize extends Canvas {
 		int hexagonSize = this.getHexSize();
 		BufferedImage sea = null;
 		BufferedImage land = null;
+		BufferedImage mountain = null;
 		try {
 			File s = new File("src/main/resources/seastroke.png");
 			File d = new File("src/main/resources/grassstroke.png");
+			File m = new File("src/main/resources/mountainstroke.png");
 			sea = ImageIO.read(s);
 			land = ImageIO.read(d);
+			mountain = ImageIO.read(m);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,12 +69,17 @@ public class Visualize extends Canvas {
 			for (int j = 0; j < map.sizeY; j++) {
 				int offsetX = (j % 2) * hexagonSize / 2;
 				int offsetY = j * hexagonSize / 4;// j*4;//
-				if (map.matrix[i][j].getType() == "SEA") {
+				String cellType = map.matrix[i][j].getType();
+				if (cellType == "SEA") {
 					g.drawImage(sea, i * hexagonSize + offsetX, j
 							* hexagonSize - offsetY, hexagonSize,
 							hexagonSize, null);
-				} else {
+				} else if (cellType == "LAND") {
 					g.drawImage(land, i * hexagonSize + offsetX, j
+							* hexagonSize - offsetY, hexagonSize,
+							hexagonSize, null);
+				} else if (cellType == "MOUNTAIN") {
+					g.drawImage(mountain, i * hexagonSize + offsetX, j
 							* hexagonSize - offsetY, hexagonSize,
 							hexagonSize, null);
 				}

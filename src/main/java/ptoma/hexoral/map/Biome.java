@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.apache.jasper.runtime.PerThreadTagHandlerPool;
-
 import ptoma.hexoral.map.Hexagon;
 import ptoma.hexoral.map.Map;
 
@@ -20,7 +18,6 @@ import ptoma.hexoral.map.Map;
 public class Biome {
 
 	
-	public static double max = -100;
 	/**
 	 * The path of the biome resources.
 	 */
@@ -86,10 +83,10 @@ public class Biome {
 	 * @param in_min from Range of numbers lower bound
 	 * @param in_max from range of numbers upper bound
 	 * @param out_min to range of numbers lower bound
-	 * @param out_max to range of numbesr upper bound
+	 * @param out_max to range of numbers upper bound
 	 * @return
 	 */
-	private int map(double x, int in_min, int in_max, int out_min, int out_max) {
+	static int map(double x, int in_min, int in_max, int out_min, int out_max) {
 		int ret =  (int) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
 		ret = (ret > out_max) ? out_max : ret;
 		ret = (ret < out_min) ? out_min : ret;
@@ -103,12 +100,12 @@ public class Biome {
 	 * @return Hexagon.type the type of the cell
 	 */
 	public Hexagon.type getType(double perlinNoise, int distance) {
-		Biome.max = Math.max(Biome.max, perlinNoise);
 		int maxSideMap = (int)Math.sqrt(Math.pow(this.pMap.sizeX/2, 2)+Math.pow(this.pMap.sizeY/2, 2));
 		int axisX = map(distance,0,maxSideMap,0,this.size-1); //Subtruction because it's zero based
 		int axisY = map(perlinNoise,-1,1,0,this.size-1);
-		
-		System.out.printf("Distance %d and noise %f maps to [%d][%d]\n", distance,perlinNoise,axisX,axisY);
+		int complexItMore = Biome.map(Math.random(),0,1,-2,2);
+		//System.out.println("Rand " + complexItMore + " axisX " + axisX);
+		//System.out.printf("Distance %d and noise %f maps to [%d][%d]\n", distance,perlinNoise,axisX,axisY);
 		
 		Hexagon.type ret;
 		switch (this.matrix[axisX][axisY]) {
@@ -120,11 +117,14 @@ public class Biome {
 			break;
 		case 'M':
 			ret = Hexagon.type.MOUNTAIN;
+			break;
 		default:
 			ret = null;
 			break;
 		}
 		return ret;
 	}
+	
+	
 	
 }
