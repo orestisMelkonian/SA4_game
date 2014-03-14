@@ -54,13 +54,16 @@ public class Visualize extends Canvas {
 		BufferedImage sea = null;
 		BufferedImage land = null;
 		BufferedImage mountain = null;
+		BufferedImage lake = null;
 		try {
 			File s = new File("src/main/resources/seastroke.png");
 			File d = new File("src/main/resources/grassstroke.png");
 			File m = new File("src/main/resources/mountainstroke.png");
+			File l = new File("src/main/resources/lakestroke.png");
 			sea = ImageIO.read(s);
 			land = ImageIO.read(d);
 			mountain = ImageIO.read(m);
+			lake = ImageIO.read(l);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,6 +83,10 @@ public class Visualize extends Canvas {
 							hexagonSize, null);
 				} else if (cellType == "MOUNTAIN") {
 					g.drawImage(mountain, i * hexagonSize + offsetX, j
+							* hexagonSize - offsetY, hexagonSize,
+							hexagonSize, null);
+				} else if (cellType == "MOUNTAIN") {
+					g.drawImage(lake, i * hexagonSize + offsetX, j
 							* hexagonSize - offsetY, hexagonSize,
 							hexagonSize, null);
 				}
