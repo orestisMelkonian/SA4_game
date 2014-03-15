@@ -2,8 +2,8 @@
 
 /*author :Hanieh */
 
+package Assignment4; 
  
-package Assignment4;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -32,18 +32,18 @@ public class MyCanvas extends Canvas  {
         JFrame AppWin = new JFrame();
         AppWin.setTitle("Map Generator");
         AppWin.setBackground(Color.WHITE );
-        AppWin.setSize(800, 600);
+        //AppWin.setSize(800, 600);
         AppWin.setVisible(true);
         AppWin.setLocationRelativeTo(null);
         AppWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
-        Component newTitle = new JTextField("Map Generator");
-        //newTitle.setBounds(0, 0, 800, 10);
-        newTitle.setBackground(Color.gray);
-        
-        
-        AppWin.add(newTitle);
+//        Component newTitle = new JTextField("Map Generator");
+//        newTitle.setBounds(0, 0, 800, 10);
+//        newTitle.setBackground(Color.gray);
+//        
+//        
+//        AppWin.add(newTitle);
 
 
         AppWin.setLayout(new GridLayout(1,2));
@@ -143,20 +143,42 @@ public class MyCanvas extends Canvas  {
         JScrollPane scrollPane = new JScrollPane(panelMap);
         scrollPane.getViewport().add( panelMap );
         
+        //ADD TEXT TO TEST SCROLLBAR#############################################
         
-      
+        JTextArea storyArea = new JTextArea("jdiihsofhfihslhfush;uhfg;ushgw;hugufhbguwhbhgwbh;bhbhw");
+        storyArea.setEditable(false);
+        storyArea.setLineWrap(true);
+        storyArea.setWrapStyleWord(true);
+        
+        panelMap.add( storyArea );
+        
+//        //scrollPane.add(storyArea);
+//        AppWin.setLayout(new BorderLayout());
+//        AppWin.add(new JScrollPane(storyArea));
+        
+        
+   
         
         
         
-        
-        AppWin.setLayout(new BorderLayout());
-        AppWin.add(new JScrollPane(panelMap));
+        // AppWin.setLayout(new BorderLayout());
+        // AppWin.add(new JScrollPane(panelMap));
         
         
         AppWin.add(leftSide, BorderLayout.WEST);
-        AppWin.add(panelMap, BorderLayout.EAST);
+        // AppWin.add(panelMap, BorderLayout.EAST);
+        AppWin.add(new JScrollPane(panelMap), BorderLayout.EAST);
         
-        setVisible(true);       
+        
+        AppWin.pack();
+        setVisible(true); 
+        
+        
+        AppWin.setSize(800, 600);
+       
+        
+        //setVisible(true); 
+        
     }
     
     
@@ -175,17 +197,17 @@ public class MyCanvas extends Canvas  {
     }
     
     private void createWorld( ) {
-    	 JSpinner _spiNumOfAIs = null;
-		((Integer)_spiNumOfAIs.getValue()).intValue();
+         JSpinner _spiNumOfAIs = null;
+        ((Integer)_spiNumOfAIs.getValue()).intValue();
     }
 
 
-	public JSpinner getSpnHeight() {
-		return spnHeight;
-	}
+    public JSpinner getSpnHeight() {
+        return spnHeight;
+    }
 
 
-	public void setSpnHeight(JSpinner spnHeight) {
-		this.spnHeight = spnHeight;
-	}
+    public void setSpnHeight(JSpinner spnHeight) {
+        this.spnHeight = spnHeight;
+    }
 }
