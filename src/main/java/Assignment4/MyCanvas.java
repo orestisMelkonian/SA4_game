@@ -38,27 +38,18 @@ public class MyCanvas extends Canvas  {
         AppWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
-        JFormattedTextField newTitle = new JFormattedTextField("Map Generator");
-        AppWin.add(newTitle);
-        newTitle.setSize(750, 40);
-        newTitle.setBounds(0, 10, 50, 100);
+        Component newTitle = new JTextField("Map Generator");
         //newTitle.setBounds(0, 0, 800, 10);
         newTitle.setBackground(Color.gray);
         
         
-      
+        AppWin.add(newTitle);
 
 
         AppWin.setLayout(new GridLayout(1,2));
         
         JPanel leftSide = new JPanel( new BorderLayout() );
-        JPanel  titlePanel = new JPanel(new BorderLayout() );
-        titlePanel.add(newTitle);
         
-        
-        leftSide.setPreferredSize(new Dimension(200, 80));
-       
-      
         //A panel produce with GridLayout
         JPanel panelLabel = new JPanel( new GridLayout(7,1) );
         panelLabel.setBorder(new EmptyBorder(10, 10, 10, 10) );
@@ -148,14 +139,12 @@ public class MyCanvas extends Canvas  {
         
         // **** Display map in here: ****
         JPanel panelMap = new JPanel( );
-      
         //add today
-      
         JScrollPane scrollPane = new JScrollPane(panelMap);
         scrollPane.getViewport().add( panelMap );
         
         
-
+      
         
         
         
@@ -166,13 +155,12 @@ public class MyCanvas extends Canvas  {
         
         AppWin.add(leftSide, BorderLayout.WEST);
         AppWin.add(panelMap, BorderLayout.EAST);
-        AppWin.add(titlePanel, BorderLayout.NORTH);
         
         setVisible(true);       
     }
     
     
-    	
+   
     
     
 
