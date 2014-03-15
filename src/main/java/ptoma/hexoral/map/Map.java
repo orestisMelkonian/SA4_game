@@ -249,6 +249,7 @@ public class Map {
 	public int distFromCenterEdges(int x, int y)	{
 		int a = (int) ( Math.pow( Math.abs(y - (this.sizeY-1)/2 ), 2) );
 		int b = (int) ( Math.pow( Math.abs(x - (this.sizeX-1)/2 ), 2) );
+		System.out.println("point ("+x+","+y+")");
 		return (int) ( Math.sqrt(a + b) );
 	}
 	
@@ -284,7 +285,19 @@ public class Map {
 		}
 	}
 	
-	
+	public void cleanUp()	{
+		for (int i=0; i<this.sizeX; i++)	{
+			this.matrix[i][0].setType(Hexagon.type.SEA);
+			this.matrix[i][this.sizeY - 1].setType(Hexagon.type.SEA);
+		}
+		for (int i=0; i<this.sizeY; i++)	{
+			this.matrix[0][i].setType(Hexagon.type.SEA);
+			this.matrix[this.sizeX - 1][i].setType(Hexagon.type.SEA);
+		}
+		if (this.sizeX < this.sizeY)	{
+			
+		}
+	}
 	/**
 	 * 
 	 * @param i is the X coordinate 
