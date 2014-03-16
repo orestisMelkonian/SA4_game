@@ -49,6 +49,7 @@ public class Biome {
 
 	protected int angleSize;
 	protected int[] angleMatrix;
+
 	/**
 	 * Basic biome class.
 	 * 
@@ -58,7 +59,7 @@ public class Biome {
 	 * 
 	 */
 	public Biome(String filename, WorldMap map) {
-		this.angleSize = 80;
+		this.angleSize = Math.max(map.sizeX, map.sizeY);
 		this.angleMatrix = new int[this.angleSize];
 		this.pMap = map;
 		inBiome = new File(Biome.PATH + filename);
@@ -78,21 +79,24 @@ public class Biome {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < this.angleSize; i++) {
-			this.angleMatrix[i] = Biome.map(Math.random(), 0, 1, -this.size/4, this.size/4);
+			this.angleMatrix[i] = Biome.map(Math.random(), 0, 1,
+					-this.size / 4, this.size / 4);
 		}
 
 	}
 
-	
-	public double similarTriangle(Coords center,Coords point, Coords reflection,Coords edge) {
-		/*double cp = Map.distance(center, point);
-		double cr = Map.distance(center, reflection);
-		return (cp*ce)/cr */
+	public double similarTriangle(Coords center, Coords point,
+			Coords reflection, Coords edge) {
+		/*
+		 * double cp = Map.distance(center, point); double cr =
+		 * Map.distance(center, reflection); return (cp*ce)/cr
+		 */
 		double ce = WorldMap.distance(center, edge);
-		double angle = Math.cos(WorldMap.angleBetween(center, reflection, point));
-		return ce/Math.abs(angle);
+		double angle = Math.cos(WorldMap
+				.angleBetween(center, reflection, point));
+		return ce / Math.abs(angle);
 	}
-	
+
 	/**
 	 * Math magic involved Do not write this at home!
 	 * 
@@ -106,31 +110,32 @@ public class Biome {
 		Coords edge;
 		char closestBorder = this.pMap.distFromBorderNESW(p.x, p.y);
 		int ret;
-		
+
 		switch (closestBorder) {
-		case 'N': //done
-			reflection = new Coords(center.x,p.y);
-			edge = new Coords(center.x,0);
+		case 'N': // done
+			reflection = new Coords(center.x, p.y);
+			edge = new Coords(center.x, 0);
 			break;
-		case 'S': //done
-			reflection = new Coords(center.x,p.y);
-			edge = new Coords(center.x,this.pMap.sizeY-1);
+		case 'S': // done
+			reflection = new Coords(center.x, p.y);
+			edge = new Coords(center.x, this.pMap.sizeY - 1);
 			break;
-		case 'E': //done
-			reflection = new Coords(p.x,center.y);
-			edge = new Coords(this.pMap.sizeX-1,center.y);
+		case 'E': // done
+			reflection = new Coords(p.x, center.y);
+			edge = new Coords(this.pMap.sizeX - 1, center.y);
 			break;
-		case 'W': //done
-			reflection = new Coords(p.x,center.y);
-			edge = new Coords(0,center.y);
+		case 'W': // done
+			reflection = new Coords(p.x, center.y);
+			edge = new Coords(0, center.y);
 			break;
 		default:
 			return 0;
 		}
-		
-		ret =(int) WorldMap.distance(center, edge);
-		
-		//System.out.println(closestBorder + " - " +ret + " point " + p.toString());
+
+		ret = (int) WorldMap.distance(center, edge);
+
+		// System.out.println(closestBorder + " - " +ret + " point " +
+		// p.toString());
 		return ret;
 	}
 
@@ -166,19 +171,20 @@ public class Biome {
 	 */
 	public Hexagon.type getType(double perlinNoise, int distance, int x, int y) {
 		int maxSideMap = this.maxFromBorders(new Coords(x, y));
-		Coords center = new Coords(this.pMap.sizeX/2,this.pMap.sizeY/2);
-		double angle = WorldMap.angleBetween(center, new Coords(0,0), new Coords(x,y));
-		int complexItMore = map(angle, -360, 360, 0, this.angleSize-1);
-		int axisX = map(distance+this.angleMatrix[complexItMore], 0, maxSideMap, 0, this.size - 1); 
-		
+		Coords center = new Coords(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
+		double angle = WorldMap.angleBetween(center, new Coords(0, 0),
+				new Coords(x, y));
+		int complexItMore = map(angle, -360, 360, 0, this.angleSize - 1);
+		int axisX = map(distance + this.angleMatrix[complexItMore], 0,
+				maxSideMap, 0, this.size - 1);
+
 		int axisY = map(perlinNoise, -1, 1, 0, this.size - 1);
-		
-		//System.out.println("Angle " + angle + " random " + complexItMore);
-		/*if(perlinNoise < 0.5) {
-			return Hexagon.type.LAND;
-		} else if( perlinNoise >= 0.5) {
-			return Hexagon.type.SEA;
-		} */
+
+		// System.out.println("Angle " + angle + " random " + complexItMore);
+		/*
+		 * if(perlinNoise < 0.5) { return Hexagon.type.LAND; } else if(
+		 * perlinNoise >= 0.5) { return Hexagon.type.SEA; }
+		 */
 		Hexagon.type ret;
 		switch (this.matrix[axisX][axisY]) {
 		case 'S':
