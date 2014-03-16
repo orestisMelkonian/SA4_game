@@ -106,26 +106,26 @@ public class Biome {
 	 */
 	protected int maxFromBorders(Coords p) {
 		Coords center = new Coords(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
-		Coords reflection;
+		//Coords reflection;
 		Coords edge;
 		char closestBorder = this.pMap.distFromBorderNESW(p.x, p.y);
 		int ret;
 
 		switch (closestBorder) {
 		case 'N': // done
-			reflection = new Coords(center.x, p.y);
+			//reflection = new Coords(center.x, p.y);
 			edge = new Coords(center.x, 0);
 			break;
 		case 'S': // done
-			reflection = new Coords(center.x, p.y);
+			//reflection = new Coords(center.x, p.y);
 			edge = new Coords(center.x, this.pMap.sizeY - 1);
 			break;
 		case 'E': // done
-			reflection = new Coords(p.x, center.y);
+			//reflection = new Coords(p.x, center.y);
 			edge = new Coords(this.pMap.sizeX - 1, center.y);
 			break;
 		case 'W': // done
-			reflection = new Coords(p.x, center.y);
+			//reflection = new Coords(p.x, center.y);
 			edge = new Coords(0, center.y);
 			break;
 		default:
@@ -182,8 +182,8 @@ public class Biome {
 
 		// System.out.println("Angle " + angle + " random " + complexItMore);
 		/*
-		 * if(perlinNoise < 0.5) { return Hexagon.type.LAND; } else if(
-		 * perlinNoise >= 0.5) { return Hexagon.type.SEA; }
+		 if(perlinNoise < 0) { return Hexagon.type.LAND; } else if(
+		 perlinNoise >= 0) { return Hexagon.type.SEA; }
 		 */
 		Hexagon.type ret;
 		switch (this.matrix[axisX][axisY]) {

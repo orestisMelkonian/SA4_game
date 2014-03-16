@@ -55,25 +55,26 @@ public class Visualize extends Canvas {
 		aFrame.setLayout(new GridLayout(1,2));  
 		//aFrame.getContentPane().add(cnv, BorderLayout.WEST);
         //aFrame.add(cnv, BorderLayout.EAST);  
-		aFrame.add(cnv);
+		
 		
 		//aFrame.setSize((this.map.sizeX + 2)* hexagonSize + 50, (this.map.sizeY + 2)* hexagonSize);
 		//aFrame.setSize(1400,1000);
-		aFrame.setSize(1000, 1000);
+		aFrame.setSize(1000, 500);
 		JButton jb=new JButton();
-	    jb.setText("Leech");
-	    jb.setSize(20, 20);
+	    jb.setText("Generate");
 	    aFrame.add(jb);
+	    aFrame.add(cnv);
 		aFrame.setVisible(true);
 	}
 
-	private void internalPaint(Graphics g) {
+	private Image internalPaint() {
 		WorldMap map = this.getMap();
 		int hexagonSize = this.getHexSize();
 		BufferedImage sea = null;
 		BufferedImage land = null;
 		BufferedImage mountain = null;
 		BufferedImage lake = null;
+		BufferedImage output = new BufferedImage(map.sizeX*hexagonSize+hexagonSize/2, map.sizeY*hexagonSize-map.sizeY*hexagonSize/6, BufferedImage.TYPE_INT_RGB);
 		try {
 			File s = new File("src/main/resources/seastroke.png");
 			File d = new File("src/main/resources/grassstroke.png");
@@ -87,11 +88,12 @@ public class Visualize extends Canvas {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Graphics g = output.getGraphics();
 		for (int i = 0; i < map.sizeX; i++) {
 			for (int j = 0; j < map.sizeY; j++) {
 				int offsetX = (j % 2) * hexagonSize / 2;
 				int offsetY = j * hexagonSize / 4;// j*4;//
-				String cellType = map.matrix[i][j].getType();
+				String cellType = map.matrix.get(i, j).getType();
 				if (cellType == "SEA") {
 					g.drawImage(sea, i * hexagonSize + offsetX, j
 							* hexagonSize - offsetY, hexagonSize,
@@ -112,9 +114,10 @@ public class Visualize extends Canvas {
 
 			}
 		}
+		return output;
 	}
 	@Override
 	public void paint(Graphics g) {
-		this.internalPaint(g);
+		g.drawImage(this.internalPaint(), 0, 0, 500, 500, null);
 	}
 }

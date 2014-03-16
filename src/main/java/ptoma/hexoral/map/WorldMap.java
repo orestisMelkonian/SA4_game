@@ -1,33 +1,18 @@
 package ptoma.hexoral.map;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
+import com.google.common.collect.Table;
+import com.google.common.collect.HashBasedTable;
 
 //import java.util.ArrayList;
 //import SHIT
 public class WorldMap {
 	protected int sizeX;
 	protected int sizeY;
-	protected Hexagon[][] matrix;
-
-	/**
-	 * @author Orestis Default constructor
-	 */
-	public WorldMap() {
-		this.sizeX = 30;
-		this.sizeY = 30;
-		matrix = new Hexagon[sizeX][sizeY];
-		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				matrix[i][j] = new Hexagon(Hexagon.type.LAND);
-			}
-		}
-	}
+	protected Table<Integer, Integer, Hexagon> matrix;
+	protected Hexagon.type popularType;
+	protected int count[];
 
 	/**
 	 * Constructor with parameters.
@@ -35,21 +20,17 @@ public class WorldMap {
 	 * @param x
 	 *            horizontal dimension
 	 * @param y
-	 *            vertical dimension TODO Load map from file functionality. TODO
-	 *            Define how the map file will look like.
+	 *            vertical dimension
 	 */
 	public WorldMap(int x, int y) {
+		this.popularType = Hexagon.type.SEA;
 		this.sizeX = x;
 		this.sizeY = y;
-
-		this.matrix = new Hexagon[sizeX][sizeY];
-
-		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				matrix[i][j] = new Hexagon(Hexagon.type.SEA);
-			}
+		this.count = new int[Hexagon.type.values().length];
+		for (int i = 0; i < this.count.length; i++) {
+			this.count[i] = 0;
 		}
-
+		this.matrix = HashBasedTable.create();
 	}
 
 	/**
@@ -202,48 +183,6 @@ public class WorldMap {
 		return ret;
 	}
 
-	public void printMap() {
-		// TODO Auto-generated method stub
-		PrintWriter writer = null;
-		try {
-			writer = new PrintWriter("myPNmap.txt", "UTF-8");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				if (this.matrix[i][j].getType() == "SEA")
-					writer.print('S');
-				else
-					writer.print('L');
-			}
-			writer.println();
-		}
-		writer.close();
-
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader("myPNmap.txt"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String line = null;
-		try {
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
 	/**
 	 * Compute distance from closest border.
 	 * 
@@ -351,15 +290,6 @@ public class WorldMap {
 				* (p1.y - p0.y));
 	}
 
-	// TODO write javadoc here
-	public static double angleBetween(Coords center, Coords current,
-			Coords previous) {
-
-		return Math.toDegrees(Math.atan2(current.x - center.x, current.y
-				- center.y)
-				- Math.atan2(previous.x - center.x, previous.y - center.y));
-	}
-
 	public String getArea(int x, int y) {
 		if (x < (this.sizeX - 1) / 2) {
 			if (y < (this.sizeX - 1) / 2) // NW
@@ -377,125 +307,35 @@ public class WorldMap {
 	}
 
 	public int getLandNo() {
-		int count = 0;
-		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				if (this.matrix[i][j].getType() == "LAND")
-					count++;
-			}
-		}
-		return count;
+		return this.count[Hexagon.type.LAND.ordinal()];
 	}
 
 	public int getSeaNo() {
-		int count = 0;
-		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				if (this.matrix[i][j].getType() == "SEA")
-					count++;
-			}
-		}
-		return count;
+		return this.count[Hexagon.type.SEA.ordinal()];
 	}
 
 	public int getLakeNo() {
-		int count = 0;
-		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				if (this.matrix[i][j].getType() == "LAKE")
-					count++;
-			}
-		}
-		return count;
+		return this.count[Hexagon.type.LAKE.ordinal()];
 	}
 
 	public int getMountainNo() {
-		int count = 0;
-		for (int i = 0; i < this.sizeX; i++) {
-			for (int j = 0; j < this.sizeY; j++) {
-				if (this.matrix[i][j].getType() == "MOUNTAIN")
-					count++;
-			}
-		}
-		return count;
-	}
-
-	public Coords findCoastalLand() {
-		int i = (int) (Math.random() * this.sizeX);
-		int j = (int) (Math.random() * this.sizeY);
-		int countS = 0;
-		while ((this.matrix[i][j].getType() != "LAND")) {
-			// System.out.println("Searching -i="+i+" j="+j+"-- type = " +
-			// this.matrix[i][j].getType());
-			i = (int) (Math.random() * this.sizeX);
-			j = (int) (Math.random() * this.sizeY);
-		}
-
-		String area = this.getArea(i, j);
-		if (area == "NW") {
-			countS = 0;
-			ArrayList<Coords> leftNeigh = this.getLeftNeighbours(new Coords(i,
-					j));
-			for (int k = 0; k < leftNeigh.size(); k++) {
-				if (this.matrix[leftNeigh.get(k).x][leftNeigh.get(k).y]
-						.getType() == "SEA")
-					countS++;
-			}
-			if (countS >= 2)
-				return (new Coords(i, j));
-		} else if (area == "NE") {
-			countS = 0;
-			ArrayList<Coords> leftNeigh = this.getRightNeighbours(new Coords(i,
-					j));
-			for (int k = 0; k < leftNeigh.size(); k++) {
-				if (this.matrix[leftNeigh.get(k).x][leftNeigh.get(k).y]
-						.getType() == "SEA")
-					countS++;
-			}
-			if (countS >= 2)
-				return (new Coords(i, j));
-		} else if (area == "SW") {
-			countS = 0;
-			ArrayList<Coords> leftNeigh = this.getLeftNeighbours(new Coords(i,
-					j));
-			for (int k = 0; k < leftNeigh.size(); k++) {
-				if (this.matrix[leftNeigh.get(k).x][leftNeigh.get(k).y]
-						.getType() == "SEA")
-					countS++;
-			}
-			if (countS >= 2)
-				return (new Coords(i, j));
-		} else if (area == "SE") {
-			countS = 0;
-			ArrayList<Coords> leftNeigh = this.getRightNeighbours(new Coords(i,
-					j));
-			for (int k = 0; k < leftNeigh.size(); k++) {
-				if (this.matrix[leftNeigh.get(k).x][leftNeigh.get(k).y]
-						.getType() == "SEA")
-					countS++;
-			}
-			if (countS >= 2)
-				return (new Coords(i, j));
-		} else
-			System.out.println("ERROR! in getArea()");
-		return null;
-
+		return this.count[Hexagon.type.MOUNTAIN.ordinal()];
 	}
 
 	public Coords findSeaNextToLand() {
 		int i = (int) (Math.random() * this.sizeX);
 		int j = (int) (Math.random() * this.sizeY);
 
-		while ((this.matrix[i][j].getType() != "SEA")
-				&& (this.matrix[i][j].getType() != "LAKE")) {
+		while ((this.matrix.get(i, j).getType() != "SEA")
+				&& (this.matrix.get(i, j).getType() != "LAKE")) {
 			i = (int) (Math.random() * this.sizeX);
 			j = (int) (Math.random() * this.sizeY);
 		}
 
 		ArrayList<Coords> toCheck = this.getNeighbours(new Coords(i, j));
 		for (int k = 0; k < toCheck.size(); k++) {
-			if ((this.matrix[toCheck.get(k).x][toCheck.get(k).y].getType() == "LAND")
-					|| (this.matrix[toCheck.get(k).x][toCheck.get(k).y]
+			if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).getType() == "LAND")
+					|| (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
 							.getType() == "MOUNTAIN")) {
 				return (new Coords(i, j));
 			}
@@ -507,18 +347,18 @@ public class WorldMap {
 		int i = (int) (Math.random() * this.sizeX);
 		int j = (int) (Math.random() * this.sizeY);
 
-		while ((this.matrix[i][j].getType() != "LAND")
-				&& (this.matrix[i][j].getType() != "MOUNTAIN")) {
+		while ((this.matrix.get(i, j).getType() != "LAND")
+				&& (this.matrix.get(i, j).getType() != "MOUNTAIN")) {
 			// System.out.println("Searching -i="+i+" j="+j+"-- type = " +
-			// this.matrix[i][j].getType());
+			// this.matrix.get(i,j).getType());
 			i = (int) (Math.random() * this.sizeX);
 			j = (int) (Math.random() * this.sizeY);
 		}
 
 		ArrayList<Coords> toCheck = this.getNeighbours(new Coords(i, j));
 		for (int k = 0; k < toCheck.size(); k++) {
-			if ((this.matrix[toCheck.get(k).x][toCheck.get(k).y].getType() == "SEA")
-					|| (this.matrix[toCheck.get(k).x][toCheck.get(k).y]
+			if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).getType() == "SEA")
+					|| (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
 							.getType() == "LAKE")) {
 				return (new Coords(i, j));
 			}
@@ -548,7 +388,7 @@ public class WorldMap {
 				Coords p = null;
 				while (p == null)
 					p = this.findLandNextToSea();
-				this.matrix[p.x][p.y].setType(Hexagon.type.SEA);
+				this.matrix.get(p.x, p.y).setType(Hexagon.type.SEA);
 			}
 		} else { // add land / remove sea
 			System.out.println("Must remove " + (waterNo - realWaterNo)
@@ -557,7 +397,7 @@ public class WorldMap {
 				Coords p = null;
 				while (p == null)
 					p = this.findSeaNextToLand();
-				this.matrix[p.x][p.y].setType(Hexagon.type.LAND);
+				this.matrix.get(p.x, p.y).setType(Hexagon.type.LAND);
 			}
 		}
 
@@ -578,14 +418,16 @@ public class WorldMap {
 	public void cleanUp() {
 		for (int i = 0; i < this.sizeX; i++) {
 			for (int l = 0; l < (int) (Math.max(1, sizeY / 50)); l++) {
-				this.matrix[i][l].setType(Hexagon.type.SEA);
-				this.matrix[i][this.sizeY - (l + 1)].setType(Hexagon.type.SEA);
+				this.matrix.get(i, l).setType(Hexagon.type.SEA);
+				this.matrix.get(i, this.sizeY - (l + 1)).setType(
+						Hexagon.type.SEA);
 			}
 		}
 		for (int i = 0; i < this.sizeY; i++) {
 			for (int l = 0; l < (int) (Math.max(1, sizeX / 50)); l++) {
-				this.matrix[l][i].setType(Hexagon.type.SEA);
-				this.matrix[this.sizeX - (l + 1)][i].setType(Hexagon.type.SEA);
+				this.matrix.get(l, i).setType(Hexagon.type.SEA);
+				this.matrix.get(this.sizeX - (l + 1), i).setType(
+						Hexagon.type.SEA);
 			}
 		}
 		if (this.sizeX < this.sizeY) {
@@ -596,20 +438,21 @@ public class WorldMap {
 	public void cleanIsland() {
 		for (int i = 0; i < this.sizeX; i++) {
 			for (int j = 0; j < this.sizeY; j++) {
-				if ((this.matrix[i][j].getType() == "SEA")
-						|| (this.matrix[i][j].getType() == "LAKE")) {
+				if ((this.matrix.get(i, j).getType() == "SEA")
+						|| (this.matrix.get(i, j).getType() == "LAKE")) {
 					int allLand = 0;
 					ArrayList<Coords> toCheck = this.getNeighbours(new Coords(
 							i, j));
 					for (int k = 0; k < toCheck.size(); k++) {
-						if ((this.matrix[toCheck.get(k).x][toCheck.get(k).y]
+						if ((this.matrix
+								.get(toCheck.get(k).x, toCheck.get(k).y)
 								.getType() == "SEA")
-								|| (this.matrix[toCheck.get(k).x][toCheck
-										.get(k).y].getType() == "LAKE"))
+								|| (this.matrix.get(toCheck.get(k).x,
+										toCheck.get(k).y).getType() == "LAKE"))
 							allLand++;
 					}
 					if (allLand < 2) // only one or none neighboring sea cells
-						this.matrix[i][j].setType(Hexagon.type.LAND);
+						this.matrix.get(i, j).setType(Hexagon.type.LAND);
 				}
 			}
 		}
@@ -618,23 +461,39 @@ public class WorldMap {
 	public void cleanSea() {
 		for (int i = 0; i < this.sizeX; i++) {
 			for (int j = 0; j < this.sizeY; j++) {
-				if ((this.matrix[i][j].getType() == "LAND")
-						|| (this.matrix[i][j].getType() == "MOUNTAIN")) {
+				if ((this.matrix.get(i, j).getType() == "LAND")
+						|| (this.matrix.get(i, j).getType() == "MOUNTAIN")) {
 					int allLand = 0;
 					ArrayList<Coords> toCheck = this.getNeighbours(new Coords(
 							i, j));
 					for (int k = 0; k < toCheck.size(); k++) {
-						if ((this.matrix[toCheck.get(k).x][toCheck.get(k).y]
+						if ((this.matrix
+								.get(toCheck.get(k).x, toCheck.get(k).y)
 								.getType() == "LAND")
-								|| (this.matrix[toCheck.get(k).x][toCheck
-										.get(k).y].getType() == "MOUNTAIN"))
+								|| (this.matrix.get(toCheck.get(k).x,
+										toCheck.get(k).y).getType() == "MOUNTAIN"))
 							allLand++;
 					}
 					if (allLand < 2) // only one or none neighboring land cells
-						this.matrix[i][j].setType(Hexagon.type.SEA);
+						this.matrix.get(i, j).setType(Hexagon.type.SEA);
 				}
 			}
 		}
+	}
+
+	/**
+	 * Computes the angle between three points in degrees.
+	 * @param center point
+	 * @param current point
+	 * @param previous point
+	 * @return the angle between them
+	 */
+	public static double angleBetween(Coords center, Coords current,
+			Coords previous) {
+
+		return Math.toDegrees(Math.atan2(current.x - center.x, current.y
+				- center.y)
+				- Math.atan2(previous.x - center.x, previous.y - center.y));
 	}
 
 	/**
@@ -646,6 +505,41 @@ public class WorldMap {
 	 * @return a string of the type of the hexagon
 	 */
 	public String getType(int i, int j) {
-		return this.matrix[i][j].getType();
+		return this.matrix.get(i, j).getType();
+	}
+
+	/**
+	 * Adds a new hexagon to the hash map and updates the count array. 
+	 * @param x coordinate 
+	 * @param y coordinate
+	 * @param type of the Hexagon to be created
+	 */
+	public void setHexagon(int x, int y, Hexagon.type type) {
+		Hexagon previous = this.matrix.get(x, y);
+		Hexagon ret = new Hexagon(type, x, y);
+		if (previous == null) {
+			this.matrix.put(x, y, ret);
+		} else if (previous !=null && previous.getType() != ret.getType()) {
+			this.count[previous.getOrdinalType()]--;
+		}
+		this.count[type.ordinal()]++;
+		if (type != this.popularType) {
+			this.matrix.put(x, y, ret);
+		}
+	}
+
+	/**
+	 * Return a hexagon object of the specified coordinates.
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @return Hexagon Object of the specified coordinates.
+	 */
+	public Hexagon getHexagon(int x, int y) {
+		Hexagon ret = this.matrix.get(x, y);
+		if (ret == null) {
+			return new Hexagon(this.popularType, x, y);
+		} else {
+			return ret;
+		}
 	}
 }

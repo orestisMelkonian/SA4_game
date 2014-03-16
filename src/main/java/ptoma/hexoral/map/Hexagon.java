@@ -122,4 +122,12 @@ public class Hexagon {
 	public void setCoords(int x, int y) {
 		this.w = new Coords(x, y);
 	}
+	
+	/**
+	 * Return the integer assigned to the enum.
+	 * @return int of the ordinal of the enum
+	 */
+	public int getOrdinalType() {
+		return this.terrainType.ordinal();
+	}
 }
