@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Visualize extends Canvas {
@@ -33,18 +36,34 @@ public class Visualize extends Canvas {
 	public void print() {
 		Visualize cnv = new Visualize(this.map,this.hexagonSize);
 		// this.map = map;
-		Frame aFrame = new Frame();
-		aFrame.setTitle("Map visual");
+		JFrame aFrame = new JFrame("Border Layout");
+		aFrame.setTitle("Island Generator");
 		aFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				System.exit(0);
 			}
 		});
 		System.out.println(this.map.sizeX + " : " + this.map.sizeY);
-		aFrame.setSize((this.map.sizeX + 2)* hexagonSize, (this.map.sizeY + 2)
-				* hexagonSize);
+		
+		//TESTING
+		((JFrame) aFrame).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		aFrame.pack();
+		aFrame.setVisible(true);
+		//-------DONE
+		
+		
+		aFrame.setLayout(new GridLayout(1,2));  
+		//aFrame.getContentPane().add(cnv, BorderLayout.WEST);
+        //aFrame.add(cnv, BorderLayout.EAST);  
 		aFrame.add(cnv);
-
+		
+		//aFrame.setSize((this.map.sizeX + 2)* hexagonSize + 50, (this.map.sizeY + 2)* hexagonSize);
+		//aFrame.setSize(1400,1000);
+		aFrame.setSize(1000, 1000);
+		JButton jb=new JButton();
+	    jb.setText("Leech");
+	    jb.setSize(20, 20);
+	    aFrame.add(jb);
 		aFrame.setVisible(true);
 	}
 
