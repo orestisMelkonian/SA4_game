@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import ptoma.hexoral.map.Hexagon;
-import ptoma.hexoral.map.Map;
+import ptoma.hexoral.map.WorldMap;
 
 /**
  * A class for representing the biome of the world. i.e. the properties of the
@@ -45,8 +45,10 @@ public class Biome {
 	/**
 	 * A pointer for the map
 	 */
-	protected Map pMap;
+	protected WorldMap pMap;
 
+	protected int angleSize;
+	protected int[] angleMatrix;
 	/**
 	 * Basic biome class.
 	 * 
@@ -55,7 +57,9 @@ public class Biome {
 	 *            system
 	 * 
 	 */
-	public Biome(String filename, Map map) {
+	public Biome(String filename, WorldMap map) {
+		this.angleSize = 80;
+		this.angleMatrix = new int[this.angleSize];
 		this.pMap = map;
 		inBiome = new File(Biome.PATH + filename);
 		try {
@@ -73,9 +77,22 @@ public class Biome {
 			System.err.println("Didn't found Biome File in " + Biome.PATH);
 			e.printStackTrace();
 		}
+		for (int i = 0; i < this.angleSize; i++) {
+			this.angleMatrix[i] = Biome.map(Math.random(), 0, 1, -this.size/4, this.size/4);
+		}
 
 	}
 
+	
+	public double similarTriangle(Coords center,Coords point, Coords reflection,Coords edge) {
+		/*double cp = Map.distance(center, point);
+		double cr = Map.distance(center, reflection);
+		return (cp*ce)/cr */
+		double ce = WorldMap.distance(center, edge);
+		double angle = Math.cos(WorldMap.angleBetween(center, reflection, point));
+		return ce/Math.abs(angle);
+	}
+	
 	/**
 	 * Math magic involved Do not write this at home!
 	 * 
@@ -85,42 +102,35 @@ public class Biome {
 	 */
 	protected int maxFromBorders(Coords p) {
 		Coords center = new Coords(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
+		Coords reflection;
+		Coords edge;
 		char closestBorder = this.pMap.distFromBorderNESW(p.x, p.y);
 		int ret;
 		
-		/*
-		Coords R = new Coords(center.x , p.y);
-		int C_R = center.y - p.y;
-		int C_Rt = center.y ;
-		int C_p = this.pMap.distFromCenter(p.x, p.y);
-		ret = (C_Rt * C_p)/C_R; 
-		*/
-		
 		switch (closestBorder) {
-		case 'N':
-		case 'S':
-			if (Math.abs(p.y - center.y) == 0) {
-				ret = this.pMap.sizeY;
-				break;
-			}
-			int dist = this.pMap.distFromCenter(p.x, p.y);
-			ret = (Math.abs(center.y * dist))
-					/ (Math.abs(p.y - center.y));
+		case 'N': //done
+			reflection = new Coords(center.x,p.y);
+			edge = new Coords(center.x,0);
 			break;
-		case 'E':
-		case 'W':
-			if (Math.abs(p.x - center.x) == 0) {
-				ret = this.pMap.sizeX;
-				break;
-			}
-			ret = (Math.abs(center.x * this.pMap.distFromCenter(p.x, p.y)))
-					/ (Math.abs(p.x - center.x));
+		case 'S': //done
+			reflection = new Coords(center.x,p.y);
+			edge = new Coords(center.x,this.pMap.sizeY-1);
+			break;
+		case 'E': //done
+			reflection = new Coords(p.x,center.y);
+			edge = new Coords(this.pMap.sizeX-1,center.y);
+			break;
+		case 'W': //done
+			reflection = new Coords(p.x,center.y);
+			edge = new Coords(0,center.y);
 			break;
 		default:
-			ret = 0;
-			break;
+			return 0;
 		}
-		System.out.println(closestBorder + " - " +ret + " point " + p.toString());
+		
+		ret =(int) WorldMap.distance(center, edge);
+		
+		//System.out.println(closestBorder + " - " +ret + " point " + p.toString());
 		return ret;
 	}
 
@@ -156,17 +166,19 @@ public class Biome {
 	 */
 	public Hexagon.type getType(double perlinNoise, int distance, int x, int y) {
 		int maxSideMap = this.maxFromBorders(new Coords(x, y));
-		//int maxSideMap = this.pMap.distFromCenter(0, 0);
-		int axisX = map(distance, 0, maxSideMap, 0, this.size - 1); // Subtraction
-																	// because
-																	// it's zero
-																	// based
+		Coords center = new Coords(this.pMap.sizeX/2,this.pMap.sizeY/2);
+		double angle = WorldMap.angleBetween(center, new Coords(0,0), new Coords(x,y));
+		int complexItMore = map(angle, -360, 360, 0, this.angleSize-1);
+		int axisX = map(distance+this.angleMatrix[complexItMore], 0, maxSideMap, 0, this.size - 1); 
+		
 		int axisY = map(perlinNoise, -1, 1, 0, this.size - 1);
-		// int complexItMore = Biome.map(Math.random(),0,1,-2,2);
-		// System.out.println("Rand " + complexItMore + " axisX " + axisX);
-		// System.out.printf("Distance %d and noise %f maps to [%d][%d]\n",
-		// distance,perlinNoise,axisX,axisY);
-
+		
+		//System.out.println("Angle " + angle + " random " + complexItMore);
+		/*if(perlinNoise < 0.5) {
+			return Hexagon.type.LAND;
+		} else if( perlinNoise >= 0.5) {
+			return Hexagon.type.SEA;
+		} */
 		Hexagon.type ret;
 		switch (this.matrix[axisX][axisY]) {
 		case 'S':

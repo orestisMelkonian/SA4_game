@@ -1,7 +1,5 @@
 package ptoma.hexoral.map;
 
-import ptoma.hexoral.map.Hexagon.type;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 
 //import java.util.ArrayList;
 //import SHIT
-public class Map {
+public class WorldMap {
 	protected int sizeX;
 	protected int sizeY;
 	protected Hexagon[][] matrix;
@@ -20,7 +18,7 @@ public class Map {
 	/**
 	 * @author Orestis Default constructor
 	 */
-	public Map() {
+	public WorldMap() {
 		this.sizeX = 30;
 		this.sizeY = 30;	
 		
@@ -41,7 +39,7 @@ public class Map {
 	 *            vertical dimension TODO Load map from file functionality. TODO
 	 *            Define how the map file will look like.
 	 */
-	public Map(int x, int y) {
+	public WorldMap(int x, int y) {
 		this.sizeX = x;
 		this.sizeY = y;
 		
@@ -284,6 +282,23 @@ public class Map {
 		}
 	}
 	
+	/**
+	 * Calculates the distance between 2 points.
+	 * @param p0 Coords object of first point
+	 * @param p1 Coords object of second point
+	 * @return the distance between them
+	 */
+	public static double distance(Coords p0, Coords p1)
+	{
+		return Math.sqrt((p1.x - p0.x)*(p1.x - p0.x) + (p1.y - p0.y)*(p1.y - p0.y));
+	}
+	
+	//TODO write javadoc here
+	public static double angleBetween(Coords center, Coords current, Coords previous) {
+
+		  return Math.toDegrees(Math.atan2(current.x - center.x,current.y - center.y)-
+		                        Math.atan2(previous.x- center.x,previous.y- center.y));
+		}
 	
 	/**
 	 * 

@@ -12,17 +12,17 @@ import javax.imageio.ImageIO;
 @SuppressWarnings("serial")
 public class Visualize extends Canvas {
 
-	protected Map map;
+	protected WorldMap map;
 	protected int hexagonSize;
 
-	public Visualize(Map map,int hexSize) {
+	public Visualize(WorldMap map,int hexSize) {
 		setSize(map.sizeX * hexagonSize + hexagonSize, map.sizeY
 				* hexagonSize);
 		this.map = map;
 		this.hexagonSize = hexSize;
 	}
 
-	public Map getMap() {
+	public WorldMap getMap() {
 		return this.map;
 	}
 
@@ -49,7 +49,7 @@ public class Visualize extends Canvas {
 	}
 
 	private void internalPaint(Graphics g) {
-		Map map = this.getMap();
+		WorldMap map = this.getMap();
 		int hexagonSize = this.getHexSize();
 		BufferedImage sea = null;
 		BufferedImage land = null;
@@ -85,7 +85,7 @@ public class Visualize extends Canvas {
 					g.drawImage(mountain, i * hexagonSize + offsetX, j
 							* hexagonSize - offsetY, hexagonSize,
 							hexagonSize, null);
-				} else if (cellType == "MOUNTAIN") {
+				} else if (cellType == "LAKE") {
 					g.drawImage(lake, i * hexagonSize + offsetX, j
 							* hexagonSize - offsetY, hexagonSize,
 							hexagonSize, null);
