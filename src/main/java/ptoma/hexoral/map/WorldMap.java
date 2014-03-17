@@ -697,4 +697,14 @@ public class WorldMap {
 			return ret;
 		}
 	}
+	
+	/**
+	 * Erases the map completely.
+	 */
+	public void erase() {
+		this.matrix.clear();
+		for (int i = 0; i < this.count.length; i++) {
+			this.count[i] = 0;
+		}
+	}
 }
