@@ -3,9 +3,9 @@ package ptoma.hexoral.map;
 import java.util.Random;
 
 public class MapGenerator {
-	public void generateMap(WorldMap myMap, int groundPercentage) {
+	public void generateMap(WorldMap myMap, int groundPercentage,String biomeFile) {
 
-		Biome bio = new Biome("test.bio", myMap);
+		Biome bio = new Biome(biomeFile, myMap);
 		Random rand = new Random();
 
 		PerlinNoiseParameters perlinParameters = new PerlinNoiseParameters(
