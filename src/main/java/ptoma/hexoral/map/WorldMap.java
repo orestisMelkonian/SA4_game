@@ -625,6 +625,31 @@ public class WorldMap {
 		}
 	}
 
+	
+	public int decideLakeNo (int waterPercentage)	{
+		int ret = 0;
+		int groundNo = this.getLandNo() + this.getMountainNo();
+		while (waterPercentage > 0)	{
+			ret += groundNo/100;
+			waterPercentage -= 5;
+		}
+		return ret;
+			
+	}
+	public int decideRiverNo (int waterPercentage)	{
+		int ret = 0;
+		int groundNo = this.getLandNo() + this.getMountainNo();
+		while (waterPercentage > 0)	{
+			ret += groundNo/100;
+			waterPercentage -= 5;
+		}
+		return ret;
+			
+	}
+	
+	
+	
+	
 	/**
 	 * Computes the angle between three points in degrees.
 	 * 
