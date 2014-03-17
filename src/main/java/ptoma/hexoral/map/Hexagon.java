@@ -16,7 +16,7 @@ public class Hexagon {
 	 * 
 	 */
 	static public enum directions {
-		TOP_LEFT, TOP_RIGHT, RIGHT, BOTTOM_RIGHT, BOTTOM_LEFT, LEFT
+		LEFT, TOP_LEFT, TOP_RIGHT, RIGHT, BOTTOM_LEFT,  BOTTOM_RIGHT
 	};
 
 	/**

@@ -381,17 +381,17 @@ public class WorldMap {
 		int mountainNo = this.getMountainNo();
 		int waterNo = seaNo + lakeNo;
 		int groundNo = landNo + mountainNo;
-		
+
 		int realWaterNo = ((100 - groundPer) * (this.sizeX * this.sizeY)) / 100;
 		int realGroundNo = ((groundPer) * (this.sizeX * this.sizeY)) / 100;
-		
-		  System.out.println("waterNo = " + waterNo + " groundNo = " + groundNo
-		  + " realWaterNo = " + realWaterNo + " realGroundNo = " +
-		  realGroundNo);
-		 
+
+		System.out.println("waterNo = " + waterNo + " groundNo = " + groundNo
+				+ " realWaterNo = " + realWaterNo + " realGroundNo = "
+				+ realGroundNo);
+
 		if (waterNo < realWaterNo) { // add sea / remove land
-			 System.out.println("Must remove " + (groundNo - realGroundNo)
-			 + " lands cells");
+			System.out.println("Must remove " + (groundNo - realGroundNo)
+					+ " lands cells");
 			for (int i = 0; i < (groundNo - realGroundNo); i++) {
 				Coords p = null;
 				while (p == null)
@@ -399,8 +399,8 @@ public class WorldMap {
 				this.matrix.get(p.x, p.y).setType(Hexagon.type.SEA);
 			}
 		} else { // add land / remove sea
-			 System.out.println("Must remove " + (waterNo - realWaterNo)
-			 + " sea cells");
+			System.out.println("Must remove " + (waterNo - realWaterNo)
+					+ " sea cells");
 			for (int i = 0; i < (waterNo - realWaterNo); i++) {
 				Coords p = null;
 				while (p == null)
@@ -408,15 +408,12 @@ public class WorldMap {
 				this.matrix.get(p.x, p.y).setType(Hexagon.type.LAND);
 			}
 		}
-		
+
 		/*
-		seaNo = this.getSeaNo();
-		landNo = this.getLandNo();
-		lakeNo = this.getLakeNo();
-		mountainNo = this.getMountainNo();
-		waterNo = seaNo + lakeNo;
-		groundNo = landNo + mountainNo;
-		*/
+		 * seaNo = this.getSeaNo(); landNo = this.getLandNo(); lakeNo =
+		 * this.getLakeNo(); mountainNo = this.getMountainNo(); waterNo = seaNo
+		 * + lakeNo; groundNo = landNo + mountainNo;
+		 */
 		/*
 		 * System.out.println("waterNo = " + waterNo + " groundNo = " + groundNo
 		 * + " realWaterNo = " + realWaterNo + " realGroundNo = " +
@@ -493,41 +490,44 @@ public class WorldMap {
 	}
 
 	public void createRiver() {
-		boolean foundSea = true;
-		ArrayList<Coords> toCheck = null;
-		int i = (int) (Math.random() * this.sizeX);
-		int j = (int) (Math.random() * this.sizeY);
-		while (foundSea == true) {
-			foundSea = false;
+		/*
+		 * boolean foundSea = true; ArrayList<Coords> toCheck = null; int i =
+		 * (int) (Math.random() * this.sizeX); int j = (int) (Math.random() *
+		 * this.sizeY); while (foundSea == true) { foundSea = false;
+		 * 
+		 * i = (int) (Math.random() * this.sizeX); j = (int) (Math.random() *
+		 * this.sizeY);
+		 * 
+		 * while ((this.matrix.get(i, j).getType() != "LAND") &&
+		 * (this.matrix.get(i, j).getType() != "MOUNTAIN")) { //
+		 * System.out.println("Searching -i="+i+" j="+j+"-- type = " + //
+		 * this.matrix.get(i,j).getType()); i = (int) (Math.random() *
+		 * this.sizeX); j = (int) (Math.random() * this.sizeY); }
+		 * 
+		 * toCheck = this.getNeighbours(new Coords(i, j)); for (int k = 0; k <
+		 * toCheck.size(); k++) { if (this.matrix.get(toCheck.get(k).x,
+		 * toCheck.get(k).y) .getType() == "SEA") { // ||
+		 * (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y) // .getType() ==
+		 * "LAKE")) { foundSea = true; } } }
+		 */
 
-			i = (int) (Math.random() * this.sizeX);
-			j = (int) (Math.random() * this.sizeY);
-
-			while ((this.matrix.get(i, j).getType() != "LAND")
-					&& (this.matrix.get(i, j).getType() != "MOUNTAIN")) {
-				// System.out.println("Searching -i="+i+" j="+j+"-- type = " +
-				// this.matrix.get(i,j).getType());
-				i = (int) (Math.random() * this.sizeX);
-				j = (int) (Math.random() * this.sizeY);
-			}
-
-			toCheck = this.getNeighbours(new Coords(i, j));
-			for (int k = 0; k < toCheck.size(); k++) {
-				if (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
-						.getType() == "SEA") {
-					// || (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
-					// .getType() == "LAKE")) {
-					foundSea = true;
-				}
-			}
-		}
-		// Here we have a ground cell in the middle of 6 lands
+		Coords p = null;
+		while (p == null)
+			p = this.findLandNextToSea();
+		int i = p.x, j = p.y;
+		// Here we have a coastal ground cell
 		// Make a river
 		this.matrix.get(i, j).setType(Hexagon.type.LAKE);
-		// pick random direction
-		while (true) {
-			int gen = (int) (Math.random() * 7);
-			switch (gen) {
+
+		int direction = (int) (Math.random() * 6); // pick random direction
+		// System.out.println(direction);
+		boolean iter = true;
+		int counter = 0;
+		while (iter == true) {
+			// direction = (int) (Math.random() * 7);
+			counter++;
+			// System.out.println(direction);
+			switch (direction) {
 			case 0: { // left
 				j--;
 				break;
@@ -556,6 +556,10 @@ public class WorldMap {
 			case 4: { // bottom-right
 				if (i % 2 == 0)
 					i++;
+				else {
+					i++;
+					j++;
+				}
 				break;
 			}
 			case 5: { // bottom-left
@@ -567,7 +571,18 @@ public class WorldMap {
 				break;
 			}
 			}
-			this.matrix.get(i, j);
+			if ((this.matrix.get(i, j).getType() == "SEA")
+					|| (counter > Math.min(sizeX, sizeY) / 4))
+				iter = false;
+			this.matrix.get(i, j).setType(Hexagon.type.LAKE);
+			/*
+			 * double limit; if (Math.max(this.sizeX, this.sizeY) > 300) { limit
+			 * = 0.99; } else if (Math.max(this.sizeX, this.sizeY) > 100) {
+			 * limit = 0.98; } else if (Math.max(this.sizeX, this.sizeY) > 50) {
+			 * limit = 0.95; } else { limit = 0.9999; }
+			 * 
+			 * if (Math.random() > limit) iter = false;
+			 */
 		}
 	}
 
