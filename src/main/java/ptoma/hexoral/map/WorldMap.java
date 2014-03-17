@@ -333,14 +333,23 @@ public class WorldMap {
 		}
 
 		ArrayList<Coords> toCheck = this.getNeighbours(new Coords(i, j));
+		int countL = 0, countS = 0;
 		for (int k = 0; k < toCheck.size(); k++) {
 			if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).getType() == "LAND")
 					|| (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
 							.getType() == "MOUNTAIN")) {
-				return (new Coords(i, j));
+				countL++;
+				if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
+						.getType() == "SEA")
+						|| (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
+								.getType() == "LAKE"))
+					countS++;
 			}
 		}
-		return null;
+		if ((countL > 0) && (countS == 0))
+			return (new Coords(i, j));
+		else
+			return null;
 	}
 
 	public Coords findLandNextToSea() {
@@ -357,9 +366,7 @@ public class WorldMap {
 
 		ArrayList<Coords> toCheck = this.getNeighbours(new Coords(i, j));
 		for (int k = 0; k < toCheck.size(); k++) {
-			if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).getType() == "SEA")
-					|| (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
-							.getType() == "LAKE")) {
+			if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).getType() == "SEA")) {
 				return (new Coords(i, j));
 			}
 		}
@@ -374,16 +381,17 @@ public class WorldMap {
 		int mountainNo = this.getMountainNo();
 		int waterNo = seaNo + lakeNo;
 		int groundNo = landNo + mountainNo;
-
+		
 		int realWaterNo = ((100 - groundPer) * (this.sizeX * this.sizeY)) / 100;
 		int realGroundNo = ((groundPer) * (this.sizeX * this.sizeY)) / 100;
-		System.out.println("waterNo = " + waterNo + " groundNo = " + groundNo
-				+ " realWaterNo = " + realWaterNo + " realGroundNo = "
-				+ realGroundNo);
-
+		
+		  System.out.println("waterNo = " + waterNo + " groundNo = " + groundNo
+		  + " realWaterNo = " + realWaterNo + " realGroundNo = " +
+		  realGroundNo);
+		 
 		if (waterNo < realWaterNo) { // add sea / remove land
-			System.out.println("Must remove " + (groundNo - realGroundNo)
-					+ " lands cells");
+			 System.out.println("Must remove " + (groundNo - realGroundNo)
+			 + " lands cells");
 			for (int i = 0; i < (groundNo - realGroundNo); i++) {
 				Coords p = null;
 				while (p == null)
@@ -391,8 +399,8 @@ public class WorldMap {
 				this.matrix.get(p.x, p.y).setType(Hexagon.type.SEA);
 			}
 		} else { // add land / remove sea
-			System.out.println("Must remove " + (waterNo - realWaterNo)
-					+ " sea cells");
+			 System.out.println("Must remove " + (waterNo - realWaterNo)
+			 + " sea cells");
 			for (int i = 0; i < (waterNo - realWaterNo); i++) {
 				Coords p = null;
 				while (p == null)
@@ -400,17 +408,20 @@ public class WorldMap {
 				this.matrix.get(p.x, p.y).setType(Hexagon.type.LAND);
 			}
 		}
-
+		
+		/*
 		seaNo = this.getSeaNo();
 		landNo = this.getLandNo();
 		lakeNo = this.getLakeNo();
 		mountainNo = this.getMountainNo();
 		waterNo = seaNo + lakeNo;
 		groundNo = landNo + mountainNo;
-
-		System.out.println("waterNo = " + waterNo + " groundNo = " + groundNo
-				+ " realWaterNo = " + realWaterNo + " realGroundNo = "
-				+ realGroundNo);
+		*/
+		/*
+		 * System.out.println("waterNo = " + waterNo + " groundNo = " + groundNo
+		 * + " realWaterNo = " + realWaterNo + " realGroundNo = " +
+		 * realGroundNo);
+		 */
 	}
 
 	// --------CLEAN FUNCTIONS
@@ -451,7 +462,7 @@ public class WorldMap {
 										toCheck.get(k).y).getType() == "LAKE"))
 							allLand++;
 					}
-					if (allLand < 2) // only one or none neighboring sea cells
+					if (allLand < 3) // only one or none neighboring sea cells
 						this.matrix.get(i, j).setType(Hexagon.type.LAND);
 				}
 			}
@@ -481,11 +492,133 @@ public class WorldMap {
 		}
 	}
 
+	public void createRiver() {
+		boolean foundSea = true;
+		ArrayList<Coords> toCheck = null;
+		int i = (int) (Math.random() * this.sizeX);
+		int j = (int) (Math.random() * this.sizeY);
+		while (foundSea == true) {
+			foundSea = false;
+
+			i = (int) (Math.random() * this.sizeX);
+			j = (int) (Math.random() * this.sizeY);
+
+			while ((this.matrix.get(i, j).getType() != "LAND")
+					&& (this.matrix.get(i, j).getType() != "MOUNTAIN")) {
+				// System.out.println("Searching -i="+i+" j="+j+"-- type = " +
+				// this.matrix.get(i,j).getType());
+				i = (int) (Math.random() * this.sizeX);
+				j = (int) (Math.random() * this.sizeY);
+			}
+
+			toCheck = this.getNeighbours(new Coords(i, j));
+			for (int k = 0; k < toCheck.size(); k++) {
+				if (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
+						.getType() == "SEA") {
+					// || (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
+					// .getType() == "LAKE")) {
+					foundSea = true;
+				}
+			}
+		}
+		// Here we have a ground cell in the middle of 6 lands
+		// Make a river
+		this.matrix.get(i, j).setType(Hexagon.type.LAKE);
+		// pick random direction
+		while (true) {
+			int gen = (int) (Math.random() * 7);
+			switch (gen) {
+			case 0: { // left
+				j--;
+				break;
+			}
+			case 1: { // top-left
+				if (i % 2 == 0) {
+					i--;
+					j--;
+				} else
+					i--;
+				break;
+			}
+			case 2: { // top-right
+				if (i % 2 == 0)
+					i--;
+				else {
+					i--;
+					j++;
+				}
+				break;
+			}
+			case 3: { // right
+				j++;
+				break;
+			}
+			case 4: { // bottom-right
+				if (i % 2 == 0)
+					i++;
+				break;
+			}
+			case 5: { // bottom-left
+				if (i % 2 == 0) {
+					i++;
+					j--;
+				} else
+					i++;
+				break;
+			}
+			}
+			this.matrix.get(i, j);
+		}
+	}
+
+	public void createLake() {
+		boolean foundSea = true;
+		ArrayList<Coords> toCheck = null;
+		int i = (int) (Math.random() * this.sizeX);
+		int j = (int) (Math.random() * this.sizeY);
+		while (foundSea == true) {
+			foundSea = false;
+
+			i = (int) (Math.random() * this.sizeX);
+			j = (int) (Math.random() * this.sizeY);
+
+			while ((this.matrix.get(i, j).getType() != "LAND")
+					&& (this.matrix.get(i, j).getType() != "MOUNTAIN")) {
+				// System.out.println("Searching -i="+i+" j="+j+"-- type = " +
+				// this.matrix.get(i,j).getType());
+				i = (int) (Math.random() * this.sizeX);
+				j = (int) (Math.random() * this.sizeY);
+			}
+
+			toCheck = this.getNeighbours(new Coords(i, j));
+			for (int k = 0; k < toCheck.size(); k++) {
+				if (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
+						.getType() == "SEA") {
+					// || (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
+					// .getType() == "LAKE")) {
+					foundSea = true;
+				}
+			}
+		}
+		// Here we have a sea cell in the middle of 6 lands
+		// Make a lake
+		this.matrix.get(i, j).setType(Hexagon.type.LAKE);
+		for (int k = 0; k < toCheck.size(); k++) {
+			if (Math.random() > 0.1)
+				this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).setType(
+						Hexagon.type.LAKE);
+		}
+	}
+
 	/**
 	 * Computes the angle between three points in degrees.
-	 * @param center point
-	 * @param current point
-	 * @param previous point
+	 * 
+	 * @param center
+	 *            point
+	 * @param current
+	 *            point
+	 * @param previous
+	 *            point
 	 * @return the angle between them
 	 */
 	public static double angleBetween(Coords center, Coords current,
@@ -509,17 +642,21 @@ public class WorldMap {
 	}
 
 	/**
-	 * Adds a new hexagon to the hash map and updates the count array. 
-	 * @param x coordinate 
-	 * @param y coordinate
-	 * @param type of the Hexagon to be created
+	 * Adds a new hexagon to the hash map and updates the count array.
+	 * 
+	 * @param x
+	 *            coordinate
+	 * @param y
+	 *            coordinate
+	 * @param type
+	 *            of the Hexagon to be created
 	 */
 	public void setHexagon(int x, int y, Hexagon.type type) {
 		Hexagon previous = this.matrix.get(x, y);
 		Hexagon ret = new Hexagon(type, x, y);
 		if (previous == null) {
 			this.matrix.put(x, y, ret);
-		} else if (previous !=null && previous.getType() != ret.getType()) {
+		} else if (previous != null && previous.getType() != ret.getType()) {
 			this.count[previous.getOrdinalType()]--;
 		}
 		this.count[type.ordinal()]++;
@@ -530,8 +667,11 @@ public class WorldMap {
 
 	/**
 	 * Return a hexagon object of the specified coordinates.
-	 * @param x coordinate
-	 * @param y coordinate
+	 * 
+	 * @param x
+	 *            coordinate
+	 * @param y
+	 *            coordinate
 	 * @return Hexagon Object of the specified coordinates.
 	 */
 	public Hexagon getHexagon(int x, int y) {
