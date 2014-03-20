@@ -5,16 +5,10 @@
 
 package ptoma.hexoral.map;
 
-public class Fog{
-	
-	
-	
-	public Fog(){
-		
-		
-		
+public class Fog {
+
+	public Fog() {
+
 	}
-	
-	
 
 }

@@ -16,7 +16,7 @@ public class Hexagon {
 	 * 
 	 */
 	static public enum directions {
-		LEFT, TOP_LEFT, TOP_RIGHT, RIGHT, BOTTOM_LEFT,  BOTTOM_RIGHT
+		LEFT, TOP_LEFT, TOP_RIGHT, RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
 	};
 
 	/**
@@ -122,9 +122,10 @@ public class Hexagon {
 	public void setCoords(int x, int y) {
 		this.w = new Coords(x, y);
 	}
-	
+
 	/**
 	 * Return the integer assigned to the enum.
+	 * 
 	 * @return int of the ordinal of the enum
 	 */
 	public int getOrdinalType() {

@@ -43,9 +43,7 @@ public class Coords {
 
 	@Override
 	public String toString() {
-		return "[" +this.x+","+this.y+"]";
+		return "[" + this.x + "," + this.y + "]";
 	}
-	
-	
 
 }

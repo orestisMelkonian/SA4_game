@@ -18,13 +18,13 @@ public class Visualize extends Canvas {
 	protected int hexagonSize;
 	JSpinner HeightArea;
 	JSpinner groundArea;
-	
-	
+
 	public Visualize(int hexSize, WorldMap m) {
-		//setSize(map.sizeX * hexagonSize + hexagonSize, map.sizeY * hexagonSize);
+		// setSize(map.sizeX * hexagonSize + hexagonSize, map.sizeY *
+		// hexagonSize);
 		this.map = m;
 		this.hexagonSize = hexSize;
-		
+
 		this.print();
 	}
 
@@ -38,7 +38,6 @@ public class Visualize extends Canvas {
 
 	public void print() {
 
-		
 	}
 
 	private Image internalPaint() {

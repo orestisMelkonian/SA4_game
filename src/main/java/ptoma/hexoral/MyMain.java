@@ -96,7 +96,7 @@ public class MyMain {
 					for (int k = 0; k < lakeNo; k++)
 						localmap.createLake();
 				}
-	
+
 				cnv.repaint();
 				Thread clean = new Thread(new Runnable() {
 

@@ -490,26 +490,6 @@ public class WorldMap {
 	}
 
 	public void createRiver() {
-		/*
-		 * boolean foundSea = true; ArrayList<Coords> toCheck = null; int i =
-		 * (int) (Math.random() * this.sizeX); int j = (int) (Math.random() *
-		 * this.sizeY); while (foundSea == true) { foundSea = false;
-		 * 
-		 * i = (int) (Math.random() * this.sizeX); j = (int) (Math.random() *
-		 * this.sizeY);
-		 * 
-		 * while ((this.matrix.get(i, j).getType() != "LAND") &&
-		 * (this.matrix.get(i, j).getType() != "MOUNTAIN")) { //
-		 * System.out.println("Searching -i="+i+" j="+j+"-- type = " + //
-		 * this.matrix.get(i,j).getType()); i = (int) (Math.random() *
-		 * this.sizeX); j = (int) (Math.random() * this.sizeY); }
-		 * 
-		 * toCheck = this.getNeighbours(new Coords(i, j)); for (int k = 0; k <
-		 * toCheck.size(); k++) { if (this.matrix.get(toCheck.get(k).x,
-		 * toCheck.get(k).y) .getType() == "SEA") { // ||
-		 * (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y) // .getType() ==
-		 * "LAKE")) { foundSea = true; } } }
-		 */
 
 		Coords p = null;
 		while (p == null)
@@ -625,31 +605,28 @@ public class WorldMap {
 		}
 	}
 
-	
-	public int decideLakeNo (int waterPercentage)	{
+	public int decideLakeNo(int waterPercentage) {
 		int ret = 0;
 		int groundNo = this.getLandNo() + this.getMountainNo();
-		while (waterPercentage > 0)	{
-			ret += groundNo/100;
+		while (waterPercentage > 0) {
+			ret += groundNo / 100;
 			waterPercentage -= 5;
 		}
 		return ret;
-			
+
 	}
-	public int decideRiverNo (int waterPercentage)	{
+
+	public int decideRiverNo(int waterPercentage) {
 		int ret = 0;
 		int groundNo = this.getLandNo() + this.getMountainNo();
-		while (waterPercentage > 0)	{
-			ret += groundNo/100;
+		while (waterPercentage > 0) {
+			ret += groundNo / 100;
 			waterPercentage -= 5;
 		}
 		return ret;
-			
+
 	}
-	
-	
-	
-	
+
 	/**
 	 * Computes the angle between three points in degrees.
 	 * 
@@ -722,7 +699,7 @@ public class WorldMap {
 			return ret;
 		}
 	}
-	
+
 	/**
 	 * Erases the map completely.
 	 */

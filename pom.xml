@@ -6,15 +6,19 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hexoral Jersey Webapp</name>
 	<build>
-		<finalName>hexoral</finalName>
+		<finalName>Hexarchy</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
+				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<archive>
+						<manifest>
+							<mainClass>ptoma.hexoral.MyMain</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
 			</plugin>
 			<plugin>
