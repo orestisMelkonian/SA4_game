@@ -66,7 +66,6 @@ public class MyMain {
 		generate.setText("Generate");
 		generate.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				localmap.setSizeY((Integer) widthArea.getValue());
 				localmap.setSizeX((Integer) HeightArea.getValue());
@@ -100,7 +99,6 @@ public class MyMain {
 				cnv.repaint();
 				Thread clean = new Thread(new Runnable() {
 
-					@Override
 					public void run() {
 						System.gc();
 
