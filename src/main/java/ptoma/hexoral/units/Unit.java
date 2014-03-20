@@ -1,13 +1,14 @@
 package ptoma.hexoral.units;
 
-import ptoma.hexoral.map.Coords;
+import java.awt.Point;
+
 
 public interface Unit {
 	//boolean isDestroyed;
 	//Soldiers soldierCount;
-	public Coords move(Coords moveCoord);
-	public void attack(Coords attackCoord);
-	public Coords follow(Coords followCoord);
+	public Point move(Point moveCoord);
+	public void attack(Point attackCoord);
+	public Point follow(Point followCoord);
 	public boolean destroyUnit(Soldiers soldier);
 	
 

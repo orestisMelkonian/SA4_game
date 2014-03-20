@@ -1,5 +1,7 @@
 package ptoma.hexoral.map;
 
+import java.awt.Point;
+
 // TODO Add more types to enum type
 
 /**
@@ -36,7 +38,7 @@ public class Hexagon {
 	/**
 	 * Coordinates of hexagon.
 	 */
-	private Coords w;
+	private Point w;
 
 	/**
 	 * Basic Constructor of Hexagon. Coords are (0,0)
@@ -46,7 +48,7 @@ public class Hexagon {
 	 */
 	public Hexagon(type terrainType) {
 		this.terrainType = terrainType;
-		this.w = new Coords(0, 0);
+		this.w = new Point(0, 0);
 	}
 
 	/**
@@ -57,7 +59,7 @@ public class Hexagon {
 	 * @param w
 	 *            for the location of the hexagon
 	 */
-	public Hexagon(type terrainType, Coords w) {
+	public Hexagon(type terrainType, Point w) {
 		this.terrainType = terrainType;
 		this.w = w;
 	}
@@ -74,7 +76,7 @@ public class Hexagon {
 	 */
 	public Hexagon(type terrainType, int x, int y) {
 		this.terrainType = terrainType;
-		this.w = new Coords(x, y);
+		this.w = new Point(x, y);
 	}
 
 	@Override
@@ -107,7 +109,7 @@ public class Hexagon {
 	 * 
 	 * @return Coords of Hexagon
 	 */
-	public Coords getCoords() {
+	public Point getCoords() {
 		return this.w;
 	}
 
@@ -120,7 +122,7 @@ public class Hexagon {
 	 *            Y coordinate
 	 */
 	public void setCoords(int x, int y) {
-		this.w = new Coords(x, y);
+		this.w = new Point(x, y);
 	}
 
 	/**

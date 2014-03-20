@@ -1,5 +1,6 @@
 package ptoma.hexoral.map;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -85,8 +86,8 @@ public class Biome {
 
 	}
 
-	public double similarTriangle(Coords center, Coords point,
-			Coords reflection, Coords edge) {
+	public double similarTriangle(Point center, Point point,
+			Point reflection, Point edge) {
 		/*
 		 * double cp = Map.distance(center, point); double cr =
 		 * Map.distance(center, reflection); return (cp*ce)/cr
@@ -104,29 +105,29 @@ public class Biome {
 	 *            the point
 	 * @return the maximum distance from the closest border
 	 */
-	protected int maxFromBorders(Coords p) {
-		Coords center = new Coords(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
+	protected int maxFromBorders(Point p) {
+		Point center = new Point(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
 		//Coords reflection;
-		Coords edge;
+		Point edge;
 		char closestBorder = this.pMap.distFromBorderNESW(p.x, p.y);
 		int ret;
 
 		switch (closestBorder) {
 		case 'N': // done
 			//reflection = new Coords(center.x, p.y);
-			edge = new Coords(center.x, 0);
+			edge = new Point(center.x, 0);
 			break;
 		case 'S': // done
 			//reflection = new Coords(center.x, p.y);
-			edge = new Coords(center.x, this.pMap.sizeY - 1);
+			edge = new Point(center.x, this.pMap.sizeY - 1);
 			break;
 		case 'E': // done
 			//reflection = new Coords(p.x, center.y);
-			edge = new Coords(this.pMap.sizeX - 1, center.y);
+			edge = new Point(this.pMap.sizeX - 1, center.y);
 			break;
 		case 'W': // done
 			//reflection = new Coords(p.x, center.y);
-			edge = new Coords(0, center.y);
+			edge = new Point(0, center.y);
 			break;
 		default:
 			return 0;
@@ -170,10 +171,10 @@ public class Biome {
 	 * @return Hexagon.type the type of the cell
 	 */
 	public Hexagon.type getType(double perlinNoise, int distance, int x, int y) {
-		int maxSideMap = this.maxFromBorders(new Coords(x, y));
-		Coords center = new Coords(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
-		double angle = WorldMap.angleBetween(center, new Coords(0, 0),
-				new Coords(x, y));
+		int maxSideMap = this.maxFromBorders(new Point(x, y));
+		Point center = new Point(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
+		double angle = WorldMap.angleBetween(center, new Point(0, 0),
+				new Point(x, y));
 		int complexItMore = map(angle, -360, 360, 0, this.angleSize - 1);
 		int axisX = map(distance + this.angleMatrix[complexItMore], 0,
 				maxSideMap, 0, this.size - 1);

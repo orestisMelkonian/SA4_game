@@ -1,5 +1,6 @@
 package ptoma.hexoral.map;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import com.google.common.collect.Table;
@@ -91,94 +92,94 @@ public class WorldMap {
 	 *            is the point in map from which to return the neighbour cells.
 	 * @return ArrayList of Coords
 	 */
-	public ArrayList<Coords> getNeighbours(Coords w) {
-		ArrayList<Coords> ret = new ArrayList<Coords>();
+	public ArrayList<Point> getNeighbours(Point w) {
+		ArrayList<Point> ret = new ArrayList<Point>();
 		if (w.x % 2 == 0) { // if row is even
 			if (w.x > 0) {
-				ret.add(new Coords(w.x - 1, w.y)); // TOP_RIGHT
+				ret.add(new Point(w.x - 1, w.y)); // TOP_RIGHT
 				if (w.y > 0) {
-					ret.add(new Coords(w.x - 1, w.y - 1)); // TOP_LEFT
+					ret.add(new Point(w.x - 1, w.y - 1)); // TOP_LEFT
 				}
 			}
 			if (w.x < this.sizeX - 1) {
-				ret.add(new Coords(w.x + 1, w.y)); // BOTTOM_RIGHT
+				ret.add(new Point(w.x + 1, w.y)); // BOTTOM_RIGHT
 				if (w.y > 0) {
-					ret.add(new Coords(w.x + 1, w.y - 1)); // BOTTOM_LEFT
+					ret.add(new Point(w.x + 1, w.y - 1)); // BOTTOM_LEFT
 				}
 			}
 		} else { // else row is odd
 			if (w.x > 0) {
-				ret.add(new Coords(w.x - 1, w.y)); // TOP_LEFT
+				ret.add(new Point(w.x - 1, w.y)); // TOP_LEFT
 				if (w.y < this.sizeY - 1) {
-					ret.add(new Coords(w.x - 1, w.y + 1)); // TOP_RIGHT
+					ret.add(new Point(w.x - 1, w.y + 1)); // TOP_RIGHT
 				}
 			}
 			if (w.x < this.sizeX - 1) {
-				ret.add(new Coords(w.x + 1, w.y)); // BOTTOM_LEFT
+				ret.add(new Point(w.x + 1, w.y)); // BOTTOM_LEFT
 				if (w.y > this.sizeY - 1) {
-					ret.add(new Coords(w.x + 1, w.y + 1)); // BOTTOM_RIGHT
+					ret.add(new Point(w.x + 1, w.y + 1)); // BOTTOM_RIGHT
 				}
 			}
 		}
 		if (w.y < this.sizeY - 1) {
-			ret.add(new Coords(w.x, w.y + 1)); // RIGHT
+			ret.add(new Point(w.x, w.y + 1)); // RIGHT
 		}
 		if (w.y > 0) {
-			ret.add(new Coords(w.x, w.y - 1)); // LEFT
+			ret.add(new Point(w.x, w.y - 1)); // LEFT
 		}
 		return ret;
 	}
 
-	public ArrayList<Coords> getRightNeighbours(Coords w) {
-		ArrayList<Coords> ret = new ArrayList<Coords>();
+	public ArrayList<Point> getRightNeighbours(Point w) {
+		ArrayList<Point> ret = new ArrayList<Point>();
 		if (w.x % 2 == 0) { // if row is even
 			if (w.x > 0) {
-				ret.add(new Coords(w.x - 1, w.y)); // TOP_RIGHT
+				ret.add(new Point(w.x - 1, w.y)); // TOP_RIGHT
 			}
 			if (w.x < this.sizeX - 1) {
-				ret.add(new Coords(w.x + 1, w.y)); // BOTTOM_RIGHT
+				ret.add(new Point(w.x + 1, w.y)); // BOTTOM_RIGHT
 			}
 		} else { // else row is odd
 			if (w.x > 0) {
 				if (w.y < this.sizeY - 1) {
-					ret.add(new Coords(w.x - 1, w.y + 1)); // TOP_RIGHT
+					ret.add(new Point(w.x - 1, w.y + 1)); // TOP_RIGHT
 				}
 			}
 			if (w.x < this.sizeX - 1) {
 				if (w.y > this.sizeY - 1) {
-					ret.add(new Coords(w.x + 1, w.y + 1)); // BOTTOM_RIGHT
+					ret.add(new Point(w.x + 1, w.y + 1)); // BOTTOM_RIGHT
 				}
 			}
 		}
 		if (w.y < this.sizeY - 1) {
-			ret.add(new Coords(w.x, w.y + 1)); // RIGHT
+			ret.add(new Point(w.x, w.y + 1)); // RIGHT
 		}
 		return ret;
 	}
 
-	public ArrayList<Coords> getLeftNeighbours(Coords w) {
-		ArrayList<Coords> ret = new ArrayList<Coords>();
+	public ArrayList<Point> getLeftNeighbours(Point w) {
+		ArrayList<Point> ret = new ArrayList<Point>();
 		if (w.x % 2 == 0) { // if row is even
 			if (w.x > 0) {
 				if (w.y > 0) {
-					ret.add(new Coords(w.x - 1, w.y - 1)); // TOP_LEFT
+					ret.add(new Point(w.x - 1, w.y - 1)); // TOP_LEFT
 				}
 			}
 			if (w.x < this.sizeX - 1) {
 				if (w.y > 0) {
-					ret.add(new Coords(w.x + 1, w.y - 1)); // BOTTOM_LEFT
+					ret.add(new Point(w.x + 1, w.y - 1)); // BOTTOM_LEFT
 				}
 			}
 		} else { // else row is odd
 			if (w.x > 0) {
-				ret.add(new Coords(w.x - 1, w.y)); // TOP_LEFT
+				ret.add(new Point(w.x - 1, w.y)); // TOP_LEFT
 			}
 			if (w.x < this.sizeX - 1) {
-				ret.add(new Coords(w.x + 1, w.y)); // BOTTOM_LEFT
+				ret.add(new Point(w.x + 1, w.y)); // BOTTOM_LEFT
 			}
 		}
 		if (w.y > 0) {
-			ret.add(new Coords(w.x, w.y - 1)); // LEFT
+			ret.add(new Point(w.x, w.y - 1)); // LEFT
 		}
 		return ret;
 	}
@@ -285,7 +286,7 @@ public class WorldMap {
 	 *            Coords object of second point
 	 * @return the distance between them
 	 */
-	public static double distance(Coords p0, Coords p1) {
+	public static double distance(Point p0, Point p1) {
 		return Math.sqrt((p1.x - p0.x) * (p1.x - p0.x) + (p1.y - p0.y)
 				* (p1.y - p0.y));
 	}
@@ -322,7 +323,7 @@ public class WorldMap {
 		return this.count[Hexagon.type.MOUNTAIN.ordinal()];
 	}
 
-	public Coords findSeaNextToLand() {
+	public Point findSeaNextToLand() {
 		int i = (int) (Math.random() * this.sizeX);
 		int j = (int) (Math.random() * this.sizeY);
 
@@ -332,7 +333,7 @@ public class WorldMap {
 			j = (int) (Math.random() * this.sizeY);
 		}
 
-		ArrayList<Coords> toCheck = this.getNeighbours(new Coords(i, j));
+		ArrayList<Point> toCheck = this.getNeighbours(new Point(i, j));
 		int countL = 0, countS = 0;
 		for (int k = 0; k < toCheck.size(); k++) {
 			if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).getType() == "LAND")
@@ -347,12 +348,12 @@ public class WorldMap {
 			}
 		}
 		if ((countL > 0) && (countS == 0))
-			return (new Coords(i, j));
+			return (new Point(i, j));
 		else
 			return null;
 	}
 
-	public Coords findLandNextToSea() {
+	public Point findLandNextToSea() {
 		int i = (int) (Math.random() * this.sizeX);
 		int j = (int) (Math.random() * this.sizeY);
 
@@ -364,10 +365,10 @@ public class WorldMap {
 			j = (int) (Math.random() * this.sizeY);
 		}
 
-		ArrayList<Coords> toCheck = this.getNeighbours(new Coords(i, j));
+		ArrayList<Point> toCheck = this.getNeighbours(new Point(i, j));
 		for (int k = 0; k < toCheck.size(); k++) {
 			if ((this.matrix.get(toCheck.get(k).x, toCheck.get(k).y).getType() == "SEA")) {
-				return (new Coords(i, j));
+				return (new Point(i, j));
 			}
 		}
 		return null;
@@ -393,7 +394,7 @@ public class WorldMap {
 			System.out.println("Must remove " + (groundNo - realGroundNo)
 					+ " lands cells");
 			for (int i = 0; i < (groundNo - realGroundNo); i++) {
-				Coords p = null;
+				Point p = null;
 				while (p == null)
 					p = this.findLandNextToSea();
 				this.matrix.get(p.x, p.y).setType(Hexagon.type.SEA);
@@ -402,7 +403,7 @@ public class WorldMap {
 			System.out.println("Must remove " + (waterNo - realWaterNo)
 					+ " sea cells");
 			for (int i = 0; i < (waterNo - realWaterNo); i++) {
-				Coords p = null;
+				Point p = null;
 				while (p == null)
 					p = this.findSeaNextToLand();
 				this.matrix.get(p.x, p.y).setType(Hexagon.type.LAND);
@@ -449,7 +450,7 @@ public class WorldMap {
 				if ((this.matrix.get(i, j).getType() == "SEA")
 						|| (this.matrix.get(i, j).getType() == "LAKE")) {
 					int allLand = 0;
-					ArrayList<Coords> toCheck = this.getNeighbours(new Coords(
+					ArrayList<Point> toCheck = this.getNeighbours(new Point(
 							i, j));
 					for (int k = 0; k < toCheck.size(); k++) {
 						if ((this.matrix
@@ -472,7 +473,7 @@ public class WorldMap {
 				if ((this.matrix.get(i, j).getType() == "LAND")
 						|| (this.matrix.get(i, j).getType() == "MOUNTAIN")) {
 					int allLand = 0;
-					ArrayList<Coords> toCheck = this.getNeighbours(new Coords(
+					ArrayList<Point> toCheck = this.getNeighbours(new Point(
 							i, j));
 					for (int k = 0; k < toCheck.size(); k++) {
 						if ((this.matrix
@@ -491,7 +492,7 @@ public class WorldMap {
 
 	public void createRiver() {
 
-		Coords p = null;
+		Point p = null;
 		while (p == null)
 			p = this.findLandNextToSea();
 		int i = p.x, j = p.y;
@@ -568,7 +569,7 @@ public class WorldMap {
 
 	public void createLake() {
 		boolean foundSea = true;
-		ArrayList<Coords> toCheck = null;
+		ArrayList<Point> toCheck = null;
 		int i = (int) (Math.random() * this.sizeX);
 		int j = (int) (Math.random() * this.sizeY);
 		while (foundSea == true) {
@@ -585,7 +586,7 @@ public class WorldMap {
 				j = (int) (Math.random() * this.sizeY);
 			}
 
-			toCheck = this.getNeighbours(new Coords(i, j));
+			toCheck = this.getNeighbours(new Point(i, j));
 			for (int k = 0; k < toCheck.size(); k++) {
 				if (this.matrix.get(toCheck.get(k).x, toCheck.get(k).y)
 						.getType() == "SEA") {
@@ -638,8 +639,8 @@ public class WorldMap {
 	 *            point
 	 * @return the angle between them
 	 */
-	public static double angleBetween(Coords center, Coords current,
-			Coords previous) {
+	public static double angleBetween(Point center, Point current,
+			Point previous) {
 
 		return Math.toDegrees(Math.atan2(current.x - center.x, current.y
 				- center.y)
