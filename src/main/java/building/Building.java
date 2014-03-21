@@ -19,10 +19,10 @@ public class Building {
 	 *  Building Constructor
 	 */
 	
-	public Building(ArrayList<Unit> unit, int unitCapacity,int defenceBonus ) {
+	public Building(ArrayList<Unit> unit, int unitCapacity,int defenceBonus, int BaseunitCapacity ) {
 		
 		this.unit = unit;
-		this.BaseunitCapacity =unitCapacity;
+		this.BaseunitCapacity = BaseunitCapacity;
 		this.defenseBonus = defenceBonus;
 		
 	}
@@ -50,7 +50,7 @@ public class Building {
 	
 	
 /*
- * to increase the capacity of unit 
+ * if one unit goes inside the building, the base capacity will be decreased by 1
  */
 	public void DecreaseBaseCapacity(int unitCapacity) {
 		
