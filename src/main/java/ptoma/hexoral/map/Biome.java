@@ -86,20 +86,8 @@ public class Biome {
 
 	}
 
-	public double similarTriangle(Point center, Point point,
-			Point reflection, Point edge) {
-		/*
-		 * double cp = Map.distance(center, point); double cr =
-		 * Map.distance(center, reflection); return (cp*ce)/cr
-		 */
-		double ce = WorldMap.distance(center, edge);
-		double angle = Math.cos(WorldMap
-				.angleBetween(center, reflection, point));
-		return ce / Math.abs(angle);
-	}
-
 	/**
-	 * Math magic involved Do not write this at home!
+	 * Calculates the maximum distance a point can have from its closest border
 	 * 
 	 * @param p
 	 *            the point
@@ -107,36 +95,29 @@ public class Biome {
 	 */
 	protected int maxFromBorders(Point p) {
 		Point center = new Point(this.pMap.sizeX / 2, this.pMap.sizeY / 2);
-		//Coords reflection;
 		Point edge;
 		char closestBorder = this.pMap.distFromBorderNESW(p.x, p.y);
 		int ret;
 
 		switch (closestBorder) {
-		case 'N': // done
-			//reflection = new Coords(center.x, p.y);
+		case 'N': 
 			edge = new Point(center.x, 0);
 			break;
-		case 'S': // done
-			//reflection = new Coords(center.x, p.y);
+		case 'S': 
 			edge = new Point(center.x, this.pMap.sizeY - 1);
 			break;
-		case 'E': // done
-			//reflection = new Coords(p.x, center.y);
+		case 'E': 
 			edge = new Point(this.pMap.sizeX - 1, center.y);
 			break;
-		case 'W': // done
-			//reflection = new Coords(p.x, center.y);
+		case 'W': 
 			edge = new Point(0, center.y);
 			break;
 		default:
 			return 0;
 		}
 
-		ret = (int) WorldMap.distance(center, edge);
-
-		// System.out.println(closestBorder + " - " +ret + " point " +
-		// p.toString());
+		ret = (int) (edge.distance(center));
+		
 		return ret;
 	}
 
@@ -181,11 +162,6 @@ public class Biome {
 
 		int axisY = map(perlinNoise, -1, 1, 0, this.size - 1);
 
-		// System.out.println("Angle " + angle + " random " + complexItMore);
-		/*
-		 if(perlinNoise < 0) { return Hexagon.type.LAND; } else if(
-		 perlinNoise >= 0) { return Hexagon.type.SEA; }
-		 */
 		Hexagon.type ret;
 		switch (this.matrix[axisX][axisY]) {
 		case 'S':

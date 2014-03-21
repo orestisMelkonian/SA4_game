@@ -78,24 +78,16 @@ public class MyMain {
 				localmap.cleanIsland();
 				localmap.cleanSea();
 				localmap.cleanUp();
+				
 				int waterPercentage = (Integer) waterArea.getValue();
-				if ((River.isSelected()) && (River.isSelected())) {
-					int lakeNo = localmap.decideLakeNo(waterPercentage / 2);
-					int riverNo = localmap.decideRiverNo(waterPercentage / 2);
-					for (int k = 0; k < lakeNo; k++)
-						localmap.createLake();
-					for (int k = 0; k < riverNo; k++)
-						localmap.createRiver();
-				} else if (River.isSelected()) {
-					int riverNo = localmap.decideRiverNo(waterPercentage);
-					for (int k = 0; k < riverNo; k++)
-						localmap.createRiver();
-				} else if (Lake.isSelected()) {
-					int lakeNo = localmap.decideLakeNo(waterPercentage);
-					for (int k = 0; k < lakeNo; k++)
-						localmap.createLake();
-				}
-
+				if ((River.isSelected())||(Lake.isSelected()))
+					localmap.applyWaterPercentage(waterPercentage, Lake.isSelected(), River.isSelected());
+				
+				
+				
+				
+				
+				
 				cnv.repaint();
 				Thread clean = new Thread(new Runnable() {
 
