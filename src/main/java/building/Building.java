@@ -24,53 +24,6 @@ public class Building {
 	ArrayList<Unit> unit = new ArrayList<Unit>();
 	public int BaseunitCapacity;
 	public int defenseBonus;
-	// for the GUI to check 
-	private Player p;
-	
-	// for testing 
-	public static void main(String[] args){
-		new Building();
-	}
-	
-	public Building(){
-		createGUI();
-	}
-	
-//	public Unit createUnit(){
-//		return new Unit(p);
-//	}
-
-	public void createGUI(){
-		//System.out.println("GAY");
-		final JFrame frame = new JFrame("BUILDING");
-		JPanel leftPanel = new JPanel(new BorderLayout());
-		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		JButton bButton = new JButton("building");
-		JButton InfoButton = new JButton("buildingInfo");
-		
-		leftPanel.add(bButton, BorderLayout.SOUTH);
-		frame.add(leftPanel, BorderLayout.WEST);
-		
-		InfoButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent ae) {
-            	JButton createUnitButton = new JButton("Create Unit");
-            	JPanel rightPanel = new JPanel(new BorderLayout());
-            	rightPanel.add(createUnitButton, BorderLayout.SOUTH);
-            	//rightPanel.add(bButton, BorderLayout.SOUTH);
-            	
-            	Container content = frame.getContentPane();
-            	content.add(rightPanel);
-            	content.repaint();
-            	//frame.setVisible(true);
-            }     
-        });
-		frame.setSize(500,500);
-		
-		frame.setVisible(true);
-		
-	}
-
-		
 	
 
 	/*
