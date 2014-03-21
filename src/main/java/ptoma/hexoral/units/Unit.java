@@ -2,10 +2,16 @@ package ptoma.hexoral.units;
 
 import java.awt.Point;
 
+import ptoma.hexoral.user.Player;
+import ptoma.hexoral.user.User;
+
 
 public class Unit {
 	
-	public Unit(){
+	private Player p;
+	
+	public Unit(Player p){
+		this.p = p;
 		
 	}
 	//boolean isDestroyed;
@@ -14,6 +20,10 @@ public class Unit {
 //	public void attack(Point attackCoord);
 //	public Point follow(Point followCoord);
 //	public boolean destroyUnit(Soldiers soldier);
+	public User owner(){
+		return p;
+	}
+	
 	
 
 }
