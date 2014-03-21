@@ -21,7 +21,17 @@ public abstract class Unit implements IAttackable {
 	/**
 	 * The health of the unit.
 	 */
-	protected long health;
+	protected int health;
+	
+	/**
+	 * Attack force of a unit.
+	 */
+	protected int attackPower;
+	
+	/**
+	 * Defence force of a unit.
+	 */
+	protected int defencePower;
 
 	public Unit(Player owner, int x, int y) {
 		this.owner = owner;
@@ -47,15 +57,6 @@ public abstract class Unit implements IAttackable {
 		return position;
 	}
 
-	public int attack() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void defend(int damage) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	// boolean isDestroyed;
 	// Soldiers soldierCount;
