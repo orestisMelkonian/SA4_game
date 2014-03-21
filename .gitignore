@@ -1,1 +1,9 @@
 /target
+./.classpath
+./.settings
+.*
+!/.gitignore
+My*
+.gitignore
+*.db
+*.zip
