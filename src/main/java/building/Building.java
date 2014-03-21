@@ -36,9 +36,9 @@ public class Building {
 		createGUI();
 	}
 	
-	public Unit createUnit(){
-		return new Unit(p);
-	}
+//	public Unit createUnit(){
+//		return new Unit(p);
+//	}
 
 	public void createGUI(){
 		//System.out.println("GAY");
@@ -116,7 +116,7 @@ public class Building {
 			return false;
 		}
 		else{
-			BaseunitCapacity = BaseunitCapacity -1;
+			BaseunitCapacity = BaseunitCapacity - 1;
 			unit.add(e);
 			
 			
