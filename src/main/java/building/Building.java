@@ -50,9 +50,12 @@ public class Building {
 	
 	
 /*
- * if one unit goes inside the building, the base capacity will be decreased by 1
+ * it checks if the building has the capacity for the new unit inside.
  */
-	public void DecreaseBaseCapacity(int unitCapacity) {
+	public boolean EnterUnit() {
+		return false;
+		
+	}
 		
 		
 		
@@ -62,4 +65,4 @@ public class Building {
 		
 	}
 	
-}
+
