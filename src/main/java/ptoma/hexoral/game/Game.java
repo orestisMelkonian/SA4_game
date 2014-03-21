@@ -1,5 +1,6 @@
 package ptoma.hexoral.game;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ import ptoma.hexoral.units.*;
 /**
  * The container of all the elements for the game.
  * 
- * @author steve_000
+ * @author Stefanos Gatsios
  * 
  */
 public class Game {
@@ -29,7 +30,7 @@ public class Game {
 	/**
 	 * Every unit of every player.
 	 */
-	private HashMap<Player,ArrayList<Unit>> units;
+	private HashMap<Point,Unit> units;
 	
 	
 	/**
@@ -45,8 +46,8 @@ public class Game {
 		//TODO add parameters for water and land percentage etcetera
 		generator.generateMap(island, 50, "test.bio");
 		//initialization of players and their units
-		players = new HashMap<String, Player>(null);
-		units = new HashMap<Player, ArrayList<Unit>>(null);
+		players = new HashMap<String, Player>();
+		units = new HashMap<Point, Unit>();
 	}
 
 	/**
@@ -56,7 +57,6 @@ public class Game {
 	 */
 	public void addPlayer(Player p) {
 		this.players.put(p.getName(), p);
-		this.units.put(p, new ArrayList<Unit>(null));
 	}
 	
 	/**
@@ -65,6 +65,11 @@ public class Game {
 	 */
 	public void removePlayer(Player p) {
 		this.players.remove(p.getName());
+		for (Unit u : this.units.values()) {
+			if(u.owner() == p) {
+				this.units.remove(u);
+			}
+		}
 		this.units.remove(p);
 	}
 	
@@ -76,5 +81,29 @@ public class Game {
 	 */
 	public Player getPlayer(String username) {
 		return this.players.get(username);
+	}
+	
+	/**
+	 * Creates a new unit for the player.
+	 * @param player the player who creates the unit.
+	 * @param unit the unit to be created.
+	 */
+	public void createUnit(Player player, Unit unit, Point p) {
+		this.units.put(p, unit);
+	}
+	
+	/**
+	 * Return the units of the player as an ArrayList
+	 * @param player to list his units
+	 * @return ArrayList<Unit> of the units of the player.
+	 */
+	public ArrayList<Unit> getPlayerUnits(Player player) {
+		ArrayList<Unit> ret = new ArrayList<Unit>();
+		for (Unit unit : this.units.values()) {
+			if(unit.owner() == player) {
+				ret.add(unit);
+			}
+		}
+		return ret;
 	}
 }
