@@ -6,12 +6,13 @@
 package ptoma.hexoral.building;
 import java.util.ArrayList;
 
+import ptoma.hexoral.IAttackable;
 import ptoma.hexoral.units.Unit;
 
 
-public class Building {
+public class Building implements IAttackable {
 	
-	ArrayList<Unit> unit = new ArrayList<Unit>();
+	ArrayList<Unit> units = new ArrayList<Unit>();
 	private int BaseunitCapacity;
 	private int defenseBonus;
 	private int health;
@@ -26,7 +27,7 @@ public class Building {
 	
 	public Building(ArrayList<Unit> unit, int unitCapacity,int defenceBonus, int BaseunitCapacity ) {
 		
-		this.unit = unit;
+		this.units = unit;
 		this.BaseunitCapacity = BaseunitCapacity;
 		this.defenseBonus = defenceBonus;
 		
@@ -62,8 +63,8 @@ public class Building {
 			return false;
 		
 		}
-		if (unit.size() >  BaseunitCapacity) {
-			System.out.println("The building does not have place for the new unit!!");
+		if (units.size() >  BaseunitCapacity) {
+			System.err.println("The building does not have place for the new unit!!");
 			return false;
 		}
 		else{ 
@@ -86,15 +87,10 @@ public class Building {
  * It handles enemy attack.
  * if the building is under attack it takes damage if it is empty otherwise it relays the damage to units.   
  */
-	
-	public void Attack(int damage){
+	public int attack(){
+		return 0;
+		//TODO Maybe turrets in the  building
 		
-		if (unit.size() == 0 ){
-			Takedamage(damage);
-		}
-		else{
-			damageUnits(damage);
-		}
 	}
 	
 	
@@ -102,13 +98,13 @@ public class Building {
  *  it damages building and check if it is collapsed.
  */
 	
-	private void Takedamage(int damage){
+	public void defend(int damage){
 		// *** if the building has some armor, this might reduced damage.
 		// int realDamage = damage - armor;
 		// if(realDamage >= 0){
 		// 		health = health - (damage - armor);
 		//	}
-		
+		//TODO take into account armour and units inside the building
 		health = health - (damage);
 		if (health < 0){
 			buildingDestroyed = true;
@@ -122,7 +118,7 @@ public class Building {
 	
 	private void damageUnits(int damage){
 		// unit should decrease their health 
-		for(Unit u : unit){
+		for(Unit u : units){
 			//u.attack(damage);     *************** need to have function that tells the unit to take damage *************
 			
 		}
@@ -136,7 +132,9 @@ public class Building {
 	public void leaveUnits(Unit u){
 		// if unit is inside and reduced the units armor.
 	}
-	
+
+
+
 	
 }
 	
