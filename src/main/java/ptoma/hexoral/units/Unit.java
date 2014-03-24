@@ -68,4 +68,8 @@ public abstract class Unit implements IAttackable {
 		return this.owner;
 	}
 
+	public int getHealth() {
+		return health;
+	}
+
 }

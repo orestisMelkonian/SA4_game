@@ -103,7 +103,7 @@ public class WorldMap {
 
 	/**
 	 * Adds a new hexagon to the hash map and updates the count array.
-	 * 
+	 * TODO error when type == popularType
 	 * @param x
 	 *            coordinate
 	 * @param y

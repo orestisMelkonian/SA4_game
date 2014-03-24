@@ -1,4 +1,4 @@
-package building;
+package ptoma.hexoral.building;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
