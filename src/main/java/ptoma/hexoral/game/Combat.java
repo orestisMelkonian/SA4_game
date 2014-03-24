@@ -1,23 +1,50 @@
 package ptoma.hexoral.game;
 
-import ptoma.hexoral.IAttackable;
+//import ptoma.hexoral.IAttackable;
+import ptoma.hexoral.units.Unit;
 
 public class Combat {
 	
-	public IAttackable attacker;
-	public IAttackable defender;
+	public Unit attacker;
+	public Unit defender;
 	
-	public Combat(IAttackable attacker, IAttackable defender){
+	
+	/**
+	 * Constructor for Combat.
+	 */
+	public Combat(Unit attacker, Unit defender){
 		this.attacker = attacker;
 		this.defender = defender;
 	}
 	
-	public IAttackable getAttacker(){
+	
+	/**
+	 * Returns the unit who is attacking.
+	 * 
+	 * @return Unit the attacker.
+	 */
+	public Unit getAttacker(){
 		return attacker;
 	}
 	
-	public IAttackable getDefender(){
+	/**
+	 * Returns the unit who is defending.
+	 * 
+	 * @return Unit the defender.
+	 */
+	public Unit getDefender(){
 		return defender;
+	}
+	
+	public boolean combatInitialization(){
+		if(attacker.getPosition() == defender.getPosition()){
+			System.out.println("Battle initialized");
+			return true;
+		}
+		else{
+			return false;
+		}
+		
 	}
 	
 }
