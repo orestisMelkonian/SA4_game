@@ -37,8 +37,7 @@ public class MyMain {
 	public static void main(String[] args) {
 
 		localmap = new WorldMap(50, 50);
-		gen = new MapGenerator();
-		gen.generateMap(localmap, 50, "test.bio");
+
 		cnv = new Visualize(32, localmap);
 		aFrame = new JFrame("Border Layout");
 		aFrame.setTitle("Island Generator");
@@ -48,7 +47,6 @@ public class MyMain {
 			}
 		});
 
-		// TESTING
 		((JFrame) aFrame).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		aFrame.pack();
 		aFrame.setVisible(true);
@@ -67,27 +65,19 @@ public class MyMain {
 		generate.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				
+				gen = new MapGenerator(localmap, "test.bio");
+				
 				localmap.setSizeY((Integer) widthArea.getValue());
 				localmap.setSizeX((Integer) HeightArea.getValue());
 				localmap.erase();
 				String biome = "test.bio";
-				gen.generateMap(localmap, (Integer) groundArea.getValue(),
-						biome);
-				localmap.applyGroundPercentage((Integer) groundArea.getValue() % 101);
-				localmap.cleanIsland();
-				localmap.cleanIsland();
-				localmap.cleanSea();
-				localmap.cleanUp();
+				gen = new MapGenerator(localmap, biome);
 				
-				int waterPercentage = (Integer) waterArea.getValue();
-				if ((River.isSelected())||(Lake.isSelected()))
-					localmap.applyWaterPercentage(waterPercentage, Lake.isSelected(), River.isSelected());
-				
-				
-				
-				
-				
-				
+				gen.applyParameters((Integer) groundArea.getValue(),
+						(Integer) waterArea.getValue(), Lake.isSelected(),
+						River.isSelected());
+
 				cnv.repaint();
 				Thread clean = new Thread(new Runnable() {
 

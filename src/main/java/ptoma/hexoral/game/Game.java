@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ptoma.hexoral.map.Biome;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.WorldMap;
 import ptoma.hexoral.user.Player;
@@ -42,9 +43,8 @@ public class Game {
 		//The creation of the map
 		island = new WorldMap(width, height);
 		//Creating the generator
-		MapGenerator generator = new MapGenerator();
+		MapGenerator generator = new MapGenerator(island, "test.bio");
 		//TODO add parameters for water and land percentage etcetera
-		generator.generateMap(island, 50, "test.bio");
 		//initialization of players and their units
 		players = new HashMap<String, Player>();
 		units = new HashMap<Point, Unit>();

@@ -26,11 +26,11 @@ public class WorldTest {
 	
 	@Test(timeout=1000)
 	public void gererateTest() {
-		MapGenerator gen = new MapGenerator();
-		gen.generateMap(world.island, 50, "test.bio");
-		world.island.cleanIsland();
-		world.island.cleanSea();
-		world.island.cleanUp();
+		//MapGenerator gen = new MapGenerator();
+		//gen.generateMap(world.island, 50, "test.bio");
+		//world.island.cleanIsland();
+		//world.island.cleanSea();
+		//world.island.cleanUp();
 	}
 	
 	@Test

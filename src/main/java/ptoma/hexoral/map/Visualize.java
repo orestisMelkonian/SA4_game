@@ -68,7 +68,7 @@ public class Visualize extends Canvas {
 			for (int j = 0; j < map.sizeY; j++) {
 				int offsetX = (j % 2) * hexagonSize / 2;
 				int offsetY = j * hexagonSize / 4;// j*4;//
-				String cellType = map.matrix.get(i, j).getType();
+				String cellType = map.getHexagon(i, j).getType();
 				if (cellType == "SEA") {
 					g.drawImage(sea, i * hexagonSize + offsetX, j * hexagonSize
 							- offsetY, hexagonSize, hexagonSize, null);

@@ -90,7 +90,6 @@ public class Hexagon {
 	 */
 	public String getType() {
 		return terrainType.toString();
-
 	}
 
 	/**
