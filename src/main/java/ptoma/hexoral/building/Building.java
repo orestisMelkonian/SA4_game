@@ -38,11 +38,11 @@ public class Building implements IAttackable {
  * getter and setter for fields
  */
 	
-	public int getUnitCapacity() {
+	public int getUnitsCapacity() {
 		return BaseunitCapacity;
 	}
 	
-	public void setUnitCapacity(int unitCapacity) {
+	public void setUnitsCapacity(int unitCapacity) {
 		this.BaseunitCapacity = unitCapacity;
 	}
 	
@@ -58,7 +58,7 @@ public class Building implements IAttackable {
 /*
  * it checks if the building has the capacity for the new unit inside.
  */
-	public boolean EnterUnit(Unit e) {
+	public boolean enteredUnits(Unit e) {
 		if(buildingDestroyed ){
 			return false;
 		
@@ -70,7 +70,7 @@ public class Building implements IAttackable {
 		else{ 
 //			 I should check the unit type later
 //			if (e.getType() == "SOLDIER" || ..........){
-//				unit.add(e);
+//				units.add(e);
 //				e.increaseDefence(defenseBonus);
 //				return true;
 //			}
