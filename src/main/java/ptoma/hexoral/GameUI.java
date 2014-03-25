@@ -1,3 +1,4 @@
+
 package ptoma.hexoral;
 
 import java.awt.EventQueue;
@@ -94,10 +95,10 @@ public class GameUI {
 		JPanel userInfoTab = new JPanel();
 		tabbedPane.addTab("User Info", null, userInfoTab, null);
 		GridBagLayout gbl_userInfoTab = new GridBagLayout();
-		gbl_userInfoTab.columnWidths = new int[] {100, 100, 0};
+		gbl_userInfoTab.columnWidths = new int[] {100, 0, 0};
 		gbl_userInfoTab.rowHeights = new int[] {15, 15, 0};
 		gbl_userInfoTab.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_userInfoTab.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_userInfoTab.rowWeights = new double[]{0.0, 0.0};
 		userInfoTab.setLayout(gbl_userInfoTab);
 		
 		JLabel unitCounterFxd = new JLabel("Unit counter");
