@@ -9,12 +9,27 @@ import ptoma.hexoral.user.User;
 public abstract class Unit implements IAttackable {
 
 	/**
-	 * Refernce to the owner of the unit
+	 * Refernce to the owner of the unit.
 	 */
 	private Player owner;
+	
+	/**
+	 * Action points needed to move.
+	 */
+	protected int moveAP;
+	
+	/**
+	 * Action points needed to create.
+	 */
+	protected int createAP;
+	
+	/**
+	 * Energy points needed to create.
+	 */
+	protected int createEP;
 
 	/**
-	 * The position of the unit
+	 * The position of the unit.
 	 */
 	private Point position;
 	
@@ -41,6 +56,9 @@ public abstract class Unit implements IAttackable {
 	public Unit(Player owner, int x, int y) {
 		this.owner = owner;
 		this.position = new Point(x, y);
+		this.moveAP = 0;
+		this.createAP = 0;
+		this.createEP = 0;
 
 	}
 
@@ -72,6 +90,18 @@ public abstract class Unit implements IAttackable {
 	
 	public void move(Point w) {
 		this.position = w;
-	};
+	}
+	
+	public int getMoveAP(int moves){
+		return this.moveAP * moves;
+	}
+	
+	public int getCreateAP(){
+		return this.createAP;
+	}
+	
+	public int getCreateEP(){
+		return this.createEP;
+	}
 
 }
