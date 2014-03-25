@@ -2,26 +2,68 @@ package ptoma.hexoral.units;
 
 import ptoma.hexoral.user.Player;
 
+/**
+ * The basic land soldier in the game.
+ * 
+ * @author steve
+ * 
+ */
 public class Soldier extends Unit {
 
-	protected static int BASE_ATTACK = 100;
-	protected static int BASE_HEALTH = 200;
-	protected static int BASE_DEFENCE = 200;
+	/**
+	 * Starting attack power.
+	 */
+	private static int baseAttack= 100;
+	/**
+	 * Starting health points.
+	 */
+	private static int baseHealth = 200;
 
-	public Soldier(Player owner, int x, int y) {
+	/**
+	 * Starting defence points.
+	 */
+	private static int baseDefence = 200;
+
+	/**
+	 * Soldier Unit Class.
+	 * 
+	 * @param owner
+	 *            of the unit.
+	 * @param x
+	 *            coord of the unit.
+	 * @param y
+	 *            coord of the unit.
+	 */
+	public Soldier(final Player owner, final int x, final int y) {
 		super(owner, x, y);
-		this.health = Soldier.BASE_HEALTH;
-		this.attackPower = Soldier.BASE_ATTACK;
-		this.defencePower = Soldier.BASE_DEFENCE;
+		this.health = Soldier.baseHealth;
+		this.attackPower = Soldier.baseAttack;
+		this.defencePower = Soldier.baseDefence;
 	}
 
-	public int attack() {
+	/**
+	 * Calculates the damage to be dane.
+	 * 
+	 * @return int the damage to be done.
+	 */
+	public final int attack() {
 		return this.attackPower;
 	}
 
-	public void defend(int damage) {
+	/**
+	 * Calculates the damage received and updates health.
+	 * 
+	 * @param damage
+	 *            The damage to be taken.
+	 */
+	public final void defend(final int damage) {
 		this.health -= damage;
 
+	}
+
+	@Override
+	public final int getMoveAP(final int moves) {
+		return moves * this.moveAP;
 	}
 
 }

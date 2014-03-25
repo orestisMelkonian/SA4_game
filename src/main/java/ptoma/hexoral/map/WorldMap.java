@@ -2,6 +2,7 @@ package ptoma.hexoral.map;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.common.collect.Table;
 import com.google.common.collect.HashBasedTable;
@@ -193,8 +194,8 @@ public class WorldMap {
 	 *            is the point in map from which to return the neighbor cells.
 	 * @return ArrayList of Points
 	 */
-	public ArrayList<Point> getNeighbours(Point w) {
-		ArrayList<Point> ret = new ArrayList<Point>();
+	public List<Point> getNeighbours(Point w) {
+		final List<Point> ret = new ArrayList<Point>();
 		// if row is even
 		if (w.x % 2 == 0) {
 			if (w.x > 0) {

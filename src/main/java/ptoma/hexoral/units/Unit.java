@@ -6,54 +6,70 @@ import ptoma.hexoral.IAttackable;
 import ptoma.hexoral.user.Player;
 import ptoma.hexoral.user.User;
 
+/**
+ * Abstract class unit, base class for every other movable unit in the game.
+ * 
+ * @author steve
+ * 
+ */
 public abstract class Unit implements IAttackable {
 
-	/**
-	 * Refernce to the owner of the unit.
-	 */
-	private Player owner;
-	
 	/**
 	 * Action points needed to move.
 	 */
 	protected int moveAP;
-	
+
 	/**
 	 * Action points needed to create.
 	 */
 	protected int createAP;
-	
+
 	/**
 	 * Energy points needed to create.
 	 */
 	protected int createEP;
 
 	/**
-	 * The position of the unit.
-	 */
-	private Point position;
-	
-	/**
 	 * The health of the unit.
 	 */
 	protected int health;
-	
+
 	/**
 	 * Attack force of a unit.
 	 */
 	protected int attackPower;
-	
+
 	/**
 	 * Defence force of a unit.
 	 */
 	protected int defencePower;
-	
+
 	/**
 	 * Move range of a unit.
 	 */
 	protected int moveRane;
 
-	public Unit(Player owner, int x, int y) {
+	/**
+	 * The position of the unit.
+	 */
+	private Point position;
+
+	/**
+	 * Refernce to the owner of the unit.
+	 */
+	private Player owner;
+
+	/**
+	 * Constructor for abstract class Unit.
+	 * 
+	 * @param owner
+	 *            the owner of the unit.
+	 * @param x
+	 *            the position x of the unit.
+	 * @param y
+	 *            the position y of the unit.
+	 */
+	public Unit(final Player owner, final int x, final int y) {
 		this.owner = owner;
 		this.position = new Point(x, y);
 		this.moveAP = 0;
@@ -67,8 +83,8 @@ public abstract class Unit implements IAttackable {
 	 * 
 	 * @return Player the owner.
 	 */
-	public Player getOwner() {
-		return owner;
+	public final Player getOwner() {
+		return this.owner;
 	}
 
 	/**
@@ -76,31 +92,62 @@ public abstract class Unit implements IAttackable {
 	 * 
 	 * @return Point the position.
 	 */
-	public Point getPosition() {
-		return position;
+	public final Point getPosition() {
+		return this.position;
 	}
 
-	public User owner() {
+	/**
+	 * Gets the owner of a unit.
+	 * 
+	 * @return User the owner of the unit.
+	 */
+	public final User owner() {
 		return this.owner;
 	}
 
-	public int getHealth() {
-		return health;
+	/**
+	 * Returns the health of a unit.
+	 * 
+	 * @return int health of the unit
+	 */
+	public final int getHealth() {
+		return this.health;
 	}
-	
-	public void move(Point w) {
+
+	/**
+	 * Moves the unit to Point w.
+	 * 
+	 * @param w
+	 *            the new position of the unit.
+	 */
+	public final void move(final Point w) {
 		this.position = w;
 	}
-	
-	public int getMoveAP(int moves){
-		return this.moveAP * moves;
-	}
-	
-	public int getCreateAP(){
+
+	/**
+	 * Returns the Action Points required to make moves moves.
+	 * 
+	 * @param moves
+	 *            the moves to be made.
+	 * @return int Action Points required.
+	 */
+	public abstract int getMoveAP(int moves);
+
+	/**
+	 * Get the Action Points Required to create this type of unit.
+	 * 
+	 * @return int the Action Points required for creation.
+	 */
+	public final int getCreateAP() {
 		return this.createAP;
 	}
-	
-	public int getCreateEP(){
+
+	/**
+	 * Get the Energy Points Required to create this type of unit.
+	 * 
+	 * @return int the Energy Points required
+	 */
+	public final int getCreateEP() {
 		return this.createEP;
 	}
 

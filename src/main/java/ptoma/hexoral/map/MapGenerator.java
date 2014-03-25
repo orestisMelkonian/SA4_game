@@ -2,6 +2,7 @@ package ptoma.hexoral.map;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MapGenerator {
@@ -57,7 +58,7 @@ public class MapGenerator {
 			j = (int) (Math.random() * this.myMap.sizeY);
 		}
 
-		ArrayList<Point> toCheck = this.myMap.getNeighbours(new Point(i, j));
+		List<Point> toCheck = this.myMap.getNeighbours(new Point(i, j));
 		int countL = 0, countS = 0;
 		for (int k = 0; k < toCheck.size(); k++) {
 			if ((this.myMap.getHexagon(toCheck.get(k).x, toCheck.get(k).y)
@@ -95,7 +96,7 @@ public class MapGenerator {
 			j = (int) (Math.random() * this.myMap.sizeY);
 		}
 
-		ArrayList<Point> toCheck = this.myMap.getNeighbours(new Point(i, j));
+		List<Point> toCheck = this.myMap.getNeighbours(new Point(i, j));
 		for (int k = 0; k < toCheck.size(); k++) {
 			if ((this.myMap.getHexagon(toCheck.get(k).x, toCheck.get(k).y)
 					.getType() == "SEA")) {
@@ -179,7 +180,7 @@ public class MapGenerator {
 	private int createLake() {
 		int ret = 0;
 		int seaNo = 3;
-		ArrayList<Point> toCheck = null;
+		List<Point> toCheck = null;
 		int i = (int) (Math.random() * this.myMap.sizeX);
 		int j = (int) (Math.random() * this.myMap.sizeY);
 		while (seaNo > 2) {
@@ -238,7 +239,7 @@ public class MapGenerator {
 		boolean iter = true;
 		// Pick neighbor land
 		while (iter == true) {
-			ArrayList<Point> neighbors = this.myMap.getNeighbours(p);
+			List<Point> neighbors = this.myMap.getNeighbours(p);
 			for (int k = 0; k < neighbors.size(); k++) {
 				int x = neighbors.get(k).x, y = neighbors.get(k).y;
 				Point n = new Point(x, y);
@@ -248,7 +249,7 @@ public class MapGenerator {
 					continue;
 				}
 				// Check all neighbors
-				ArrayList<Point> neigh = this.myMap.getNeighbours(n);
+				List<Point> neigh = this.myMap.getNeighbours(n);
 				int countS = 0;
 				int l;
 				for (l = 0; l < neigh.size(); l++) {
@@ -331,7 +332,7 @@ public class MapGenerator {
 				if ((myMap.getHexagon(i, j).getType() == "SEA")
 						|| (this.myMap.getHexagon(i, j).getType() == "LAKE")) {
 					int allLand = 0;
-					ArrayList<Point> toCheck = this.myMap
+					List<Point> toCheck = this.myMap
 							.getNeighbours(new Point(i, j));
 					for (int k = 0; k < toCheck.size(); k++) {
 						if ((this.myMap.getHexagon(toCheck.get(k).x,
@@ -357,7 +358,7 @@ public class MapGenerator {
 			for (int j = 0; j < this.myMap.sizeY; j++) {
 				if (!(this.myMap.getHexagon(i, j).getType() == "SEA")) {
 					int allLand = 0;
-					ArrayList<Point> toCheck = this.myMap
+					List<Point> toCheck = this.myMap
 							.getNeighbours(new Point(i, j));
 					for (int k = 0; k < toCheck.size(); k++) {
 						if (!(this.myMap.getHexagon(i, j).getType() == "SEA"))
