@@ -26,6 +26,7 @@ public class AttackAction extends Action {
 	public boolean exec() {
 		if (this.validate()) {
 			Combat battle = new Combat(attacker, defender);
+			battle.combatInitialization(); //TODO fix this
 		} else {
 			return false;
 		}
