@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 import ptoma.hexoral.map.*;
 
@@ -37,7 +38,6 @@ public class MyMain {
 	public static void main(String[] args) {
 
 		localmap = new WorldMap(50, 50);
-
 		cnv = new Visualize(32, localmap);
 		aFrame = new JFrame("Border Layout");
 		aFrame.setTitle("Island Generator");
@@ -65,19 +65,18 @@ public class MyMain {
 		generate.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
-				gen = new MapGenerator(localmap, "test.bio");
-				
+								
 				localmap.setSizeY((Integer) widthArea.getValue());
 				localmap.setSizeX((Integer) HeightArea.getValue());
 				localmap.erase();
 				String biome = "test.bio";
+				
 				gen = new MapGenerator(localmap, biome);
 				
 				gen.applyParameters((Integer) groundArea.getValue(),
 						(Integer) waterArea.getValue(), Lake.isSelected(),
 						River.isSelected());
-
+				//gen.printPercentage();
 				cnv.repaint();
 				Thread clean = new Thread(new Runnable() {
 
@@ -115,16 +114,19 @@ public class MyMain {
 
 		// ground
 		JPanel groundPanel = new JPanel(new GridLayout(1, 2));
-		groundArea = new JSpinner();
+		groundArea = new JSpinner(new SpinnerNumberModel(100, 20, 100, 1));
 		groundPanel.add(new JLabel("%Ground"));
-		groundArea.setValue(50);
 		groundPanel.add(groundArea);
 
 		// water inside
 		JPanel waterPanel = new JPanel(new GridLayout(1, 2));
-		waterArea = new JSpinner();
+		if ((River.isSelected()) && !(Lake.isSelected()))
+			waterArea = new JSpinner(new SpinnerNumberModel(30, 0, 30, 1));
+		else if ((Lake.isSelected()) && !(River.isSelected()))
+			waterArea = new JSpinner(new SpinnerNumberModel(70, 0, 70, 1));
+		else
+			waterArea = new JSpinner(new SpinnerNumberModel(50, 0, 50, 1));
 		waterPanel.add(new JLabel("%Water Inside"));
-		waterArea.setValue(10);
 		waterPanel.add(waterArea);
 
 		left.add(WidthPanel);

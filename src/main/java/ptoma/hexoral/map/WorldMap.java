@@ -31,6 +31,7 @@ public class WorldMap {
 		for (int i = 0; i < this.count.length; i++) {
 			this.count[i] = 0;
 		}
+		this.count[this.popularType.ordinal()] = this.sizeX*this.sizeY;
 		this.matrix = HashBasedTable.create();
 	}
 
@@ -102,7 +103,7 @@ public class WorldMap {
 	}
 
 	/**
-	 * Adds a new hexagon to the hash map and updates the count array. TODO
+	 * Adds a new hexagon to the hash map and updates the count array.
 	 * error when type == popularType
 	 * 
 	 * @param x
@@ -118,14 +119,15 @@ public class WorldMap {
 		if ((previous == null) && (type != this.popularType)) {
 			this.matrix.put(x, y, ret);
 			this.count[this.popularType.ordinal()]--;
-		} else if (previous != null && previous.getType() != ret.getType()) {
+			this.count[ret.getOrdinalType()]++;
+		} 
+		else if (previous != null && previous.getType() != ret.getType()) {
 			this.count[previous.getOrdinalType()]--;
+			this.count[ret.getOrdinalType()]++;
 			if (type == this.popularType)
 				this.matrix.remove(x, y);
-		}
-		this.count[type.ordinal()]++;
-		if (type != this.popularType) {
-			this.matrix.put(x, y, ret);
+			else
+				this.matrix.put(x, y, ret);
 		}
 	}
 
@@ -155,6 +157,7 @@ public class WorldMap {
 		for (int i = 0; i < this.count.length; i++) {
 			this.count[i] = 0;
 		}
+		this.count[this.popularType.ordinal()] = this.sizeX*this.sizeY;
 	}
 
 	/**
