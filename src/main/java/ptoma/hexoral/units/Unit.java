@@ -32,6 +32,11 @@ public abstract class Unit implements IAttackable {
 	 * Defence force of a unit.
 	 */
 	protected int defencePower;
+	
+	/**
+	 * Move range of a unit.
+	 */
+	protected int moveRane;
 
 	public Unit(Player owner, int x, int y) {
 		this.owner = owner;
@@ -57,13 +62,6 @@ public abstract class Unit implements IAttackable {
 		return position;
 	}
 
-
-	// boolean isDestroyed;
-	// Soldiers soldierCount;
-	// public Point move(Point moveCoord);
-	// public void attack(Point attackCoord);
-	// public Point follow(Point followCoord);
-	// public boolean destroyUnit(Soldiers soldier);
 	public User owner() {
 		return this.owner;
 	}
@@ -71,5 +69,9 @@ public abstract class Unit implements IAttackable {
 	public int getHealth() {
 		return health;
 	}
+	
+	public void move(Point w) {
+		this.position = w;
+	};
 
 }
