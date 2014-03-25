@@ -6,12 +6,34 @@ import java.util.ArrayList;
 import com.google.common.collect.Table;
 import com.google.common.collect.HashBasedTable;
 
+/**
+ * The container of the map. Using hashmaps.
+ * 
+ * @author steve
+ * 
+ */
 public class WorldMap {
+
+	/**
+	 * The size X of the map.
+	 */
 	protected int sizeX;
+	/**
+	 * The size Y of the map.
+	 */
 	protected int sizeY;
+	/**
+	 * Hash table maping coordinates to Hexagons.
+	 */
 	protected Table<Integer, Integer, Hexagon> matrix;
-	protected Hexagon.type popularType;
-	protected int count[];
+	/**
+	 * According to the poapular type, these are not stored inside the map.
+	 */
+	private Hexagon.type popularType;
+	/**
+	 * Holds Information about the count of types.
+	 */
+	private int[] count;
 
 	/**
 	 * Constructor of WorldMap.
@@ -23,7 +45,7 @@ public class WorldMap {
 	 * @param y
 	 *            height
 	 */
-	public WorldMap(int x, int y) {
+	public WorldMap(final int x, final int y) {
 		this.popularType = Hexagon.type.SEA;
 		this.sizeX = x;
 		this.sizeY = y;
@@ -31,53 +53,53 @@ public class WorldMap {
 		for (int i = 0; i < this.count.length; i++) {
 			this.count[i] = 0;
 		}
-		this.count[this.popularType.ordinal()] = this.sizeX*this.sizeY;
+		this.count[this.popularType.ordinal()] = this.sizeX * this.sizeY;
 		this.matrix = HashBasedTable.create();
 	}
 
 	/**
-	 * sizeX getter
+	 * sizeX getter.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
 	 * @return width of the map
 	 */
-	public int getSizeX() {
-		return (this.sizeX);
+	public final int getSizeX() {
+		return this.sizeX;
 	}
 
 	/**
-	 * sizeX setter
+	 * sizeX setter.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
-	 * @param desired
-	 *            width of the map
+	 * @param x
+	 *            desired width of the map
 	 */
-	public void setSizeX(int x) {
+	public final void setSizeX(final int x) {
 		this.sizeX = x;
 	}
 
 	/**
-	 * sizeY getter
+	 * sizeY getter.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
 	 * @return height of the map
 	 */
-	public int getSizeY() {
-		return (this.sizeY);
+	public final int getSizeY() {
+		return this.sizeY;
 	}
 
 	/**
-	 * sizeY setter
+	 * sizeY setter.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
-	 * @param desired
-	 *            height of the map
+	 * @param y
+	 *            desired height of the map
 	 */
-	public void setSizeY(int y) {
+	public final void setSizeY(final int y) {
 		this.sizeY = y;
 	}
 
@@ -86,8 +108,8 @@ public class WorldMap {
 	 * 
 	 * @return String Map dimension
 	 */
-	public String getDimension() {
-		return (this.sizeX + "x" + this.sizeY);
+	public final String getDimension() {
+		return this.sizeX + "x" + this.sizeY;
 	}
 
 	/**
@@ -98,13 +120,13 @@ public class WorldMap {
 	 *            is the Y coordinate
 	 * @return a string of the type of the hexagon
 	 */
-	public String getType(int i, int j) {
+	public final String getType(final int i, final int j) {
 		return this.getHexagon(i, j).getType();
 	}
 
 	/**
-	 * Adds a new hexagon to the hash map and updates the count array.
-	 * error when type == popularType
+	 * Adds a new hexagon to the hash map and updates the count array. error
+	 * when type == popularType
 	 * 
 	 * @param x
 	 *            coordinate
@@ -113,21 +135,22 @@ public class WorldMap {
 	 * @param type
 	 *            of the Hexagon to be created
 	 */
-	public void setHexagon(int x, int y, Hexagon.type type) {
-		Hexagon previous = this.matrix.get(x, y);
-		Hexagon ret = new Hexagon(type, x, y);
+	public final void setHexagon(final int x, final int y,
+			final Hexagon.type type) {
+		final Hexagon previous = this.matrix.get(x, y);
+		final Hexagon ret = new Hexagon(type, x, y);
 		if ((previous == null) && (type != this.popularType)) {
 			this.matrix.put(x, y, ret);
 			this.count[this.popularType.ordinal()]--;
 			this.count[ret.getOrdinalType()]++;
-		} 
-		else if (previous != null && previous.getType() != ret.getType()) {
+		} else if (previous != null && previous.getType() != ret.getType()) {
 			this.count[previous.getOrdinalType()]--;
 			this.count[ret.getOrdinalType()]++;
-			if (type == this.popularType)
+			if (type == this.popularType) {
 				this.matrix.remove(x, y);
-			else
+			} else {
 				this.matrix.put(x, y, ret);
+			}
 		}
 	}
 
@@ -140,8 +163,8 @@ public class WorldMap {
 	 *            coordinate
 	 * @return Hexagon Object of the specified coordinates.
 	 */
-	public Hexagon getHexagon(int x, int y) {
-		Hexagon ret = this.matrix.get(x, y);
+	public final Hexagon getHexagon(final int x, final int y) {
+		final Hexagon ret = this.matrix.get(x, y);
 		if (ret == null) {
 			return new Hexagon(this.popularType, x, y);
 		} else {
@@ -152,12 +175,12 @@ public class WorldMap {
 	/**
 	 * Erases the map completely.
 	 */
-	public void erase() {
+	public final void erase() {
 		this.matrix.clear();
 		for (int i = 0; i < this.count.length; i++) {
 			this.count[i] = 0;
 		}
-		this.count[this.popularType.ordinal()] = this.sizeX*this.sizeY;
+		this.count[this.popularType.ordinal()] = this.sizeX * this.sizeY;
 	}
 
 	/**
@@ -172,44 +195,56 @@ public class WorldMap {
 	 */
 	public ArrayList<Point> getNeighbours(Point w) {
 		ArrayList<Point> ret = new ArrayList<Point>();
-		if (w.x % 2 == 0) { // if row is even
+		// if row is even
+		if (w.x % 2 == 0) {
 			if (w.x > 0) {
-				ret.add(new Point(w.x - 1, w.y)); // TOP_RIGHT
+				// TOP RIGHT
+				ret.add(new Point(w.x - 1, w.y));
 				if (w.y > 0) {
-					ret.add(new Point(w.x - 1, w.y - 1)); // TOP_LEFT
+					// TOP LEFT
+					ret.add(new Point(w.x - 1, w.y - 1));
 				}
 			}
 			if (w.x < this.sizeX - 1) {
-				ret.add(new Point(w.x + 1, w.y)); // BOTTOM_RIGHT
+				// BOTTOM RIGHT
+				ret.add(new Point(w.x + 1, w.y));
 				if (w.y > 0) {
-					ret.add(new Point(w.x + 1, w.y - 1)); // BOTTOM_LEFT
+					// BOTTOM LEFT
+					ret.add(new Point(w.x + 1, w.y - 1));
 				}
 			}
-		} else { // else row is odd
+		} else {
+			// else row is odd
 			if (w.x > 0) {
-				ret.add(new Point(w.x - 1, w.y)); // TOP_LEFT
+				// TOP LEFT
+				ret.add(new Point(w.x - 1, w.y));
 				if (w.y < this.sizeY - 1) {
-					ret.add(new Point(w.x - 1, w.y + 1)); // TOP_RIGHT
+					// TOP RIGHT
+					ret.add(new Point(w.x - 1, w.y + 1));
 				}
 			}
 			if (w.x < this.sizeX - 1) {
-				ret.add(new Point(w.x + 1, w.y)); // BOTTOM_LEFT
+				// BOTTOM LEFT
+				ret.add(new Point(w.x + 1, w.y));
 				if (w.y > this.sizeY - 1) {
-					ret.add(new Point(w.x + 1, w.y + 1)); // BOTTOM_RIGHT
+					// BOTTOM RIGHT
+					ret.add(new Point(w.x + 1, w.y + 1));
 				}
 			}
 		}
 		if (w.y < this.sizeY - 1) {
-			ret.add(new Point(w.x, w.y + 1)); // RIGHT
+			// RIGHT
+			ret.add(new Point(w.x, w.y + 1));
 		}
 		if (w.y > 0) {
-			ret.add(new Point(w.x, w.y - 1)); // LEFT
+			// LEFT
+			ret.add(new Point(w.x, w.y - 1));
 		}
 		return ret;
 	}
 
 	/**
-	 * Returns the closest border (N,E,S,W) of the given point
+	 * Returns the closest border (N,E,S,W) of the given point.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
@@ -219,26 +254,32 @@ public class WorldMap {
 	 *            vertical coordinate
 	 * @return closest border (N,E,S,W)
 	 */
-	public char distFromBorderNESW(int x, int y) {
-		int distN = 0, distE = 0, distS = 0, distW = 0;
-
+	public final char distFromBorderNESW(final int x, final int y) {
+		int distN = 0;
+		int distE = 0;
+		int distS = 0;
+		int distW = 0;
+		char ret;
 		distN = x;
 		distE = this.sizeY - 1 - y;
 		distS = this.sizeX - 1 - x;
 		distW = y;
 
-		int distMin = Math.min(distW, Math.min(distE, Math.min(distN, distS)));
+		final int distMin = Math.min(distW,
+				Math.min(distE, Math.min(distN, distS)));
 
-		if (distMin == distN)
-			return 'N';
-		else if (distMin == distE)
-			return 'E';
-		else if (distMin == distS)
-			return 'S';
-		else if (distMin == distW)
-			return 'W';
-		else
-			return 'R';
+		if (distMin == distN) {
+			ret = 'N';
+		} else if (distMin == distE) {
+			ret = 'E';
+		} else if (distMin == distS) {
+			ret = 'S';
+		} else if (distMin == distW) {
+			ret = 'W';
+		} else {
+			ret = 'R';
+		}
+		return ret;
 	}
 
 	/**
@@ -252,8 +293,8 @@ public class WorldMap {
 	 *            point
 	 * @return the angle between them
 	 */
-	public static double angleBetween(Point center, Point current,
-			Point previous) {
+	public static double angleBetween(final Point center, final Point current,
+			final Point previous) {
 
 		return Math.toDegrees(Math.atan2(current.x - center.x, current.y
 				- center.y)
@@ -261,7 +302,7 @@ public class WorldMap {
 	}
 
 	/**
-	 * Calculates the distance from the given point to the center
+	 * Calculates the distance from the given point to the center.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
@@ -271,51 +312,52 @@ public class WorldMap {
 	 *            vertical coordinate
 	 * @return distance from center of the given point
 	 */
-	public int distFromCenterEdges(int x, int y) {
-		return (int) (new Point(x, y).distance(new Point(sizeX / 2, sizeY / 2)));
+	public final int distFromCenterEdges(final int x, final int y) {
+		return (int) (new Point(x, y).distance(new Point(this.sizeX / 2,
+				this.sizeY / 2)));
 	}
 
 	/**
-	 * Counts the number of land cells on the map
+	 * Counts the number of land cells on the map.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
 	 * @return number of Land cells on the map
 	 */
-	public int getLandNo() {
+	public final int getLandNo() {
 		return this.count[Hexagon.type.LAND.ordinal()];
 	}
 
 	/**
-	 * Counts the number of sea cells on the map
+	 * Counts the number of sea cells on the map.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
 	 * @return number of Sea cells on the map
 	 */
-	public int getSeaNo() {
+	public final int getSeaNo() {
 		return this.count[Hexagon.type.SEA.ordinal()];
 	}
 
 	/**
-	 * Counts the number of lake cells on the map
+	 * Counts the number of lake cells on the map.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
 	 * @return number of Lake cells on the map
 	 */
-	public int getLakeNo() {
+	public final int getLakeNo() {
 		return this.count[Hexagon.type.LAKE.ordinal()];
 	}
 
 	/**
-	 * Counts the number of mountain cells on the map
+	 * Counts the number of mountain cells on the map.
 	 * 
 	 * @author Orestis Melkonian
 	 * 
 	 * @return number of Mountain cells on the map
 	 */
-	public int getMountainNo() {
+	public final int getMountainNo() {
 		return this.count[Hexagon.type.MOUNTAIN.ordinal()];
 	}
 
