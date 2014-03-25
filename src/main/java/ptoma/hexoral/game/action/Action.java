@@ -1,10 +1,8 @@
 package ptoma.hexoral.game.action;
 
-import java.util.Comparator;
-
 import ptoma.hexoral.user.Player;
 
-public abstract class Action implements Comparator<Action> {
+public abstract class Action implements Comparable<Action> {
 
 	/**
 	 * The player who created this move.
@@ -13,8 +11,10 @@ public abstract class Action implements Comparator<Action> {
 
 	protected int timeSlot;
 
-	public int compare(Action o1, Action o2) {
-		return o1.timeSlot - o2.timeSlot;
+	
+
+	public int compareTo(Action arg0) {
+		return this.timeSlot - arg0.timeSlot;
 	}
 
 	public int getTimeSlot() {
@@ -37,5 +37,7 @@ public abstract class Action implements Comparator<Action> {
 	 * @return the feasibility of the extion
 	 */
 	abstract public boolean exec();
+	
+	abstract protected void print();
 
 }

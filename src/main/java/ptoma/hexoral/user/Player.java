@@ -1,7 +1,14 @@
 package ptoma.hexoral.user;
 
+import ptoma.hexoral.game.scheduler.Scheduler;
+
 public class Player extends User {
 
+	/**
+	 * The scheduled action of the user.
+	 */
+	private Scheduler schedule;
+	
 	private long energyPoints;
 	static private long BASE_ENERGY = 100;
 	static private long BASE_ACTION = 100;
@@ -11,6 +18,11 @@ public class Player extends User {
 		super(username);
 		this.actionPoints = Player.BASE_ACTION;
 		this.energyPoints = Player.BASE_ENERGY;
+		this.schedule = new Scheduler();
+	}
+
+	public Scheduler getSchedule() {
+		return schedule;
 	}
 
 	public long getEnergyPoints() {

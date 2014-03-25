@@ -1,6 +1,7 @@
 package ptoma.hexoral.game.scheduler;
 
 import java.util.ArrayList;
+
 import ptoma.hexoral.game.action.Action;
 
 public class Scheduler {
@@ -27,13 +28,17 @@ public class Scheduler {
 		this.schedule.remove(index);
 	}
 	
+	public int size() {
+		return this.schedule.size();
+	}
+	
 	/**
 	 * Organizes the actions to an array with the time slots set.
 	 * @return the time slotted defined array.
 	 */
-	public Action[] toArray() {
+	public ArrayList<Action> toArray() {
 		int timeCurrent = 0;
-		Action[] ret = (Action[]) this.schedule.toArray();
+		ArrayList<Action> ret = this.schedule; 
 		for (Action action : ret) {
 			timeCurrent += action.getTimeSlot();
 			action.setTimeSlot(timeCurrent);

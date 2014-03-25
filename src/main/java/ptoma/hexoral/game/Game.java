@@ -2,9 +2,10 @@ package ptoma.hexoral.game;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
-import ptoma.hexoral.map.Biome;
+import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.WorldMap;
 import ptoma.hexoral.user.Player;
@@ -105,5 +106,18 @@ public class Game {
 			}
 		}
 		return ret;
+	}
+	
+	public void executeTurn() {
+		ArrayList<Action> allActions = new ArrayList<Action>();
+		for(Player p : players.values()) {
+			for(Action e : p.getSchedule().toArray()) {
+				allActions.add(e);
+			}
+		}
+		Collections.sort(allActions);
+		for(Action e : allActions) {
+			e.exec();
+		}
 	}
 }

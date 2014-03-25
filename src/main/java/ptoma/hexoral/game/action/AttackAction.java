@@ -26,11 +26,18 @@ public class AttackAction extends Action {
 	public boolean exec() {
 		if (this.validate()) {
 			Combat battle = new Combat(attacker, defender);
-			battle.combatInitialization(); //TODO fix this
+			battle.combatInitialization(); // TODO fix this
+			this.print();
 		} else {
 			return false;
 		}
 		return true;
+	}
+
+	protected void print() {
+		System.err.printf("Player %s commanded unit #%d to attack unit #%d\n",
+				this.actor.getName(), this.attacker.hashCode(),
+				this.defender.hashCode());
 	}
 
 }

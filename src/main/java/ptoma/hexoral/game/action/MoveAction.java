@@ -27,10 +27,16 @@ public class MoveAction extends Action {
 		// TODO Auto-generated method stub
 		if (this.validate()) {
 			unit.move(this.where);
-			return true;
+			this.print();
 		} else {
 			return false;
 		}
+		return true;
+	}
+
+	protected void print() {
+		System.err.printf("Player %s commanded unit #%d to move to [%d,%d]\n",
+				this.actor.getName(), this.unit.hashCode(),this.where.x, this.where.y);
 	}
 
 }
