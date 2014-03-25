@@ -25,9 +25,9 @@ public class Building implements IAttackable {
 	 *  Building Constructor
 	 */
 	
-	public Building(ArrayList<Unit> unit, int unitCapacity,int defenceBonus, int BaseunitCapacity ) {
+	public Building(ArrayList<Unit> units, int unitCapacity,int defenceBonus, int BaseunitCapacity ) {
 		
-		this.units = unit;
+		this.units = units;
 		this.BaseunitCapacity = BaseunitCapacity;
 		this.defenseBonus = defenceBonus;
 		

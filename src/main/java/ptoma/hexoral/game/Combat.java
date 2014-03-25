@@ -24,7 +24,7 @@ public class Combat {
 	 * @return Unit the attacker.
 	 */
 	public Unit getAttacker(){
-		return attacker;
+		return this.attacker;
 	}
 	
 	/**
@@ -33,11 +33,11 @@ public class Combat {
 	 * @return Unit the defender.
 	 */
 	public Unit getDefender(){
-		return defender;
+		return this.defender;
 	}
 	
 	public boolean combatInitialization(){
-		if(attacker.getPosition() == defender.getPosition()){
+		if(this.attacker.getPosition() == this.defender.getPosition()){
 			System.out.println("Battle initialized");
 			return true;
 		}
@@ -45,6 +45,10 @@ public class Combat {
 			return false;
 		}
 		
+	}
+	
+	public void exec(){
+		this.defender.defend(this.attacker.attack());
 	}
 	
 }
