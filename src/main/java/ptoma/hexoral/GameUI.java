@@ -78,9 +78,6 @@ public class GameUI {
 		
 		MapGenerator mapIsland = new MapGenerator(newGame.island, "test.bio");
 		
-		JPanel mapPanel = new JPanel();
-		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
-		
 		
 		
 		
