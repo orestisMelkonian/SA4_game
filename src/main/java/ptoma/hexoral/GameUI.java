@@ -22,12 +22,17 @@ import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import ptoma.hexoral.game.Game;
+import ptoma.hexoral.map.MapGenerator;
+import ptoma.hexoral.map.WorldMap;
+
 import java.awt.GridLayout;
 
 public class GameUI {
 
 	private JFrame frame;
 	Canvas mapCanvas;
+	WorldMap localMap;
 
 	/**
 	 * Launch the application.
@@ -49,9 +54,10 @@ public class GameUI {
 	 * Create the application.
 	 * @param cnv 
 	 */
-	public GameUI(Canvas cnv) {
+	public GameUI(Canvas cnv, WorldMap localmap) {
 		initialize();
 		mapCanvas = cnv;
+		localMap = localmap;
 		this.frame.setVisible(true);
 	}
 
@@ -65,6 +71,17 @@ public class GameUI {
 		
 		JPanel mapPanel = new JPanel();
 		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
+		
+		mapPanel.add(mapCanvas);
+		
+		Game newGame = new Game(100, 100);
+		
+		MapGenerator mapIsland = new MapGenerator(newGame.island, "test.bio");
+		
+		
+		
+		
+		
 		
 		JPanel leftMenu = new JPanel();
 		frame.getContentPane().add(leftMenu, BorderLayout.WEST);

@@ -151,7 +151,7 @@ public class GameUISettings {
 						riverCheckBox.isSelected());
 				//gen.printPercentage();
 				cnv.repaint();
-				GameUI newGameUI = new GameUI(cnv);
+				new GameUI(cnv, localmap);
 				frame.setVisible(false);
 				
 				System.out.println("Generating the bukake map");
