@@ -103,9 +103,8 @@ public abstract class Building implements IAttackable {
 			return false;
 		}
 		else{ 
-//			 I should check the unit type later
-//			if (e.getType() == "SOLDIER" || ..........){
-//				units.add(e);
+			if (e.getType() == "SOLDIER" ){
+				units.add(e);
 //				e.increaseDefence(defenseBonus);
 //				return true;
 //			}
