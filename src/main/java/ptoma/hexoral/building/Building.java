@@ -1,21 +1,48 @@
 
 /*
- * author : Hanieh
+ * author : Orestis
 */
 
 package ptoma.hexoral.building;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 import ptoma.hexoral.IAttackable;
 import ptoma.hexoral.units.Unit;
+import ptoma.hexoral.user.Player;
 
 
-public class Building implements IAttackable {
+public abstract class Building implements IAttackable {
 	
-	ArrayList<Unit> units = new ArrayList<Unit>();
-	private int BaseunitCapacity;
+	List<Unit> storedUnits = new ArrayList<Unit>();
+	/**
+	 * Reference to the owner of the HQ.
+	 */
+	private Player owner;
+	/**
+	 * The position of the HQ.
+	 */
+	private Point position;
+	
+	/**
+	 * The maximum number of units that can be stored.
+	 */
+	private static int baseUnitCapacity = 10;
+	
+	/**
+	 * Extra defense provided from stored units.
+	 */
 	private int defenseBonus;
-	private int health;
+	
+	/**
+	 * The health of the HQ.
+	 */
+	protected static long baseHealth = 1000;
+	
+	/**
+	 * true:destroyed 	false:not destroyed
+	 */
 	private boolean buildingDestroyed;
 		
 	
@@ -25,29 +52,37 @@ public class Building implements IAttackable {
 	 *  Building Constructor
 	 */
 	
-	public Building(ArrayList<Unit> units, int unitCapacity,int defenceBonus, int BaseunitCapacity ) {
-		
-		this.units = units;
-		this.BaseunitCapacity = BaseunitCapacity;
-		this.defenseBonus = defenceBonus;
-		
+	public Building(Player owner, Point p) {
+		this.storedUnits = null;
+		this.owner = owner;
+		this.position = p;
+		this.defenseBonus = 0;
+		this.buildingDestroyed = false;
 	}
 	
 
 /*
  * getter and setter for fields
  */
-	
-	public int getUnitsCapacity() {
-		return BaseunitCapacity;
+	/**
+	 * Returns a reference of the owner of the unit.
+	 * 
+	 * @return Player the owner.
+	 */
+	public final Player getOwner() {
+		return owner;
 	}
 	
-	public void setUnitsCapacity(int unitCapacity) {
-		this.BaseunitCapacity = unitCapacity;
+	/**
+	 *	Returns the position of the building on the map.
+	 * @return
+	 */
+	public Point getPosition() {
+		return position;
 	}
-	
-	public void setDefenseBonus(int defenseBonus) {
-		this.defenseBonus = defenseBonus;
+
+	public int getUnitCapacity() {
+		return baseUnitCapacity;
 	}
 	
 	public int getDefenseBonus() {
@@ -63,7 +98,7 @@ public class Building implements IAttackable {
 			return false;
 		
 		}
-		if (units.size() >  BaseunitCapacity) {
+		if (storedUnits.size() >  baseUnitCapacity) {
 			System.err.println("The building does not have place for the new unit!!");
 			return false;
 		}
@@ -105,8 +140,8 @@ public class Building implements IAttackable {
 		// 		health = health - (damage - armor);
 		//	}
 		//TODO take into account armour and units inside the building
-		health = health - (damage);
-		if (health < 0){
+		baseHealth = baseHealth - (damage);
+		if (baseHealth < 0){
 			buildingDestroyed = true;
 		}
 	}
@@ -118,7 +153,7 @@ public class Building implements IAttackable {
 	
 	private void damageUnits(int damage){
 		// unit should decrease their health 
-		for(Unit u : units){
+		for(Unit u : storedUnits){
 			//u.attack(damage);     *************** need to have function that tells the unit to take damage *************
 			
 		}
