@@ -14,7 +14,7 @@ public class UnitTest {
 
 	@Test
 	public void test() {
-		Player x = new Player("Steve");
+		Player x = new Player("Steve",null);
 		Unit u11 = new Soldier(x, 1, 2);
 		Unit u22 = new Soldier(x, 1, 2);
 		IAttackable u1 = u11;
@@ -22,6 +22,7 @@ public class UnitTest {
 		System.out.printf("Defender Unit Health : %d\n", u22.getHealth());
 		u2.defend(u1.attack());
 		System.out.printf("Defender Unit Health : %d\n", u22.getHealth());
+		System.out.printf("This unit is %s\n",u11.getClass().getSimpleName());
 
 	}
 

@@ -27,6 +27,7 @@ public class AttackAction extends Action {
 		if (this.validate()) {
 			Combat battle = new Combat(attacker, defender);
 			battle.combatInitialization(); // TODO fix this
+			this.update();
 			this.print();
 		} else {
 			return false;
@@ -40,4 +41,12 @@ public class AttackAction extends Action {
 				this.defender.hashCode());
 	}
 
+	@Override
+	protected void update() {
+		if(this.defender.getHealth() <= 0) {
+			this.getGame().destroyUnit(this.defender.getPosition());
+		}
+		
+	}
+	
 }
