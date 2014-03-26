@@ -60,6 +60,10 @@ public abstract class Unit implements IAttackable {
 	private Player owner;
 
 	/**
+	 * Previous position of the unit.
+	 */
+	private Point previousPosition;
+	/**
 	 * Constructor for abstract class Unit.
 	 * 
 	 * @param owner
@@ -72,6 +76,7 @@ public abstract class Unit implements IAttackable {
 	public Unit(final Player owner, final int x, final int y) {
 		this.owner = owner;
 		this.position = new Point(x, y);
+		this.previousPosition = this.position;
 		this.moveAP = 0;
 		this.createAP = 0;
 		this.createEP = 0;
@@ -121,6 +126,7 @@ public abstract class Unit implements IAttackable {
 	 *            the new position of the unit.
 	 */
 	public final void move(final Point w) {
+		this.previousPosition = this.position;
 		this.position = w;
 	}
 
@@ -149,6 +155,13 @@ public abstract class Unit implements IAttackable {
 	 */
 	public final int getCreateEP() {
 		return this.createEP;
+	}
+
+	/**
+	 * @return the previousPosition.
+	 */
+	public Point getPreviousPosition() {
+		return previousPosition;
 	}
 
 }

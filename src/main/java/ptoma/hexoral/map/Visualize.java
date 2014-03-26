@@ -19,6 +19,9 @@ public class Visualize extends Canvas {
 	JSpinner HeightArea;
 	JSpinner groundArea;
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public Visualize(int hexSize, WorldMap m) {
 		// setSize(map.sizeX * hexagonSize + hexagonSize, map.sizeY *
 		// hexagonSize);

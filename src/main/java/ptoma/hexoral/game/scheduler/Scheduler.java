@@ -2,6 +2,7 @@ package ptoma.hexoral.game.scheduler;
 
 import java.util.ArrayList;
 
+import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.Action;
 
 public class Scheduler {
@@ -11,12 +12,15 @@ public class Scheduler {
 	 * The container of actions.
 	 */
 	protected ArrayList<Action> schedule;
+	private Game game;
 	
-	public Scheduler() {
+	public Scheduler(final Game game) {
+		this.game = game;
 		this.schedule = new ArrayList<Action>();
 	}
 	
 	public void addAction(Action e) {
+		e.setGame(this.game);
 		this.schedule.add(e);
 	}
 	
