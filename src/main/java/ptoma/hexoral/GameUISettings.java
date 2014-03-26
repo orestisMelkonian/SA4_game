@@ -150,9 +150,11 @@ public class GameUISettings {
 						(Integer) percentageOfWaterInsideSpinner.getValue(), lakeCheckBox.isSelected(),
 						riverCheckBox.isSelected());
 				//gen.printPercentage();
-				cnv.repaint();
 				new GameUI(cnv, localmap);
+				cnv.repaint();
+				
 				frame.setVisible(false);
+				
 				
 				System.out.println("Generating the bukake map");
 				Thread clean = new Thread(new Runnable() {

@@ -69,14 +69,17 @@ public class GameUI {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel mapPanel = new JPanel();
-		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
+//		JPanel mapPanel = new JPanel();
+//		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
 		
-		mapPanel.add(mapCanvas);
+		
 		
 		Game newGame = new Game(100, 100);
 		
 		MapGenerator mapIsland = new MapGenerator(newGame.island, "test.bio");
+		
+		JPanel mapPanel = new JPanel();
+		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
 		
 		
 		
@@ -136,6 +139,9 @@ public class GameUI {
 		
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("Unit Info", null, unitInfoTab, null);
+		
+		
+		//frame.getContentPane().add(mapCanvas);
 	}
 
 }
