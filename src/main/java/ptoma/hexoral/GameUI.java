@@ -5,42 +5,54 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.GridBagLayout;
+
 import javax.swing.JTabbedPane;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JButton;
+
 import java.awt.Insets;
+
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 import java.awt.GridLayout;
 
 public class GameUI {
 
 	private JFrame frame;
+	Canvas mapCanvas;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameUI window = new GameUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					GameUI window = new GameUI(new Canvas());
+//					window.frame.setVisible(false);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
+	 * @param cnv 
 	 */
-	public GameUI() {
+	public GameUI(Canvas cnv) {
 		initialize();
+		mapCanvas = cnv;
+		this.frame.setVisible(true);
 	}
 
 	/**
