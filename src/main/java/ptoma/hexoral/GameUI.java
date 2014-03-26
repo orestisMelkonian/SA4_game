@@ -5,42 +5,60 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.GridBagLayout;
+
 import javax.swing.JTabbedPane;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JButton;
+
 import java.awt.Insets;
+
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import ptoma.hexoral.game.Game;
+import ptoma.hexoral.map.MapGenerator;
+import ptoma.hexoral.map.WorldMap;
+
 import java.awt.GridLayout;
 
 public class GameUI {
 
 	private JFrame frame;
+	Canvas mapCanvas;
+	WorldMap localMap;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameUI window = new GameUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					GameUI window = new GameUI(new Canvas());
+//					window.frame.setVisible(false);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
+	 * @param cnv 
 	 */
-	public GameUI() {
+	public GameUI(Canvas cnv, WorldMap localmap) {
 		initialize();
+		mapCanvas = cnv;
+		localMap = localmap;
+		this.frame.setVisible(true);
 	}
 
 	/**
@@ -51,8 +69,19 @@ public class GameUI {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel mapPanel = new JPanel();
-		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
+//		JPanel mapPanel = new JPanel();
+//		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
+		
+		
+		
+		Game newGame = new Game(100, 100);
+		
+		MapGenerator mapIsland = new MapGenerator(newGame.island, "test.bio");
+		
+		
+		
+		
+		
 		
 		JPanel leftMenu = new JPanel();
 		frame.getContentPane().add(leftMenu, BorderLayout.WEST);
@@ -107,6 +136,9 @@ public class GameUI {
 		
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("Unit Info", null, unitInfoTab, null);
+		
+		
+		//frame.getContentPane().add(mapCanvas);
 	}
 
 }
