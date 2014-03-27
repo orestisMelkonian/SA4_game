@@ -41,11 +41,10 @@ public class WorldTest {
 		world.addPlayer(p1);
 		Unit u1 = new Soldier(p1, 2, 5);
 		Unit u2 = new Soldier(p1, 4, 6);
-		Unit u3;
 		world.createUnit(p1, u1);
 		world.createUnit(p1, u2);
 		assertEquals("Player couldn't create 2 units", 2, world.getPlayerUnits(p1).size());
-		p1.getSchedule().addAction(new MoveAction(p1,u1,new Point(3,5)));
+		p1.getSchedule().addAction(new MoveAction(p1,u1,new Point(2,7)));
 		p1.getSchedule().addAction(new AttackAction(p1, u1, u2));
 		assertEquals("Player couldn't create 2 actions", 2, p1.getSchedule().size());
 		world.executeTurn();

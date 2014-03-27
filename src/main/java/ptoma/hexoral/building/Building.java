@@ -102,78 +102,36 @@ public abstract class Building implements IAttackable {
 			System.err.println("The building does not have place for the new unit!!");
 			return false;
 		}
-		return true;
-	}
-		/*
-		else{ 
-			/*
+		else{
+				storedUnits.add(e);
+				return true;
+				
 		}
-			if (e.getType() == "SOLDIER" ){
-				units.add(e);
-//				e.increaseDefence(defenseBonus);
-//				return true;
-//			}
-//			System.out.println("Unit was refused accsess,!");
-			return false;
-//			}
-			
-		}
-
-	}
-	
-
-/*
- * It handles enemy attack.
- * if the building is under attack it takes damage if it is empty otherwise it relays the damage to units.   
- */
-	public int attack(){
-		return 0;
-		//TODO Maybe turrets in the  building
 		
 	}
 	
 	
-/*
- *  it damages building and check if it is collapsed.
- */
+	public int attack(){
+		return 0;
+	}
+	
+	
 	
 	public void defend(int damage){
-		// *** if the building has some armor, this might reduced damage.
-		// int realDamage = damage - armor;
-		// if(realDamage >= 0){
-		// 		health = health - (damage - armor);
-		//	}
-		//TODO take into account armour and units inside the building
 		baseHealth = baseHealth - (damage);
 		if (baseHealth < 0){
 			buildingDestroyed = true;
-		}
 	}
-	
-	
-/*
- * it distributes damage over unit. 
- */
-	
-	private void damageUnits(int damage){
-		// unit should decrease their health 
-		for(Unit u : storedUnits){
-			//u.attack(damage);     *************** need to have function that tells the unit to take damage *************
-			
-		}
-	}
-	
-	
-/*
- *  allows units to leave the building
- */
-	
-	public void leaveUnits(Unit u){
-		// if unit is inside and reduced the units armor.
-	}
-
-
-
 	
 }
+}
+		 
+		
+		
 	
+		
+	
+	
+	
+	
+

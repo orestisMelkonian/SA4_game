@@ -47,7 +47,7 @@ public abstract class Unit implements IAttackable {
 	/**
 	 * Move range of a unit.
 	 */
-	protected int moveRane;
+	protected int moveRange;
 
 	/**
 	 * The position of the unit.
@@ -162,6 +162,14 @@ public abstract class Unit implements IAttackable {
 	 */
 	public Point getPreviousPosition() {
 		return previousPosition;
+	}
+	
+	/**
+	 * 
+	 * @return the move range of the unit.
+	 */
+	public int getMoveRange() {
+		return this.moveRange;
 	}
 
 }
