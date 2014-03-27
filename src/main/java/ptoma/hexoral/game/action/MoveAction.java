@@ -1,6 +1,11 @@
 package ptoma.hexoral.game.action;
 
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Stack;
 
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
@@ -20,8 +25,7 @@ public class MoveAction extends Action {
 
 	@Override
 	boolean validate() {
-		// TODO Auto-generated method stub
-		return true;
+		return this.floodFillValidate();
 	}
 
 	@Override
@@ -32,6 +36,7 @@ public class MoveAction extends Action {
 			unit.move(this.where);
 			this.print();
 		} else {
+			System.err.printf("NOT VALID MOVE\n");
 			return false;
 		}
 		return true;
@@ -39,12 +44,40 @@ public class MoveAction extends Action {
 
 	protected void print() {
 		System.err.printf("Player %s commanded unit #%d to move to [%d,%d]\n",
-				this.actor.getName(), this.unit.hashCode(),this.where.x, this.where.y);
+				this.actor.getName(), this.unit.hashCode(), this.where.x,
+				this.where.y);
 	}
 
 	@Override
 	protected void update() {
 		this.getGame().moveUnit(fromWhere, where);
+	}
+
+	private boolean floodFillValidate() {
+		Map<Point, Integer> available = new HashMap<Point, Integer>();
+		Queue<Point> adjacent = new LinkedList<Point>();
+		// Initial cell
+		available.put(unit.getPosition(), unit.getMoveRange());
+		adjacent.add(unit.getPosition());
+		Point check;
+		while ((check = adjacent.poll()) != null) {
+			int move = available.get(check);
+			for (Point p : this.getGame().island.getNeighbours(check)) {
+				// If we havent visited the cell and we can reach it, add it
+				if (available.get(p) == null && move > 0) {
+					available.put(p, move - 1);
+					adjacent.add(p);
+				} else if (move > 0 && available.get(p) < move - 1) {
+					// If we have visited with a shorter path update the move
+					available.put(p, Math.max(available.get(p), move - 1));
+				}
+			}
+		}
+		if(available.get(this.where) != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
