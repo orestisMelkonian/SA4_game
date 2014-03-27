@@ -59,7 +59,7 @@ public class Hexagon {
 	 * @param w
 	 *            for the location of the hexagon
 	 */
-	public Hexagon(type terrainType, Point w) {
+	public Hexagon(final type terrainType, final Point w) {
 		this.terrainType = terrainType;
 		this.w = w;
 	}

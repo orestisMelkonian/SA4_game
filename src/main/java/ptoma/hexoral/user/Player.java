@@ -1,5 +1,6 @@
 package ptoma.hexoral.user;
 
+import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.scheduler.Scheduler;
 
 public class Player extends User {
@@ -9,16 +10,22 @@ public class Player extends User {
 	 */
 	private Scheduler schedule;
 	
+	/**
+	 * 
+	 */
+	private Game gamePlaying;
+	
 	private long energyPoints;
 	static private long BASE_ENERGY = 100;
 	static private long BASE_ACTION = 100;
 	private long actionPoints;
 	
-	public Player(String username) {
+	public Player(String username,final Game gamePLaying) {
 		super(username);
+		this.gamePlaying = gamePLaying;
 		this.actionPoints = Player.BASE_ACTION;
 		this.energyPoints = Player.BASE_ENERGY;
-		this.schedule = new Scheduler();
+		this.schedule = new Scheduler(this.gamePlaying);
 	}
 
 	public Scheduler getSchedule() {
