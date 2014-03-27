@@ -37,6 +37,12 @@ public class GameUISettings {
 	static WorldMap localmap;
 	static MapGenerator gen;
 	private JFrame frame;
+	static JSpinner widthSpinner;
+	static JSpinner heightSpinner;
+	static JCheckBox lakeCheckBox;
+	static JCheckBox riverCheckBox;
+	static JSpinner percentageOfGroundSpinner;
+	static JSpinner percentageOfResourceSpinner;
 
 	/**
 	 * Launch the application.
@@ -79,25 +85,25 @@ public class GameUISettings {
 		JLabel lblWidth = new JLabel("Width");
 		panelOfSettings.add(lblWidth);
 		
-		final JSpinner widthSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 1000, 1));
+		widthSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 1000, 1));
 		panelOfSettings.add(widthSpinner);
 		
 		JLabel lblHeight = new JLabel("Height");
 		panelOfSettings.add(lblHeight);
 		
-		final JSpinner heightSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 1000, 1));
+		heightSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 1000, 1));
 		panelOfSettings.add(heightSpinner);
 		
-		final JCheckBox lakeCheckBox = new JCheckBox("Lake");
+		lakeCheckBox = new JCheckBox("Lake");
 		panelOfSettings.add(lakeCheckBox);
 		
-		final JCheckBox riverCheckBox = new JCheckBox("River");
+		riverCheckBox = new JCheckBox("River");
 		panelOfSettings.add(riverCheckBox);
 		
 		JLabel lblPercentageOfGround = new JLabel("Percentage Of Ground");
 		panelOfSettings.add(lblPercentageOfGround);
 		
-		final JSpinner percentageOfGroundSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 100, 1));
+		percentageOfGroundSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 100, 1));
 		panelOfSettings.add(percentageOfGroundSpinner);
 		
 		JLabel lblPercentageOfWaterInside = new JLabel("Percentage Of Water Inside");
@@ -112,7 +118,7 @@ public class GameUISettings {
 		JLabel lblPercentageOfResource = new JLabel("Percentage of Resource");
 		panelOfSettings.add(lblPercentageOfResource);
 		
-		final JSpinner percentageOfResourceSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
+		percentageOfResourceSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
 		panelOfSettings.add(percentageOfResourceSpinner);
 		
 		
@@ -138,33 +144,35 @@ public class GameUISettings {
 		JButton buttonPanel = new JButton("Generate Game");
 		buttonPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new MyMain(cnv, localmap);
+//				localmap.setSizeY((Integer) widthSpinner.getValue());
+//				localmap.setSizeX((Integer) heightSpinner.getValue());
+//				localmap.erase();
+//				String biome = "test.bio";
+//				
+//				gen = new MapGenerator(localmap, biome);
+//				
+//				gen.applyParameters((Integer) percentageOfGroundSpinner.getValue(),
+//						(Integer) percentageOfWaterInsideSpinner.getValue(), lakeCheckBox.isSelected(),
+//						riverCheckBox.isSelected());
+//				//gen.printPercentage();
+//				cnv.repaint();
 				
-				localmap.setSizeY((Integer) widthSpinner.getValue());
-				localmap.setSizeX((Integer) heightSpinner.getValue());
-				localmap.erase();
-				String biome = "test.bio";
-				
-				gen = new MapGenerator(localmap, biome);
-				
-				gen.applyParameters((Integer) percentageOfGroundSpinner.getValue(),
-						(Integer) percentageOfWaterInsideSpinner.getValue(), lakeCheckBox.isSelected(),
-						riverCheckBox.isSelected());
-				//gen.printPercentage();
-				new GameUI(cnv, localmap);
-				cnv.repaint();
-				
-				frame.setVisible(false);
-				
-				
-				System.out.println("Generating the bukake map");
-				Thread clean = new Thread(new Runnable() {
-				
-					public void run() {
-						System.gc();
-				
-					}
-				});
-				clean.start();
+//				cnv.repaint();
+//				
+//				
+//				frame.setVisible(false);
+//				
+//				
+//				System.out.println("Generating the bukake map");
+//				Thread clean = new Thread(new Runnable() {
+//				
+//					public void run() {
+//						System.gc();
+//				
+//					}
+//				});
+//				clean.start();
 				}
 		});
 		panelOfButton.add(buttonPanel);

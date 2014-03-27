@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Container;
 import java.awt.GridBagLayout;
 
 import javax.swing.JTabbedPane;
@@ -66,17 +67,14 @@ public class GameUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		//frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 //		JPanel mapPanel = new JPanel();
-//		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
+//		frame.getContentPane().add(mapPanel, BorderLayout.WEST);
 		
+		//mapPanel.add(mapCanvas);
 		
-		
-		Game newGame = new Game(100, 100);
-		
-		MapGenerator mapIsland = new MapGenerator(newGame.island, "test.bio");
 		
 		
 		
@@ -138,7 +136,9 @@ public class GameUI {
 		tabbedPane.addTab("Unit Info", null, unitInfoTab, null);
 		
 		
-		//frame.getContentPane().add(mapCanvas);
+		Container content = frame.getContentPane();
+		content.add(mapCanvas, BorderLayout.CENTER);
+		frame.setVisible(true);
 	}
 
 }
