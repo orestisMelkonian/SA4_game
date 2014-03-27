@@ -61,9 +61,9 @@ public abstract class Building implements IAttackable {
 	}
 	
 
-/*
- * getter and setter for fields
- */
+	/*
+	 * getter and setter for fields
+	 */
 	/**
 	 * Returns a reference of the owner of the unit.
 	 * 
@@ -90,9 +90,9 @@ public abstract class Building implements IAttackable {
 	}
 	
 	
-/*
- * it checks if the building has the capacity for the new unit inside.
- */
+	/*
+	 * it checks if the building has the capacity for the new unit inside.
+	 */
 	public boolean enteredUnits(Unit e) {
 		if(buildingDestroyed ){
 			return false;
@@ -102,7 +102,12 @@ public abstract class Building implements IAttackable {
 			System.err.println("The building does not have place for the new unit!!");
 			return false;
 		}
+		return true;
+	}
+		/*
 		else{ 
+			/*
+		}
 			if (e.getType() == "SOLDIER" ){
 				units.add(e);
 //				e.increaseDefence(defenseBonus);
