@@ -12,9 +12,9 @@ public class User {
 
 	@Test
 	public void test() {
-		Player p1 = new Player("Player1");
+		Player p1 = new Player("Player1",null);
 		ptoma.hexoral.user.User p2 = new ptoma.hexoral.user.User("Player1");
-		Player p3 = new Player("AnotherPLayer");
+		Player p3 = new Player("AnotherPLayer",null);
 		assertEquals(p1, p2);
 		assertNotSame(p1, p3);
 	}

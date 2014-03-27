@@ -1,5 +1,6 @@
 package ptoma.hexoral.game.action;
 
+import ptoma.hexoral.game.Game;
 import ptoma.hexoral.user.Player;
 
 public abstract class Action implements Comparable<Action> {
@@ -10,6 +11,8 @@ public abstract class Action implements Comparable<Action> {
 	protected Player actor;
 
 	protected int timeSlot;
+	
+	private Game game;
 
 	
 
@@ -25,6 +28,20 @@ public abstract class Action implements Comparable<Action> {
 		this.timeSlot = timeSlot;
 	}
 
+	/**
+	 * @return the game
+	 */
+	public Game getGame() {
+		return game;
+	}
+
+	/**
+	 * @param game the game to set
+	 */
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
 	public Action(Player actor) {
 		this.actor = actor;
 	}
@@ -34,10 +51,12 @@ public abstract class Action implements Comparable<Action> {
 	/**
 	 * Executes the action defined.
 	 * 
-	 * @return the feasibility of the extion
+	 * @return the feasibility of the action
 	 */
 	abstract public boolean exec();
 	
 	abstract protected void print();
+	
+	abstract protected void update();
 
 }
