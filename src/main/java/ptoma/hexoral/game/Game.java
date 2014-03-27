@@ -115,6 +115,15 @@ public class Game {
 	}
 	
 	/**
+	 * Retrieves the unit in position where.
+	 * @param where the position of the unit
+	 * @return the unit itself.
+	 */
+	public Unit getUnit(Point where) {
+		return this.units.get(where);
+	}
+	
+	/**
 	 * Moves the units from where to toWhere.
 	 * @param where from where
 	 * @param toWhere to where
