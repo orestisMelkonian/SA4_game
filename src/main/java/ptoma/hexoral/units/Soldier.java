@@ -25,6 +25,10 @@ public class Soldier extends Unit {
 	private static int baseDefence = 200;
 
 	/**
+	 * Base move range.
+	 */
+	private static int baseMoveRange = 2;
+	/**
 	 * Soldier Unit Class.
 	 * 
 	 * @param owner
@@ -39,6 +43,7 @@ public class Soldier extends Unit {
 		this.health = Soldier.baseHealth;
 		this.attackPower = Soldier.baseAttack;
 		this.defencePower = Soldier.baseDefence;
+		this.moveRange = Soldier.baseMoveRange;
 	}
 
 	/**

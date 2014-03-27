@@ -51,7 +51,7 @@ public abstract class Action implements Comparable<Action> {
 	/**
 	 * Executes the action defined.
 	 * 
-	 * @return the feasibility of the extion
+	 * @return the feasibility of the action
 	 */
 	abstract public boolean exec();
 	
