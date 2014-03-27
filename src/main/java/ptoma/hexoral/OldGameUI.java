@@ -1,14 +1,12 @@
 
 package ptoma.hexoral;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Container;
+import java.awt.Color;
 import java.awt.GridBagLayout;
 
 import javax.swing.JTabbedPane;
@@ -20,16 +18,13 @@ import javax.swing.JButton;
 import java.awt.Insets;
 
 import javax.swing.JList;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.WorldMap;
 
 import java.awt.GridLayout;
 
-public class GameUI {
+public class OldGameUI extends Canvas{
 
 	private JFrame frame;
 	Canvas mapCanvas;
@@ -42,7 +37,7 @@ public class GameUI {
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
 //				try {
-//					GameUI window = new GameUI(new Canvas());
+//					OldGameUI window = new OldGameUI(new Canvas());
 //					window.frame.setVisible(false);
 //				} catch (Exception e) {
 //					e.printStackTrace();
@@ -55,7 +50,7 @@ public class GameUI {
 	 * Create the application.
 	 * @param cnv 
 	 */
-	public GameUI(Canvas cnv, WorldMap localmap) {
+	public OldGameUI(Canvas cnv, WorldMap localmap) {
 		initialize();
 		mapCanvas = cnv;
 		localMap = localmap;
@@ -65,16 +60,20 @@ public class GameUI {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
 	private void initialize() {
 		frame = new JFrame();
-		//frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 //		JPanel mapPanel = new JPanel();
-//		frame.getContentPane().add(mapPanel, BorderLayout.WEST);
+//		frame.getContentPane().add(mapPanel, BorderLayout.CENTER);
 		
-		//mapPanel.add(mapCanvas);
 		
+		
+		Game newGame = new Game(100, 100);
+		
+		MapGenerator mapIsland = new MapGenerator(newGame.island, "test.bio");
 		
 		
 		
@@ -135,10 +134,23 @@ public class GameUI {
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("Unit Info", null, unitInfoTab, null);
 		
-		
-		Container content = frame.getContentPane();
-		content.add(mapCanvas, BorderLayout.CENTER);
-		frame.setVisible(true);
-	}
 
+
+		
+		
+		
+		
+		
+		
+		
+		System.out.println(frame.getContentPane());
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		//bkk.setBounds(0, 0, 300, 300);
+		//frame.getContentPane().add(mapCanvas);
+	}
 }
+
+
+
