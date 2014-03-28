@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ptoma.hexoral.exception.InvalidPointException;
+
 public class MapGenerator {
 	WorldMap myMap;
 
@@ -31,14 +33,20 @@ public class MapGenerator {
 	public void applyParameters(int groundPer, int waterPer, boolean lakes,
 			boolean rivers) {
 
-		this.applyGroundPercentage(groundPer);
-		this.cleanUp();
-		this.applyWaterPercentage(waterPer, lakes, rivers);
-		this.cleanIsland();
-		this.cleanIsland();
-		this.cleanSea();
-		this.cleanSea();
-		this.cleanUp();
+		try {
+			this.applyGroundPercentage(groundPer);
+			this.cleanUp();
+			this.applyWaterPercentage(waterPer, lakes, rivers);
+			this.cleanIsland();
+			this.cleanIsland();
+			this.cleanSea();
+			this.cleanSea();
+			this.cleanUp();
+		} catch (InvalidPointException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -47,8 +55,9 @@ public class MapGenerator {
 	 * @author Orestis Melkonian
 	 * 
 	 * @return the point that is a sea cell next to land
+	 * @throws InvalidPointException 
 	 */
-	private Point findSeaNextToLand() {
+	private Point findSeaNextToLand() throws InvalidPointException {
 		int i = (int) (Math.random() * this.myMap.sizeX);
 		int j = (int) (Math.random() * this.myMap.sizeY);
 
@@ -85,8 +94,9 @@ public class MapGenerator {
 	 * @author Orestis Melkonian
 	 * 
 	 * @return the point that is a land cell next to sea
+	 * @throws InvalidPointException 
 	 */
-	private Point findLandNextToSea() {
+	private Point findLandNextToSea() throws InvalidPointException {
 		int i = (int) (Math.random() * this.myMap.sizeX);
 		int j = (int) (Math.random() * this.myMap.sizeY);
 
@@ -114,8 +124,9 @@ public class MapGenerator {
 	 * 
 	 * @param groundPer
 	 *            desired ground percentage of the map
+	 * @throws InvalidPointException 
 	 */
-	private void applyGroundPercentage(int groundPer) {
+	private void applyGroundPercentage(int groundPer) throws InvalidPointException {
 		// Decide how many must be removed
 		int seaNo = this.myMap.getSeaNo();
 		int landNo = this.myMap.getLandNo();
@@ -153,7 +164,7 @@ public class MapGenerator {
 	}
 
 	private void applyWaterPercentage(int waterPer, boolean lakes,
-			boolean rivers) {
+			boolean rivers) throws InvalidPointException {
 		int groundNo = this.myMap.getLandNo() + this.myMap.getMountainNo();
 		int waterInsideNo = (waterPer * groundNo) / 100;
 
@@ -176,8 +187,9 @@ public class MapGenerator {
 	 * @author Orestis Melkonian
 	 * 
 	 * @return the number of land cells converted to lake cells
+	 * @throws InvalidPointException 
 	 */
-	private int createLake() {
+	private int createLake() throws InvalidPointException {
 		int ret = 0;
 		int seaNo = 3;
 		List<Point> toCheck = null;
@@ -226,8 +238,9 @@ public class MapGenerator {
 	 * @author Orestis Melkonian
 	 * 
 	 * @return the number of land cells converted to sea cells
+	 * @throws InvalidPointException 
 	 */
-	private int createRiver() {
+	private int createRiver() throws InvalidPointException {
 		int ret = 0;
 		Point p = null;
 		while (p == null) {
@@ -300,8 +313,9 @@ public class MapGenerator {
 	 * island
 	 * 
 	 * @author Orestis Melkonian
+	 * @throws InvalidPointException 
 	 */
-	private void cleanUp() {
+	private void cleanUp() throws InvalidPointException {
 		for (int i = 0; i < this.myMap.sizeX; i++) {
 			for (int l = 0; l < (int) (Math.max(1, this.myMap.sizeY / 50)); l++) {
 				this.myMap.getHexagon(i, l).setType(Hexagon.type.SEA);
@@ -325,8 +339,9 @@ public class MapGenerator {
 	 * Cleans the Island of any extra water elements
 	 * 
 	 * @author Orestis Melkonian
+	 * @throws InvalidPointException 
 	 */
-	private void cleanIsland() {
+	private void cleanIsland() throws InvalidPointException {
 		for (int i = 0; i < this.myMap.sizeX; i++) {
 			for (int j = 0; j < this.myMap.sizeY; j++) {
 				if ((myMap.getHexagon(i, j).getType() == "SEA")
@@ -352,8 +367,9 @@ public class MapGenerator {
 	 * Cleans the Sea of any extra land elements
 	 * 
 	 * @author Orestis Melkonian
+	 * @throws InvalidPointException 
 	 */
-	private void cleanSea() {
+	private void cleanSea() throws InvalidPointException {
 		for (int i = 0; i < this.myMap.sizeX; i++) {
 			for (int j = 0; j < this.myMap.sizeY; j++) {
 				if (!(this.myMap.getHexagon(i, j).getType() == "SEA")) {

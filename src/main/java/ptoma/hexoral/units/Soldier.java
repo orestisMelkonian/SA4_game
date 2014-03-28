@@ -1,5 +1,7 @@
 package ptoma.hexoral.units;
 
+import java.util.Arrays;
+
 import ptoma.hexoral.user.Player;
 
 /**
@@ -28,6 +30,12 @@ public class Soldier extends Unit {
 	 * Base move range.
 	 */
 	private static int baseMoveRange = 2;
+
+	/**
+	 * The valid types a soldier can walk on.
+	 */
+	private static String[] validTypes = {"LAND"};
+	
 	/**
 	 * Soldier Unit Class.
 	 * 
@@ -70,5 +78,15 @@ public class Soldier extends Unit {
 	public final int getMoveAP(final int moves) {
 		return moves * this.moveAP;
 	}
+
+	/* (non-Javadoc)
+	 * @see ptoma.hexoral.units.Unit#isValidMove(java.lang.String)
+	 */
+	@Override
+	public boolean isValidMove(String type) {
+		return Arrays.asList(this.validTypes).contains(type);
+	}
+	
+	   
 
 }
