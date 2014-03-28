@@ -5,6 +5,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -57,7 +58,7 @@ public class MyMain {
 	static Game game = new Game(100, 100);
 	static Player player = new Player("Vitor", game);
 	static Player player2 = new Player("Lokesh", game);
-	static Action action = new AttackAction(player, new Soldier(player, 10, 10), new Soldier(player2, 10, 10));
+	static Action action = new AttackAction(player, new Soldier(player, new Point(10,10)), new Soldier(player2, new Point(10 ,10)));
 	static ArrayList<Action> listOfActions = new ArrayList<Action>();
 	static JMenuItem anItem;
 	static JPopupMenu popup = new JPopupMenu();
