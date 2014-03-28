@@ -162,6 +162,7 @@ public class Game {
 				attack.getAction().exec();
 			} 
 		}
+		//TODO apply resources updates
 	}
 	
 	/**

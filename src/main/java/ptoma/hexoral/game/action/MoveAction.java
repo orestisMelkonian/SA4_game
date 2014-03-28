@@ -24,11 +24,16 @@ public class MoveAction extends Action {
 		this.fromWhere = unit.getPosition();
 		this.where = where;
 		this.unit = unit;
-		this.getGame().island.getHexagon(where.x, where.y);
+		//Just to throw the exception
+		String type = this.getGame().island.getHexagon(where.x, where.y).getType();
+		//If the unit cannot access this type of land or is not within range
+		if (!unit.isValidMove(type) || !this.validate()) {
+			throw new InvalidPointException(where);
+		}
 	}
 
 	@Override
-	boolean validate() throws AttackException {
+	boolean validate() {
 		return this.floodFillValidate();
 	}
 
@@ -36,9 +41,18 @@ public class MoveAction extends Action {
 	public boolean exec() throws AttackException {
 		// TODO Auto-generated method stub
 		if (this.validate()) {
-			this.update();
-			unit.move(this.where);
-			this.print();
+			Unit destUnit = this.getGame().getUnit(this.where);
+			if (destUnit == null) {
+				this.update();
+				unit.move(this.where);
+				this.print();
+			} else if (!this.unit.owner().equals(destUnit.owner())) {
+				// If the destination unit is an oponent unit then attack
+				//TODO We have to move the unit somewhere near the attack
+				throw new AttackException(new AttackAction(this.actor,
+						this.unit, destUnit));
+			}
+			
 		} else {
 			System.err.printf("NOT VALID MOVE\n");
 			return false;
@@ -57,7 +71,7 @@ public class MoveAction extends Action {
 		this.getGame().moveUnit(fromWhere, where);
 	}
 
-	private boolean floodFillValidate() throws AttackException {
+	private boolean floodFillValidate() {
 		Map<Point, Integer> available = new HashMap<Point, Integer>();
 		Queue<Point> adjacent = new LinkedList<Point>();
 		// Initial cell
@@ -90,14 +104,6 @@ public class MoveAction extends Action {
 			}
 		}
 		if (available.get(this.where) != null) {
-			Unit destUnit = this.getGame().getUnit(this.where);
-			if (destUnit == null) {
-				return true;
-			} else if (!this.unit.owner().equals(destUnit.owner())) {
-				// If the destination unit is an oponent unit then attack
-				throw new AttackException(new AttackAction(this.actor,
-						this.unit, destUnit));
-			}
 			return true;
 		} else {
 			return false;
