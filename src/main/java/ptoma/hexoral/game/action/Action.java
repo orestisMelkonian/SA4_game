@@ -57,7 +57,7 @@ public abstract class Action implements Comparable<Action> {
 		this.game = actor.getGame();
 	}
 
-	abstract boolean validate() throws AttackException;
+	abstract boolean validate();
 
 	/**
 	 * Executes the action defined.
