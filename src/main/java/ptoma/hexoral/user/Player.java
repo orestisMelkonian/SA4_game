@@ -48,5 +48,9 @@ public class Player extends User {
 		this.actionPoints = actionPoints;
 	}
 	
+	public Game getGame() {
+		return this.gamePlaying;
+	}
+	
 
 }

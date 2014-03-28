@@ -1,5 +1,6 @@
 package ptoma.hexoral.game.action;
 
+import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.user.Player;
 
@@ -44,16 +45,17 @@ public abstract class Action implements Comparable<Action> {
 
 	public Action(Player actor) {
 		this.actor = actor;
+		this.game = actor.getGame();
 	}
 
-	abstract boolean validate();
+	abstract boolean validate() throws AttackException;
 
 	/**
 	 * Executes the action defined.
 	 * 
 	 * @return the feasibility of the action
 	 */
-	abstract public boolean exec();
+	abstract public boolean exec() throws AttackException;
 	
 	abstract protected void print();
 	
