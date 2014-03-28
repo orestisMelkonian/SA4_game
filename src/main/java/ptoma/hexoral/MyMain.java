@@ -7,23 +7,35 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerNumberModel;
 
+import ptoma.hexoral.game.Game;
+import ptoma.hexoral.game.action.Action;
+import ptoma.hexoral.game.action.AttackAction;
 import ptoma.hexoral.map.*;
+import ptoma.hexoral.units.Soldier;
+import ptoma.hexoral.units.Unit;
+import ptoma.hexoral.user.Player;
 
 public class MyMain {
 
@@ -39,13 +51,27 @@ public class MyMain {
 	static JCheckBox Lake;
 	static JCheckBox River;
 	static JSpinner waterArea;
+	static JList armySummaryList;
+	static JList scheduleList;
+	static DefaultListModel model = new DefaultListModel();
+	static Game game = new Game(100, 100);
+	static Player player = new Player("Vitor", game);
+	static Player player2 = new Player("Lokesh", game);
+	static Action action = new AttackAction(player, new Soldier(player, 10, 10), new Soldier(player2, 10, 10));
+	static ArrayList<Action> listOfActions = new ArrayList<Action>();
+	static JMenuItem anItem;
+	static JPopupMenu popup = new JPopupMenu();
+	
+	
 	
 	public MyMain(Canvas canvas, WorldMap localMap){
 		
 		this.cnv = canvas;
 		this.localmap = localMap;
+		
 		initialize();
 		this.aFrame.setVisible(true);
+		
 		
 	}
 
@@ -123,14 +149,25 @@ public class MyMain {
 		tabbedPane.addTab("User Info", null, userInfoTab, null);
 		userInfoTab.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JList armySummaryList = new JList();
+		armySummaryList = new JList();
 		userInfoTab.add(armySummaryList);
+		
 		
 		JPanel scheduleTab = new JPanel();
 		tabbedPane.addTab("Schedule Actions", null, scheduleTab, null);
 		
-		JList scheduleList = new JList();
+		scheduleList = new JList(model);
 		scheduleTab.add(scheduleList);
+		anItem = new JMenuItem("Delete Action");
+		popup.add(anItem);
+		scheduleList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				popup.show(null, e.getXOnScreen(), e.getYOnScreen());
+			}
+		});
+		
+		
 		
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("Unit Info", null, unitInfoTab, null);
@@ -193,8 +230,19 @@ public class MyMain {
 		cnv.setBackground(Color.GRAY);
 		aFrame.add(cnv);
 		//aFrame.add(bottom, BorderLayout.WEST);
+		action.drawActions();
+		action.drawActions();
+		
 		
 		aFrame.setVisible(true);
+		
 	}
 
+	public static int counter = 0;
+	public static void addToScheduleList(String type, Action action){
+		model.addElement(type + counter);
+		counter++;
+	}
+	
+	
 }

@@ -43,6 +43,7 @@ public class GameUISettings {
 	static JCheckBox riverCheckBox;
 	static JSpinner percentageOfGroundSpinner;
 	static JSpinner percentageOfResourceSpinner;
+	public static MyMain WINDOW;
 
 	/**
 	 * Launch the application.
@@ -144,7 +145,7 @@ public class GameUISettings {
 		JButton buttonPanel = new JButton("Generate Game");
 		buttonPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MyMain(cnv, localmap);
+				WINDOW = new MyMain(cnv, localmap);
 //				localmap.setSizeY((Integer) widthSpinner.getValue());
 //				localmap.setSizeX((Integer) heightSpinner.getValue());
 //				localmap.erase();
