@@ -1,5 +1,9 @@
 package ptoma.hexoral.game.action;
 
+import java.util.ArrayList;
+
+import ptoma.hexoral.GameUISettings;
+import ptoma.hexoral.MyMain;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.user.Player;
 
@@ -13,6 +17,8 @@ public abstract class Action implements Comparable<Action> {
 	protected int timeSlot;
 	
 	private Game game;
+	
+	
 
 	
 
@@ -58,5 +64,17 @@ public abstract class Action implements Comparable<Action> {
 	abstract protected void print();
 	
 	abstract protected void update();
+	
+	public void drawActions(){
+				if(this.getClass() == new AttackAction(null,null,null).getClass()){
+					MyMain.addToScheduleList("Attack Action - ",  this);
+					System.out.println("BUKAKAKA");
+				}else if(this.getClass() == new MoveAction(null,null,null).getClass()){
+					MyMain.addToScheduleList("Move Action - ",  this);
+					System.out.println("BUKAKAKA   222222");
+				}
+		
+		
+	}
 
 }

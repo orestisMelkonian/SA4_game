@@ -22,6 +22,7 @@ public class Scheduler {
 	public void addAction(Action e) {
 		e.setGame(this.game);
 		this.schedule.add(e);
+		e.drawActions();
 	}
 	
 	public Action peekAction(int index) {
