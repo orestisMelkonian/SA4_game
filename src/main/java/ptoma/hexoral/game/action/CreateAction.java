@@ -32,10 +32,13 @@ public class CreateAction extends Action {
 	@Override
 	boolean validate() {
 		List<Point> toCheck = this.getGame().island.getNeighbours(this.creationBuilding.getPosition());
+		//Point p = new Point(this.creationBuilding.getPosition().x + 1, this.creationBuilding.getPosition().y + 1);
 		if (!(this.creationBuilding.isAvailable(this.className)))
 			return false;
+		if (!(this.creationBuilding.canAfford(this.className)))
+			return false;
 		for(Point p : toCheck) {
-			if (this.getGame().getUnit(p) == null)	{
+			if (this.actor.getGame().getUnit(p) == null)	{
 				this.creationPoint = p;
 				return true;
 			}
@@ -51,7 +54,7 @@ public class CreateAction extends Action {
 	@Override
 	public boolean exec() {
 		if (this.validate())	{
-			this.unitCreated = new Soldier(actor, this.creationPoint.x, this.creationPoint.y);
+			this.unitCreated = new Soldier(actor, this.creationPoint);
 			this.update();
 			return true;
 		}
@@ -64,7 +67,7 @@ public class CreateAction extends Action {
 	 * @see ptoma.hexoral.game.action.Action#print()
 	 */
 	@Override
-	protected void print() {
+	public void print() {
 		// TODO Auto-generated method stub
 		System.out.printf("Player %s created Unit of type %s and ID = #%d \n",
 				actor.getName(), unitCreated.getClass().getSimpleName(),

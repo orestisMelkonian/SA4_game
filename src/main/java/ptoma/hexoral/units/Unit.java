@@ -73,13 +73,13 @@ public abstract class Unit implements IAttackable {
 	 * @param y
 	 *            the position y of the unit.
 	 */
-	public Unit(final Player owner, final int x, final int y) {
+	public Unit(final Player owner, Point p) {
 		this.owner = owner;
-		this.position = new Point(x, y);
+		this.position = p;
 		this.previousPosition = this.position;
 		this.moveAP = 0;
-		this.createAP = 0;
-		this.createEP = 0;
+		this.createAP = 25;
+		this.createEP = 50;
 
 	}
 

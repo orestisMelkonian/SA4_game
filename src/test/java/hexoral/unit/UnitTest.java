@@ -2,6 +2,8 @@ package hexoral.unit;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+
 import org.junit.Test;
 
 import ptoma.hexoral.IAttackable;
@@ -15,8 +17,8 @@ public class UnitTest {
 	@Test
 	public void test() {
 		Player x = new Player("Steve",null);
-		Unit u11 = new Soldier(x, 1, 2);
-		Unit u22 = new Soldier(x, 1, 2);
+		Unit u11 = new Soldier(x, new Point(1, 2));
+		Unit u22 = new Soldier(x, new Point(1, 2));
 		IAttackable u1 = u11;
 		IAttackable u2 = u22;
 		System.out.printf("Defender Unit Health : %d\n", u22.getHealth());

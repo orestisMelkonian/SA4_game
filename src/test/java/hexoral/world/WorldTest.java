@@ -39,8 +39,8 @@ public class WorldTest {
 	public void test() {
 		Player p1 = new Player("Steve",world);
 		world.addPlayer(p1);
-		Unit u1 = new Soldier(p1, 2, 5);
-		Unit u2 = new Soldier(p1, 4, 6);
+		Unit u1 = new Soldier(p1, new Point(2, 5));
+		Unit u2 = new Soldier(p1, new Point(2, 5));
 		world.createUnit(p1, u1);
 		world.createUnit(p1, u2);
 		assertEquals("Player couldn't create 2 units", 2, world.getPlayerUnits(p1).size());

@@ -28,6 +28,20 @@ public class Player extends User {
 		this.schedule = new Scheduler(this.gamePlaying);
 	}
 
+	/**
+	 * @return the gamePlaying
+	 */
+	public Game getGame() {
+		return gamePlaying;
+	}
+
+	/**
+	 * @param gamePlaying the gamePlaying to set
+	 */
+	public void setGame(Game gamePlaying) {
+		this.gamePlaying = gamePlaying;
+	}
+
 	public Scheduler getSchedule() {
 		return schedule;
 	}
