@@ -15,6 +15,9 @@ import ptoma.hexoral.user.Player;
 
 public abstract class Building implements IAttackable {
 	
+	/**
+	 * The units that the building contains.
+	 */
 	List<Unit> storedUnits = new ArrayList<Unit>();
 	/**
 	 * Reference to the owner of the HQ.
@@ -48,7 +51,7 @@ public abstract class Building implements IAttackable {
 	
 	
 
-	/**
+	/*
 	 *  Building Constructor
 	 */
 	
@@ -61,7 +64,9 @@ public abstract class Building implements IAttackable {
 	}
 	
 
-	
+	/*
+	 * getter and setter for fields
+	 */
 	/**
 	 * Returns a reference of the owner of the unit.
 	 * 
@@ -82,6 +87,10 @@ public abstract class Building implements IAttackable {
 	public int getUnitCapacity() {
 		return baseUnitCapacity;
 	}
+		
+	public int getNumberOfStoredUnits()	{
+		return (this.storedUnits.size());
+	}
 	
 	public int getDefenseBonus() {
 		return defenseBonus;
@@ -89,31 +98,27 @@ public abstract class Building implements IAttackable {
 	
 	
 	/**
-	 * it checks if the building has the capacity for the new unit inside.
+	 * 
+	 * @param unit	The unit to be stored.
+	 * @return	True if the unit was stored, false if the building is full.
 	 */
-	public boolean enteredUnits(Unit e) {
+	public boolean storeUnit(Unit unit) {
 		if(buildingDestroyed ){
 			return false;
 		
 		}
-		if (storedUnits.size() >  baseUnitCapacity) {
-			System.err.println("The building does not have place for the new unit!!");
-			return false;
+		if (storedUnits.size() < baseUnitCapacity) {
+			storedUnits.add(unit);
+			return true;
 		}
 		else{
-				storedUnits.add(e);
-				return true;
+			System.err.println("The building does not have place for the new unit!!");
+			return false;
 				
 		}
-		
 	}
 	
 	
-	
-	/**
-	 * Return the attack force of a unit.
-	 * @return int the attack force.
-	 */
 	public int attack(){
 		return 0;
 	}
