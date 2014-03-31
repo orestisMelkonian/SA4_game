@@ -26,21 +26,6 @@ public class Scheduler {
 	public void addAction(Action e) {
 		e.setGame(this.game);
 		this.schedule.add(e);
-		if(e.getClass() == new AttackAction(null,null,null).getClass()){
-			MyMain.addToScheduleList("Attack Action - ",  e);
-			System.out.println("BUKAKAKA");
-		} else
-			try {
-				if(e.getClass() == new MoveAction(null,null,null).getClass()){
-					MyMain.addToScheduleList("Move Action - ",  e);
-					System.out.println("BUKAKAKA   222222");
-				}
-			} catch (InvalidPointException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-		
 		
 	}
 	
