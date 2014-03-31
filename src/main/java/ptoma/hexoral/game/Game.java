@@ -144,7 +144,9 @@ public class Game {
 		//This is for units inside buildings
 		for(Building b : this.buildings.values()) {
 			if(player == null || b.getOwner().equals(player)) {
-				//TODO wait for hanieh
+				for(Unit u : b.getUnitsInsideBuilding()) {
+					ret.add(u);
+				}
 			}
 		}
 		return ret;
