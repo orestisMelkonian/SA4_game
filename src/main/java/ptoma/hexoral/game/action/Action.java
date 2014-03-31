@@ -1,17 +1,12 @@
 package ptoma.hexoral.game.action;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.ArrayList;
 
 import ptoma.hexoral.GameUISettings;
 import ptoma.hexoral.MyMain;
-=======
+
 import ptoma.hexoral.exception.AttackException;
->>>>>>> 57a4b2a... Update on actions for attackexceptions
-=======
-import ptoma.hexoral.exception.AttackException;
->>>>>>> 06656e5af19ba8c8e311a2f85b8c00a67bf7b55f
+
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.user.Player;
 
