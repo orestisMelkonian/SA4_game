@@ -64,6 +64,12 @@ public class Game {
 		this.buildings = new HashMap<Point, Building>();
 		
 	}
+	
+	
+	public HashMap<String, Player> getPlayersHashMap(){
+		return players;
+	}
+
 
 	/**
 	 * Adds a new player to the game.

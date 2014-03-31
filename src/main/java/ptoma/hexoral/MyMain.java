@@ -62,6 +62,7 @@ public class MyMain {
 	static ArrayList<Action> listOfActions = new ArrayList<Action>();
 	static JMenuItem anItem;
 	static JPopupMenu popup = new JPopupMenu();
+	static JPanel userInfoTab;
 	
 	
 	
@@ -91,7 +92,7 @@ public class MyMain {
 		((JFrame) aFrame).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		aFrame.pack();
 		aFrame.setVisible(true);
-		aFrame.setLayout(new GridLayout(1, 2));
+		aFrame.getContentPane().setLayout(new GridLayout(1, 2));
 		JPanel left = new JPanel(new GridLayout(3, 2));
 		JPanel bottom = new JPanel(new GridLayout(4, 2));
 		aFrame.setSize(1024, 493);
@@ -131,7 +132,6 @@ public class MyMain {
 //			}
 //		});
 
-		
 		
 		JButton player1 = new JButton("Player 1");
 		
@@ -227,9 +227,9 @@ public class MyMain {
 		left.add(player2);
 		left.add(tabbedPane, gbc_tabbedPane);
 		//left.add(generate);
-		aFrame.add(left, BorderLayout.WEST);
+		aFrame.getContentPane().add(left, BorderLayout.WEST);
 		cnv.setBackground(Color.GRAY);
-		aFrame.add(cnv);
+		aFrame.getContentPane().add(cnv);
 		//aFrame.add(bottom, BorderLayout.WEST);
 		//action.drawActions();
 		//action.drawActions();
@@ -243,6 +243,13 @@ public class MyMain {
 	public static void addToScheduleList(String type, Action action){
 		model.addElement(type + counter);
 		counter++;
+	}
+	
+	public static void addToPlayerUnitList(Player player){
+		for(int i =0; i < game.getPlayerUnits(player).size() ; i++){
+			armySummaryList.add(new JMenuItem("Unit" + game.getPlayerUnits(player).get(i)));
+		}
+		userInfoTab.add(armySummaryList);
 	}
 	
 	
