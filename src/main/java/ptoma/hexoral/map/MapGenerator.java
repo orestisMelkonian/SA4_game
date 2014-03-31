@@ -32,7 +32,7 @@ public class MapGenerator {
 
 	public void applyParameters(int groundPer, int waterPer, boolean lakes,
 
-			boolean rivers) {
+			boolean rivers, int resourcePer) {
 
 
 		try {
