@@ -115,7 +115,7 @@ public abstract class Unit implements IAttackable {
 	 * 
 	 * @return int health of the unit
 	 */
-	public final int getHealth() {
+	public long getHealth() {
 		return this.health;
 	}
 

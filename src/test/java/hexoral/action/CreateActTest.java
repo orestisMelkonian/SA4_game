@@ -10,6 +10,7 @@ import java.awt.Point;
 import org.junit.Test;
 
 import ptoma.hexoral.building.CreationBuilding;
+import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.CreateAction;
 import ptoma.hexoral.units.Soldier;
@@ -29,8 +30,16 @@ public class CreateActTest {  //DONE!
 		System.out.println("EP = " + p.getEnergyPoints() + " AP = " + p.getActionPoints());
 		CreationBuilding cb = new CreationBuilding(p, new Point(5,5));
 		g.createBuilding(p, cb);
-		CreateAction c = new CreateAction(p, cb, Soldier.class.getSimpleName());
-		CreateAction c2 = new CreateAction(p, cb, Soldier.class.getSimpleName());
+		CreateAction c = null;
+		CreateAction c2 = null;
+		try {
+			c = new CreateAction(p, cb, Soldier.class.getSimpleName());
+			c2 = new CreateAction(p, cb, Soldier.class.getSimpleName());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (c.exec()){
 			System.out.println("EP = " + p.getEnergyPoints() + " AP = " + p.getActionPoints());
 			System.out.println("Unit in (4, 5)  -----> " + g.getUnit(new Point(4, 5)));

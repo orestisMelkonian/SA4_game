@@ -1,5 +1,6 @@
 package ptoma.hexoral.game.action;
 
+import ptoma.hexoral.IAttackable;
 import ptoma.hexoral.game.Combat;
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
@@ -7,13 +8,12 @@ import ptoma.hexoral.user.Player;
 public class AttackAction extends Action {
 
 	private Unit attacker;
-	private Unit defender;
+	private IAttackable defender;
 
-	public AttackAction(Player actor, Unit attacker, Unit defender) {
+	public AttackAction(Player actor, Unit attacker, IAttackable defender) {
 		super(actor);
 		this.attacker = attacker;
 		this.defender = defender;
-
 	}
 
 	@Override
@@ -23,10 +23,10 @@ public class AttackAction extends Action {
 	}
 
 	@Override
-	public boolean exec() {
+	public boolean exec()	{
 		if (this.validate()) {
 			Combat battle = new Combat(attacker, defender);
-			battle.combatInitialization(); // TODO fix this
+			battle.exec(); // TODO fix this
 			this.update();
 			this.print();
 		} else {
@@ -44,9 +44,14 @@ public class AttackAction extends Action {
 	@Override
 	protected void update() {
 		if(this.defender.getHealth() <= 0) {
-			this.getGame().destroyUnit(this.defender.getPosition());
+			if (this.defender.getClass().getName().contains("building"))
+				this.getGame().destroyBuilding(this.defender.getPosition());
+			else
+				this.getGame().destroyUnit(this.defender.getPosition());
 		}
-		
+		if(this.attacker.getHealth() <= 0) {
+			this.getGame().destroyUnit(this.attacker.getPosition());
+		}
 	}
 	
 }

@@ -11,7 +11,11 @@ public abstract class Action implements Comparable<Action> {
 	 * The player who created this move.
 	 */
 	protected Player actor;
+	
+	protected int APCost;
 
+	protected int EPCost;
+	
 	protected int timeSlot;
 	
 	private Game game;
@@ -19,7 +23,19 @@ public abstract class Action implements Comparable<Action> {
 	
 
 	
-
+	/**
+	 * @return	the action points required for the action.
+	 */
+	public int getAPCost()	{
+		return APCost;
+	}
+	/**
+	 * @return	the energy points required for the action.
+	 */
+	public int getEPCost()	{
+		return EPCost;
+	}
+	
 	public int compareTo(Action arg0) {
 		return this.timeSlot - arg0.timeSlot;
 	}
@@ -49,6 +65,8 @@ public abstract class Action implements Comparable<Action> {
 	public Action(Player actor) {
 		this.actor = actor;
 		this.game = actor.getGame();
+		this.APCost = 0;
+		this.EPCost = 0;
 	}
 
 	/**

@@ -10,6 +10,8 @@ import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.units.Soldier;
 import ptoma.hexoral.user.Player;
 import ptoma.hexoral.building.CreationBuilding;
+import ptoma.hexoral.exception.CreateException;
+import ptoma.hexoral.exception.GameException;
 
 public class CreateAction extends Action {
 
@@ -18,10 +20,17 @@ public class CreateAction extends Action {
 	private String className;
 	private Point creationPoint;
 
-	public CreateAction(Player actor, CreationBuilding creationBuilding, String className) {
+	public CreateAction(Player actor, CreationBuilding creationBuilding, String className) throws GameException {
 		super(actor);
 		this.className = className;
 		this.creationBuilding = creationBuilding;
+		if (className.equals("Soldier"))	{
+			Soldier temp = new Soldier(actor, creationPoint);
+			this.APCost = temp.getCreateAP();
+			this.EPCost = temp.getCreateEP();
+		}
+		if (!(this.validate()))
+			throw new CreateException(this);
 	}
 
 	/*

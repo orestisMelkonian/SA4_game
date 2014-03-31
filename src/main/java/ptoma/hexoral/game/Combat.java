@@ -1,18 +1,19 @@
 package ptoma.hexoral.game;
 
+import ptoma.hexoral.IAttackable;
 //import ptoma.hexoral.IAttackable;
 import ptoma.hexoral.units.Unit;
 
 public class Combat {
 	
 	public Unit attacker;
-	public Unit defender;
+	public IAttackable defender;
 	
 	
 	/**
 	 * Constructor for Combat.
 	 */
-	public Combat(Unit attacker, Unit defender){
+	public Combat(Unit attacker, IAttackable defender){
 		this.attacker = attacker;
 		this.defender = defender;
 	}
@@ -32,23 +33,12 @@ public class Combat {
 	 * 
 	 * @return Unit the defender.
 	 */
-	public Unit getDefender(){
+	public IAttackable getDefender(){
 		return this.defender;
 	}
 	
-	public boolean combatInitialization(){
-		if(this.attacker.getPosition() == this.defender.getPosition()){
-			System.out.println("Battle initialized");
-			return true;
-		}
-		else{
-			return false;
-		}
-		
-	}
-	
-	public void exec(){
+	public boolean exec(){
 		this.defender.defend(this.attacker.attack());
+		return true;
 	}
-	
 }
