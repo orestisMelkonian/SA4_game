@@ -4,7 +4,7 @@ import java.awt.Point;
 
 import ptoma.hexoral.user.Player;
 
-public class InvalidPointException extends Exception {
+public class InvalidPointException extends GameException {
 
 	/**
 	 * 

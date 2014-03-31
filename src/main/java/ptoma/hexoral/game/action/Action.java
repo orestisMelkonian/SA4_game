@@ -1,12 +1,7 @@
 package ptoma.hexoral.game.action;
 
-import java.util.ArrayList;
-
-import ptoma.hexoral.GameUISettings;
-import ptoma.hexoral.MyMain;
-
 import ptoma.hexoral.exception.AttackException;
-
+import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.user.Player;
 
@@ -56,6 +51,13 @@ public abstract class Action implements Comparable<Action> {
 		this.game = actor.getGame();
 	}
 
+	/**
+	 * 
+	 * @return the player who created that action
+	 */
+	public Player getPlayer() {
+		return this.actor;
+	}
 	abstract boolean validate();
 
 	/**
@@ -63,11 +65,12 @@ public abstract class Action implements Comparable<Action> {
 	 * 
 	 * @return the feasibility of the action
 	 */
-	abstract public boolean exec() throws AttackException;
+	abstract public boolean exec() throws GameException;
 	
 	abstract protected void print();
 	
 	abstract protected void update();
+
 	
 
 }

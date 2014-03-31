@@ -25,7 +25,7 @@ public class Player extends User {
 		this.gamePlaying = gamePLaying;
 		this.actionPoints = Player.BASE_ACTION;
 		this.energyPoints = Player.BASE_ENERGY;
-		this.schedule = new Scheduler(this.gamePlaying);
+		this.schedule = new Scheduler(this.gamePlaying,this);
 	}
 
 	/**

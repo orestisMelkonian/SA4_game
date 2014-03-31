@@ -24,7 +24,7 @@ public class UnitTest {
 		System.out.printf("Defender Unit Health : %d\n", u22.getHealth());
 		u2.defend(u1.attack());
 		System.out.printf("Defender Unit Health : %d\n", u22.getHealth());
-		System.out.printf("This unit is %s\n",u11.getClass().getSimpleName());
+		System.out.printf("This unit is %s\n",u11.getClass().getName());
 
 	}
 

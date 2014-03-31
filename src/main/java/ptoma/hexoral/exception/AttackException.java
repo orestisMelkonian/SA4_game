@@ -2,7 +2,7 @@ package ptoma.hexoral.exception;
 
 import ptoma.hexoral.game.action.Action;
 
-public class AttackException extends Exception {
+public class AttackException extends GameException {
 
 	/**
 	 * 
