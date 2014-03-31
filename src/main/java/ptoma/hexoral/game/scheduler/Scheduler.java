@@ -2,8 +2,12 @@ package ptoma.hexoral.game.scheduler;
 
 import java.util.ArrayList;
 
+import ptoma.hexoral.MyMain;
+import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.Action;
+import ptoma.hexoral.game.action.AttackAction;
+import ptoma.hexoral.game.action.MoveAction;
 
 public class Scheduler {
 
@@ -22,7 +26,22 @@ public class Scheduler {
 	public void addAction(Action e) {
 		e.setGame(this.game);
 		this.schedule.add(e);
-		e.drawActions();
+		if(e.getClass() == new AttackAction(null,null,null).getClass()){
+			MyMain.addToScheduleList("Attack Action - ",  e);
+			System.out.println("BUKAKAKA");
+		} else
+			try {
+				if(e.getClass() == new MoveAction(null,null,null).getClass()){
+					MyMain.addToScheduleList("Move Action - ",  e);
+					System.out.println("BUKAKAKA   222222");
+				}
+			} catch (InvalidPointException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		
+		
 	}
 	
 	public Action peekAction(int index) {
