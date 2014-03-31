@@ -171,5 +171,14 @@ public abstract class Unit implements IAttackable {
 	public int getMoveRange() {
 		return this.moveRange;
 	}
+	
+	/**
+	 * 
+	 * @param type the type to be checked
+	 * @return boolean if unit can cross this type of land
+	 */
+	public boolean isValidMove(String type) {
+		return true;
+	}
 
 }

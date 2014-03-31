@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import ptoma.hexoral.exception.InvalidPointException;
+
 import com.google.common.collect.Table;
 import com.google.common.collect.HashBasedTable;
 
@@ -120,8 +122,9 @@ public class WorldMap {
 	 * @param j
 	 *            is the Y coordinate
 	 * @return a string of the type of the hexagon
+	 * @throws InvalidPointException 
 	 */
-	public final String getType(final int i, final int j) {
+	public final String getType(final int i, final int j) throws InvalidPointException {
 		return this.getHexagon(i, j).getType();
 	}
 
@@ -163,9 +166,14 @@ public class WorldMap {
 	 * @param y
 	 *            coordinate
 	 * @return Hexagon Object of the specified coordinates.
+	 * @throws InvalidPointException 
 	 */
-	public final Hexagon getHexagon(final int x, final int y) {
+	public final Hexagon getHexagon(final int x, final int y) throws InvalidPointException {
 		final Hexagon ret = this.matrix.get(x, y);
+		if(x < 0 || x> this.sizeX || y < 0 || y > this.sizeY ) {
+			throw new InvalidPointException(new Point(x,y));
+		}
+		
 		if (ret == null) {
 			return new Hexagon(this.popularType, x, y);
 		} else {

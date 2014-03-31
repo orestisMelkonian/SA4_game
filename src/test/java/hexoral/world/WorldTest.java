@@ -7,9 +7,11 @@ import java.awt.Point;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.AttackAction;
 import ptoma.hexoral.game.action.MoveAction;
+import ptoma.hexoral.map.Hexagon;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.units.Soldier;
 import ptoma.hexoral.units.Unit;
@@ -21,18 +23,18 @@ public class WorldTest {
 	
 	@BeforeClass
 	public static void testSetup() {
-		world = new Game(500, 500);
-		assertEquals("The map is not of expected size X", world.island.getSizeX(), 500);
-		assertEquals("The map is not of expected size Y", world.island.getSizeY(), 500);
+		world = new Game(4, 4);
+		assertEquals("The map is not of expected size X", world.island.getSizeX(), 4);
+		assertEquals("The map is not of expected size Y", world.island.getSizeY(), 4);
 	}
 	
 	@Test(timeout=1000)
 	public void gererateTest() {
-		//MapGenerator gen = new MapGenerator();
-		//gen.generateMap(world.island, 50, "test.bio");
-		//world.island.cleanIsland();
-		//world.island.cleanSea();
-		//world.island.cleanUp();
+		world.island.setHexagon(0, 0, Hexagon.type.LAND);
+		world.island.setHexagon(0, 1, Hexagon.type.LAND);
+		world.island.setHexagon(0, 0, Hexagon.type.LAND);
+		world.island.setHexagon(1, 1, Hexagon.type.SEA);
+		Point x;
 	}
 	
 	@Test
@@ -44,8 +46,12 @@ public class WorldTest {
 		world.createUnit(p1, u1);
 		world.createUnit(p1, u2);
 		assertEquals("Player couldn't create 2 units", 2, world.getPlayerUnits(p1).size());
+		try {
 		p1.getSchedule().addAction(new MoveAction(p1,u1,new Point(2,7)));
 		p1.getSchedule().addAction(new AttackAction(p1, u1, u2));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		assertEquals("Player couldn't create 2 actions", 2, p1.getSchedule().size());
 		world.executeTurn();
 		world.removePlayer(p1);

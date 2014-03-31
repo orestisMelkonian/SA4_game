@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
+import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
 
@@ -64,12 +65,20 @@ public class MoveAction extends Action {
 			int move = available.get(check);
 			for (Point p : this.getGame().island.getNeighbours(check)) {
 				// If we havent visited the cell and we can reach it, add it
-				if (available.get(p) == null && move > 0) {
+				String type = null;
+				try {
+					type = this.getGame().island.getHexagon(p.x, p.y).getType();
+				} catch (InvalidPointException e) {
+					System.err.println("Flood fill went out of bounds");
+					e.printStackTrace();
+				} finally {
+				if (available.get(p) == null && move > 0 && this.unit.isValidMove(type)) {
 					available.put(p, move - 1);
 					adjacent.add(p);
 				} else if (move > 0 && available.get(p) < move - 1) {
 					// If we have visited with a shorter path update the move
 					available.put(p, Math.max(available.get(p), move - 1));
+				}
 				}
 			}
 		}
