@@ -6,7 +6,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+<<<<<<< HEAD
 import ptoma.hexoral.building.Building;
+=======
+import ptoma.hexoral.exception.AttackException;
+>>>>>>> 57a4b2a... Update on actions for attackexceptions
 import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.WorldMap;
@@ -169,8 +173,9 @@ public class Game {
 	
 	/**
 	 * Executes the turn actions.
+	 * @throws AttackException 
 	 */
-	public void executeTurn() {
+	public void executeTurn() throws AttackException {
 		ArrayList<Action> allActions = new ArrayList<Action>();
 		for(Player p : players.values()) {
 			for(Action e : p.getSchedule().toArray()) {
@@ -179,7 +184,11 @@ public class Game {
 		}
 		Collections.sort(allActions);
 		for(Action e : allActions) {
+			try {
 			e.exec();
+			} catch (AttackException attack) {
+				attack.getAction().exec();
+			} 
 		}
 	}
 	
