@@ -31,7 +31,11 @@ public class MapGenerator {
 	}
 
 	public void applyParameters(int groundPer, int waterPer, boolean lakes,
+<<<<<<< HEAD
 			boolean rivers, int resourcePer) {
+=======
+			boolean rivers) {
+>>>>>>> 06656e5af19ba8c8e311a2f85b8c00a67bf7b55f
 
 		try {
 			this.applyGroundPercentage(groundPer);
@@ -117,7 +121,17 @@ public class MapGenerator {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Sets the desired ground percentage of the map.
+=======
+	 * Does necessary editing on the map to fulfill ground percentage
+	 * restriction
+	 * 
+	 * @author Orestis Melkonian
+	 * 
+	 * @param groundPer
+	 *            desired ground percentage of the map
+>>>>>>> 06656e5af19ba8c8e311a2f85b8c00a67bf7b55f
 	 * @throws InvalidPointException 
 	 */
 	private void applyGroundPercentage(int groundPer) throws InvalidPointException {

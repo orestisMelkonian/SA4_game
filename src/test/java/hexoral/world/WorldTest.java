@@ -47,15 +47,21 @@ public class WorldTest {
 		Player p2 = new Player("Orestis",world);
 		world.addPlayer(p1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		Unit u1 = new Soldier(p1, new Point(2, 5));
 		Unit u2 = new Soldier(p1, new Point(2, 5));
 =======
+=======
+>>>>>>> 06656e5af19ba8c8e311a2f85b8c00a67bf7b55f
 		world.addPlayer(p2);
 		Unit u1 = new Soldier(p1, 0, 0);
 		Unit u2 = new Soldier(p1, 0, 1);
 		Unit u3 = new Soldier(p2, 1, 0);
 		Unit u4 = new Soldier(p2, 1, 1);
+<<<<<<< HEAD
 >>>>>>> 57a4b2a... Update on actions for attackexceptions
+=======
+>>>>>>> 06656e5af19ba8c8e311a2f85b8c00a67bf7b55f
 		world.createUnit(p1, u1);
 		world.createUnit(p1, u2);
 		world.createUnit(p2, u3);

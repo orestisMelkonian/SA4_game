@@ -7,10 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import ptoma.hexoral.building.Building;
 =======
 import ptoma.hexoral.exception.AttackException;
 >>>>>>> 57a4b2a... Update on actions for attackexceptions
+=======
+import ptoma.hexoral.exception.AttackException;
+>>>>>>> 06656e5af19ba8c8e311a2f85b8c00a67bf7b55f
 import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.WorldMap;
