@@ -102,13 +102,7 @@ public class MyMain {
 		} catch (IOException e1) {
 			System.out.println("Icon Image not found");
 		}
-
-//		JButton generate = new JButton();
-//		generate.setText("Generate");
-//		generate.addActionListener(new ActionListener() {
-//
-//			public void actionPerformed(ActionEvent e) {
-//								
+								
 		localmap.setSizeY((Integer) GameUISettings.widthSpinner.getValue());
 		localmap.setSizeX((Integer) GameUISettings.heightSpinner.getValue());
 		localmap.erase();
@@ -119,7 +113,6 @@ public class MyMain {
 		gen.applyParameters((Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
 				(Integer) GameUISettings.percentageOfWaterInsideSpinner.getValue(), GameUISettings.lakeCheckBox.isSelected(),
 				GameUISettings.riverCheckBox.isSelected(),(Integer) GameUISettings.percentageOfResourceSpinner.getValue());
-		//gen.printPercentage();
 		cnv.repaint();
 		Thread clean = new Thread(new Runnable() {
 
@@ -129,8 +122,6 @@ public class MyMain {
 			}
 		});
 		clean.start();
-//			}
-//		});
 
 		
 		JButton player1 = new JButton("Player 1");
@@ -173,68 +164,13 @@ public class MyMain {
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("Unit Info", null, unitInfoTab, null);
 		
-		
-		
-		
-		
-		
-		// width
-//		JPanel WidthPanel = new JPanel(new GridLayout(1, 2));
-//		widthArea = new JSpinner();
-//		widthArea.setValue(50);
-//		WidthPanel.add(new JLabel("Width"));
-//		WidthPanel.add(widthArea);
 
-		// height
-//		JPanel HeightPanel = new JPanel(new GridLayout(1, 2));
-//		HeightArea = new JSpinner();
-//		HeightPanel.add(new JLabel("Height"));
-//		HeightArea.setValue(50);
-//		HeightPanel.add(HeightArea);
-
-		// checkbox
-//		JPanel checkBoxes = new JPanel(new GridLayout(1, 2));
-//		Lake = new JCheckBox();
-//		Lake.setText("Lake");
-//		River = new JCheckBox();
-//		River.setText("River");
-//		checkBoxes.add(Lake);
-//		checkBoxes.add(River);
-
-		// ground
-//		JPanel groundPanel = new JPanel(new GridLayout(1, 2));
-//		groundArea = new JSpinner(new SpinnerNumberModel(100, 20, 100, 1));
-//		groundPanel.add(new JLabel("%Ground"));
-//		groundPanel.add(groundArea);
-
-		// water inside
-//		JPanel waterPanel = new JPanel(new GridLayout(1, 2));
-//		if ((River.isSelected()) && !(Lake.isSelected()))
-//			waterArea = new JSpinner(new SpinnerNumberModel(30, 0, 30, 1));
-//		else if ((Lake.isSelected()) && !(River.isSelected()))
-//			waterArea = new JSpinner(new SpinnerNumberModel(70, 0, 70, 1));
-//		else
-//			waterArea = new JSpinner(new SpinnerNumberModel(50, 0, 50, 1));
-//		waterPanel.add(new JLabel("%Water Inside"));
-//		waterPanel.add(waterArea);
-
-//		left.add(WidthPanel);
-//		left.add(HeightPanel);
-//		left.add(checkBoxes);
-//		left.add(groundPanel);
-//		left.add(waterPanel);
 		left.add(player1);
 		left.add(player2);
 		left.add(tabbedPane, gbc_tabbedPane);
-		//left.add(generate);
 		aFrame.getContentPane().add(left, BorderLayout.WEST);
 		cnv.setBackground(Color.GRAY);
 		aFrame.getContentPane().add(cnv);
-		//aFrame.add(bottom, BorderLayout.WEST);
-		//action.drawActions();
-		//action.drawActions();
-		
-		
 		aFrame.setVisible(true);
 		
 	}
