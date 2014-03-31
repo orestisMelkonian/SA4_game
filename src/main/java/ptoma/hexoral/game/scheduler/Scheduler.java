@@ -70,4 +70,24 @@ public class Scheduler {
 		return ret;
 	}
 	
-}
+	
+	/**
+	 * swap actions .
+	 */
+	
+	public void swapAction(int e1 , int e2){
+		try{
+		Action a1 = this.schedule.get(e1);
+		this.schedule.add(e1, this.schedule.get(e2));
+		this.schedule.add(e2, a1);
+		}
+		finally{
+			System.out.println("ERROR!");
+		}
+		}
+		
+		
+	}
+	
+
+
