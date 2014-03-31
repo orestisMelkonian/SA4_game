@@ -1,6 +1,6 @@
 
 /*
- * author : Orestis
+ * author : Hanieh
 */
 
 package ptoma.hexoral.building;
@@ -31,7 +31,7 @@ public abstract class Building implements IAttackable {
 	/**
 	 * The maximum number of units that can be stored.
 	 */
-	private static int baseUnitCapacity = 10;
+	protected static int baseUnitCapacity = 2;
 	
 	/**
 	 * Extra defense provided from stored units.
@@ -46,7 +46,7 @@ public abstract class Building implements IAttackable {
 	/**
 	 * true:destroyed 	false:not destroyed
 	 */
-	private boolean buildingDestroyed;
+	public boolean buildingDestroyed;
 		
 	
 	
@@ -56,10 +56,10 @@ public abstract class Building implements IAttackable {
 	 */
 	
 	public Building(Player owner, Point p) {
-		this.storedUnits = null;
+		this.storedUnits = new ArrayList<Unit>();
 		this.owner = owner;
 		this.position = p;
-		this.defenseBonus = 0;
+		this.defenseBonus = 50;
 		this.buildingDestroyed = false;
 	}
 	
@@ -67,6 +67,10 @@ public abstract class Building implements IAttackable {
 	/*
 	 * getter and setter for fields
 	 */
+	
+	public long getHealth(){
+		return baseHealth;
+	}
 	/**
 	 * Returns a reference of the owner of the unit.
 	 * 
@@ -97,28 +101,35 @@ public abstract class Building implements IAttackable {
 	}
 	
 	
+	
+	
 	/**
 	 * 
 	 * @param unit	The unit to be stored.
 	 * @return	True if the unit was stored, false if the building is full.
 	 */
-	public boolean storeUnit(Unit unit) {
+	public boolean storeUnit(Unit e) {
 		if(buildingDestroyed ){
 			return false;
 		
 		}
-		if (storedUnits.size() < baseUnitCapacity) {
-			storedUnits.add(unit);
+		if (storedUnits.size() == baseUnitCapacity) {
+			System.err.println("The building does not have place for the new unit");
 			return true;
 		}
 		else{
-			System.err.println("The building does not have place for the new unit!!");
-			return false;
-				
+			storedUnits.add(e);
+			//whenever the unit enters should get the bonus defence.
+			return true;			
 		}
 	}
 	
 	
+	
+	/**
+	 * Return the attack force of a unit.
+	 * @return int the attack force.
+	 */
 	public int attack(){
 		return 0;
 	}
@@ -126,12 +137,20 @@ public abstract class Building implements IAttackable {
 	
 	
 	public void defend(int damage){
-		baseHealth = baseHealth - (damage);
-		if (baseHealth < 0){
-			buildingDestroyed = true;
+		if (storedUnits.size() > 0){
+			//the building does not take damage, since there are units in it.
+			for(int i = 0; i < storedUnits.size(); i++){
+				storedUnits.get(i).defend(damage);
+			}
+		}else {
+			//the building itself takes damage, since there is no units inside
+			baseHealth = baseHealth - (damage);
+			if(baseHealth < 0){
+				buildingDestroyed = true; 
+				
+			}
+		}
 	}
-	
-}
 }
 		 
 		

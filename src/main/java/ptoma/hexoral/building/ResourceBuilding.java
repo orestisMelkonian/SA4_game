@@ -20,6 +20,7 @@ public class ResourceBuilding extends Building{
 	
 	public ResourceBuilding (Player owner, Point p) {
 		super(owner, p);
+		baseUnitCapacity = 1;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,8 +36,12 @@ public class ResourceBuilding extends Building{
 	
 
 	public int getEnergyPerTurn() {
+		//if the building is still alive,it returns the value of energy it produces, otherwise it will return 0
+		if(buildingDestroyed) return 0;
 		return energyPerTurn;
 	}
+	
+	
 
 	
 	/**
@@ -46,7 +51,9 @@ public class ResourceBuilding extends Building{
 	public void setEnergyPerTurn(int energyPerTurn) {
 		this.energyPerTurn = energyPerTurn;
 	}
-
+	
+	
+	
 
 	/**
 	 * Return the attack force of a unit.
