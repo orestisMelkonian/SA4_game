@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import ptoma.hexoral.building.Building;
 import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.WorldMap;
@@ -35,6 +36,10 @@ public class Game {
 	 */
 	private HashMap<Point,Unit> units;
 	
+	/**
+	 * Every building of every player.
+	 */
+	private HashMap<Point, Building> buildings;
 	
 	/**
 	 * Constructor.
@@ -43,13 +48,15 @@ public class Game {
 	 */
 	public Game(int width,int height) {
 		//The creation of the map
-		island = new WorldMap(width, height);
+		this.island = new WorldMap(width, height);
 		//Creating the generator
 		MapGenerator generator = new MapGenerator(island, "test.bio");
 		//TODO add parameters for water and land percentage etcetera
 		//initialization of players and their units
-		players = new HashMap<String, Player>();
-		units = new HashMap<Point, Unit>();
+		this.players = new HashMap<String, Player>();
+		this.units = new HashMap<Point, Unit>();
+		this.buildings = new HashMap<Point, Building>();
+		
 	}
 
 	/**
@@ -100,6 +107,15 @@ public class Game {
 	}
 	
 	/**
+	 * Creates a new building for the player.
+	 * @param player the player who creates the building.
+	 * @param unit the building to be created.
+	 */
+	public void createBuilding(Player player, Building building) {
+		this.buildings.put(building.getPosition(), building);
+	}
+	
+	/**
 	 * Return the units of the player as an ArrayList.
 	 * @param player to list his units
 	 * @return ArrayList<Unit> of the units of the player.
@@ -123,6 +139,7 @@ public class Game {
 		return this.units.get(where);
 	}
 	
+	
 	/**
 	 * Moves the units from where to toWhere.
 	 * @param where from where
@@ -140,6 +157,14 @@ public class Game {
 	 */
 	public void destroyUnit(Point where) {
 		this.units.remove(where);
+	}
+	
+	/**
+	 * Destroys building in position where.
+	 * @param where the building is located.
+	 */
+	public void destroyBuilding(Point where) {
+		this.buildings.remove(where);
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package ptoma.hexoral.units;
 
+import java.awt.Point;
+
 import ptoma.hexoral.user.Player;
 
 /**
@@ -38,8 +40,8 @@ public class Soldier extends Unit {
 	 * @param y
 	 *            coord of the unit.
 	 */
-	public Soldier(final Player owner, final int x, final int y) {
-		super(owner, x, y);
+	public Soldier(final Player owner, Point p) {
+		super(owner, p);
 		this.health = Soldier.baseHealth;
 		this.attackPower = Soldier.baseAttack;
 		this.defencePower = Soldier.baseDefence;
