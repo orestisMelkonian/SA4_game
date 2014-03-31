@@ -107,37 +107,27 @@ public class GameUISettings {
 		JLabel lblPercentageOfGround = new JLabel("Percentage Of Ground");
 		panelOfSettings.add(lblPercentageOfGround);
 		
-		percentageOfGroundSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 100, 1));
+		percentageOfGroundSpinner = new JSpinner(new SpinnerNumberModel(50, 0, 100, 1));
 		panelOfSettings.add(percentageOfGroundSpinner);
 		
-		JLabel lblPercentageOfWaterInside = new JLabel("Percentage Of Water Inside");
-		panelOfSettings.add(lblPercentageOfWaterInside);
+		
 
 		
-		
-		
-//		JSpinner percentageOfWaterInsideSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 100, 1));
-//		panelOfSettings.add(percentageOfWaterInsideSpinner);
-		
+			
 		JLabel lblPercentageOfResource = new JLabel("Percentage of Resource");
 		panelOfSettings.add(lblPercentageOfResource);
 		
-		percentageOfResourceSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
+		percentageOfResourceSpinner = new JSpinner(new SpinnerNumberModel(20, 0, 100, 1));
 		panelOfSettings.add(percentageOfResourceSpinner);
 		
 		
-		if ((riverCheckBox.isSelected()) && !(lakeCheckBox.isSelected())){
-			percentageOfWaterInsideSpinner = new JSpinner(new SpinnerNumberModel(30, 0, 30, 1));
-			panelOfSettings.add(percentageOfWaterInsideSpinner);
-		}
-		else if ((lakeCheckBox.isSelected()) && !(riverCheckBox.isSelected())){
-			percentageOfWaterInsideSpinner = new JSpinner(new SpinnerNumberModel(70, 0, 70, 1));
-			panelOfSettings.add(percentageOfWaterInsideSpinner);
-		}
-		else{
-			percentageOfWaterInsideSpinner = new JSpinner(new SpinnerNumberModel(50, 0, 50, 1));
-			panelOfSettings.add(percentageOfWaterInsideSpinner);
-		}
+		JLabel lblPercentageOfWaterInside = new JLabel("Percentage Of Water Inside");
+		panelOfSettings.add(lblPercentageOfWaterInside);
+		
+		percentageOfWaterInsideSpinner = new JSpinner(new SpinnerNumberModel(30, 0, 100, 1));
+		panelOfSettings.add(percentageOfWaterInsideSpinner);
+		
+		
 		
 		
 		
@@ -149,34 +139,6 @@ public class GameUISettings {
 		buttonPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WINDOW = new MyMain(cnv, localmap);
-//				localmap.setSizeY((Integer) widthSpinner.getValue());
-//				localmap.setSizeX((Integer) heightSpinner.getValue());
-//				localmap.erase();
-//				String biome = "test.bio";
-//				
-//				gen = new MapGenerator(localmap, biome);
-//				
-//				gen.applyParameters((Integer) percentageOfGroundSpinner.getValue(),
-//						(Integer) percentageOfWaterInsideSpinner.getValue(), lakeCheckBox.isSelected(),
-//						riverCheckBox.isSelected());
-//				//gen.printPercentage();
-//				cnv.repaint();
-				
-//				cnv.repaint();
-//				
-//				
-//				frame.setVisible(false);
-//				
-//				
-//				System.out.println("Generating the bukake map");
-//				Thread clean = new Thread(new Runnable() {
-//				
-//					public void run() {
-//						System.gc();
-//				
-//					}
-//				});
-//				clean.start();
 				}
 			
 		});
