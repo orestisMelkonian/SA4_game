@@ -157,6 +157,17 @@ public abstract class Building implements IAttackable {
 			}
 		}
 	}
+	
+	
+	/**
+	 * 
+	 * @return	the list of units which are stored inside.
+	 */
+	
+	public List<Unit> getUnitsInsideBuilding(){
+		return this.storedUnits;
+	}
+	
 }
 		 
 		
