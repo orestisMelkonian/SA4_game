@@ -47,6 +47,8 @@ public abstract class Building implements IAttackable {
 	 * true:destroyed 	false:not destroyed
 	 */
 	public boolean buildingDestroyed;
+	
+	
 		
 	
 	
@@ -102,7 +104,11 @@ public abstract class Building implements IAttackable {
 	
 	
 	
-	
+	public void setDefenseBonus(int defenseBonus) {
+		this.defenseBonus = defenseBonus;
+	}
+
+
 	/**
 	 * 
 	 * @param unit	The unit to be stored.
@@ -119,7 +125,7 @@ public abstract class Building implements IAttackable {
 		}
 		else{
 			storedUnits.add(e);
-			//whenever the unit enters should get the bonus defence.
+			this.defenseBonus += 5;
 			return true;			
 		}
 	}

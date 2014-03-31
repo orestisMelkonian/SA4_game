@@ -69,16 +69,5 @@ public abstract class Action implements Comparable<Action> {
 	
 	abstract protected void update();
 	
-	public void drawActions(){
-				if(this.getClass() == new AttackAction(null,null,null).getClass()){
-					MyMain.addToScheduleList("Attack Action - ",  this);
-					System.out.println("BUKAKAKA");
-				}else if(this.getClass() == new MoveAction(null,null,null).getClass()){
-					MyMain.addToScheduleList("Move Action - ",  this);
-					System.out.println("BUKAKAKA   222222");
-				}
-		
-		
-	}
 
 }
