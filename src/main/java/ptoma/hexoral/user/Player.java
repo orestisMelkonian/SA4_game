@@ -62,6 +62,14 @@ public class Player extends User {
 		this.actionPoints = actionPoints;
 	}
 	
+	public long addActionPoints(long actionPoints) {
+		this.actionPoints += actionPoints;
+		return this.actionPoints;
+	}
 	
+	public long addEnergyPoints(long energyPoints) {
+		this.energyPoints = energyPoints;
+		return this.energyPoints;
+	}
 
 }
