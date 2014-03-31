@@ -40,6 +40,8 @@ public class Hexagon {
 	 */
 	private Point w;
 
+	private boolean isResource;
+	
 	/**
 	 * Basic Constructor of Hexagon. Coords are (0,0)
 	 * 
@@ -49,6 +51,7 @@ public class Hexagon {
 	public Hexagon(type terrainType) {
 		this.terrainType = terrainType;
 		this.w = new Point(0, 0);
+		isResource = false;
 	}
 
 	/**
@@ -62,6 +65,7 @@ public class Hexagon {
 	public Hexagon(final type terrainType, final Point w) {
 		this.terrainType = terrainType;
 		this.w = w;
+		isResource = false;
 	}
 
 	/**
@@ -77,6 +81,7 @@ public class Hexagon {
 	public Hexagon(type terrainType, int x, int y) {
 		this.terrainType = terrainType;
 		this.w = new Point(x, y);
+		isResource = false;
 	}
 
 	@Override
@@ -102,7 +107,15 @@ public class Hexagon {
 	public void setType(type terrainType) {
 		this.terrainType = terrainType;
 	}
-
+	
+	/**
+	 * setter for isResource.
+	 * @param isResource     true for resource, false for non-resource.
+	 */
+	public void setResource(boolean isResource)	{
+		this.isResource = isResource;
+	}
+	
 	/**
 	 * Getter for coords of hexagon.
 	 * 
@@ -131,5 +144,13 @@ public class Hexagon {
 	 */
 	public int getOrdinalType() {
 		return this.terrainType.ordinal();
+	}
+	
+	/**
+	 * getter for isResource.
+	 * @return	True, if this hexagon is able to produce resources.
+	 */
+	public boolean isResource()	{
+		return isResource;
 	}
 }

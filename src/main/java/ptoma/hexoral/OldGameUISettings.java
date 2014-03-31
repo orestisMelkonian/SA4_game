@@ -148,7 +148,7 @@ public class OldGameUISettings {
 				
 				gen.applyParameters((Integer) percentageOfGroundSpinner.getValue(),
 						(Integer) percentageOfWaterInsideSpinner.getValue(), lakeCheckBox.isSelected(),
-						riverCheckBox.isSelected());
+						riverCheckBox.isSelected(), (Integer) percentageOfResourceSpinner.getValue());
 				//gen.printPercentage();
 				
 				cnv.repaint();

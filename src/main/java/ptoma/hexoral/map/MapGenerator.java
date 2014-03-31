@@ -29,7 +29,7 @@ public class MapGenerator {
 	}
 
 	public void applyParameters(int groundPer, int waterPer, boolean lakes,
-			boolean rivers) {
+			boolean rivers, int resourcePer) {
 
 		this.applyGroundPercentage(groundPer);
 		this.cleanUp();
@@ -107,13 +107,7 @@ public class MapGenerator {
 	}
 
 	/**
-	 * Does necessary editing on the map to fulfill ground percentage
-	 * restriction
-	 * 
-	 * @author Orestis Melkonian
-	 * 
-	 * @param groundPer
-	 *            desired ground percentage of the map
+	 * Sets the desired ground percentage of the map.
 	 */
 	private void applyGroundPercentage(int groundPer) {
 		// Decide how many must be removed
@@ -151,7 +145,10 @@ public class MapGenerator {
 		 * ((100*groundNo)/(groundNo+waterNo)));
 		 */
 	}
-
+	
+	/**
+	 * Sets the desired water percentage inside the island.
+	 */
 	private void applyWaterPercentage(int waterPer, boolean lakes,
 			boolean rivers) {
 		int groundNo = this.myMap.getLandNo() + this.myMap.getMountainNo();
@@ -167,6 +164,25 @@ public class MapGenerator {
 			}
 			if ((!lakes) && (!rivers))
 				break;
+		}
+	}
+	
+	/**
+	 * Sets the desired cell percentage with resources inside the island.
+	 */
+	private void applyResourcePercentage(int resourcePer) {
+		int islandNo = this.myMap.getLandNo() + this.myMap.getMountainNo() + this.myMap.getLakeNo();
+		int resourceNo = (resourcePer * islandNo) / 100;
+
+		while (resourceNo > 0) {
+			for (int i = 0; i < this.myMap.sizeX; i++)	{
+				for (int j = 0; j < this.myMap.sizeY; j++)	{
+					if (this.myMap.getType(i, j).equals("LAND"))	{
+						
+					}
+						
+				}
+			}
 		}
 	}
 

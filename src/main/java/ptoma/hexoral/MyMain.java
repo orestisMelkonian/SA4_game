@@ -117,7 +117,7 @@ public class MyMain {
 		
 		gen.applyParameters((Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
 				(Integer) GameUISettings.percentageOfWaterInsideSpinner.getValue(), GameUISettings.lakeCheckBox.isSelected(),
-				GameUISettings.riverCheckBox.isSelected());
+				GameUISettings.riverCheckBox.isSelected(),(Integer) GameUISettings.percentageOfResourceSpinner.getValue());
 		//gen.printPercentage();
 		cnv.repaint();
 		Thread clean = new Thread(new Runnable() {
