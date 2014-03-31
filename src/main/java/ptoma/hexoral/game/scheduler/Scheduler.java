@@ -28,7 +28,8 @@ public class Scheduler {
 	}
 
 	public void addAction(Action e) {
-		//this.actionPointsLeft -= actionPointsLeft;
+		this.actionPointsLeft -= e.getAPCost();
+		this.energyPointsLeft -= e.getEPCost();
 		this.schedule.add(e);
 
 	}
@@ -38,7 +39,9 @@ public class Scheduler {
 	}
 
 	public void removeAction(int index) {
-		this.schedule.remove(index);
+		Action e = this.schedule.remove(index);
+		this.actionPointsLeft += e.getAPCost();
+		this.energyPointsLeft += e.getEPCost();
 	}
 
 	public int size() {
