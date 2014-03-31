@@ -55,6 +55,7 @@ public class CreateAction extends Action {
 	public boolean exec() {
 		if (this.validate())	{
 			this.unitCreated = new Soldier(actor, this.creationPoint);
+			System.out.println("creation Point is " + this.creationPoint.x + ", " + this.creationPoint.y);
 			this.update();
 			return true;
 		}
@@ -82,7 +83,6 @@ public class CreateAction extends Action {
 	 */
 	@Override
 	protected void update() {
-		this.unitCreated.move(this.creationPoint);
 		this.getGame().createUnit(actor, this.unitCreated);
 	}
 }
