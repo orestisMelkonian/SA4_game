@@ -6,7 +6,9 @@ package ptoma.hexoral.building;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
+import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
 
@@ -15,13 +17,32 @@ import ptoma.hexoral.user.Player;
 public class ResourceBuilding extends Building{
 	
 	
-	private int energyPerTurn = 500;
+	private int energyPerTurn;
+	static private int baseEnergyPerTurn = 25;
 	
 	
 	public ResourceBuilding (Player owner, Point p) {
 		super(owner, p);
 		baseUnitCapacity = 1;
-		// TODO Auto-generated constructor stub
+		
+		energyPerTurn = 0;
+		try {
+			if	(this.getOwner().getGame().island.getType(p.x, p.y).equals("RESOURCE"))
+				energyPerTurn += baseEnergyPerTurn;
+		} catch (InvalidPointException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Point> toCheck = this.getOwner().getGame().island.getNeighbours(p);
+		for (Point i : toCheck)	{
+			try {
+				if (this.getOwner().getGame().island.getType(i.x, i.y).equals("RESOURCE"))
+					energyPerTurn += baseEnergyPerTurn;
+			} catch (InvalidPointException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	
@@ -57,7 +78,7 @@ public class ResourceBuilding extends Building{
 
 	/**
 	 * Return the attack force of a unit.
-	 * @return int the attack force.
+	 * @return the attack force.
 	 */
 
 	public int attack() {
