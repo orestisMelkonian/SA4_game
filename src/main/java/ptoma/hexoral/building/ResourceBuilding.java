@@ -15,38 +15,43 @@ import ptoma.hexoral.user.Player;
 public class ResourceBuilding extends Building{
 	
 	
+	private int energyPerTurn = 500;
+	
+	
 	public ResourceBuilding (Player owner, Point p) {
 		super(owner, p);
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-
-	private int energyPerTurn = 500;
 	
 
 
 	
 	
-/*
- * getter for energyPerturn
- */
+	/**
+	 * Gets the energyPerTurn.
+	 * 
+	 */
 	
 
 	public int getEnergyPerTurn() {
 		return energyPerTurn;
 	}
 
-
-
-
+	
+	/**
+	 * sets the energyPerTurn.
+	 * 
+	 */
 	public void setEnergyPerTurn(int energyPerTurn) {
 		this.energyPerTurn = energyPerTurn;
 	}
 
 
-
+	/**
+	 * Return the attack force of a unit.
+	 * @return int the attack force.
+	 */
 
 	public int attack() {
 		// TODO Auto-generated method stub

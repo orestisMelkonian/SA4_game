@@ -48,7 +48,7 @@ public abstract class Building implements IAttackable {
 	
 	
 
-	/*
+	/**
 	 *  Building Constructor
 	 */
 	
@@ -61,9 +61,7 @@ public abstract class Building implements IAttackable {
 	}
 	
 
-	/*
-	 * getter and setter for fields
-	 */
+	
 	/**
 	 * Returns a reference of the owner of the unit.
 	 * 
@@ -90,7 +88,7 @@ public abstract class Building implements IAttackable {
 	}
 	
 	
-	/*
+	/**
 	 * it checks if the building has the capacity for the new unit inside.
 	 */
 	public boolean enteredUnits(Unit e) {
@@ -111,6 +109,11 @@ public abstract class Building implements IAttackable {
 	}
 	
 	
+	
+	/**
+	 * Return the attack force of a unit.
+	 * @return int the attack force.
+	 */
 	public int attack(){
 		return 0;
 	}
