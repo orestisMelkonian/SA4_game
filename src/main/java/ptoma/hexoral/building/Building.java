@@ -130,7 +130,19 @@ public abstract class Building implements IAttackable {
 		}
 	}
 	
-	
+	/**
+	 * Extracts a unit from the building.
+	 * @param 	position	the index of the unit in the List.
+	 * @return	the extracted unit.
+	 */
+	public Unit extractUnit(int position)	{
+		Unit ret = null;
+		if (storedUnits.size() >= position)	{
+			ret = storedUnits.get(position);
+			storedUnits.remove(position);
+		}
+		return ret;
+	}
 	
 	/**
 	 * Return the attack force of a unit.
