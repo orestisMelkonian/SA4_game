@@ -15,6 +15,11 @@ public class AttackException extends GameException {
 		this.what = attack;
 	}
 	
+	@Override
+	public String getMessage() {
+		return "Action from " + what.getPlayer().getName() + " could not be created";
+	}
+
 	/**
 	 * The attack that was triggered.
 	 * @return the Action

@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ptoma.hexoral.exception.AttackException;
+import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.AttackAction;
@@ -65,7 +66,7 @@ public class WorldTest {
 		
 		try {
 			world.executeTurn();
-		} catch (AttackException e) {
+		} catch (GameException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

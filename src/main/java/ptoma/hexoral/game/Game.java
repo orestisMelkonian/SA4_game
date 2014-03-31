@@ -122,7 +122,6 @@ public class Game {
 	 */
 	public void createUnit(Player player, Unit unit) {
 		this.units.put(unit.getPosition(), unit);
-		MyMain.addToPlayerUnitList(player);
 	}
 
 	/**
