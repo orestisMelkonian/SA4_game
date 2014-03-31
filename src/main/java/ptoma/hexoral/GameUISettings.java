@@ -28,6 +28,7 @@ import ptoma.hexoral.map.WorldMap;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class GameUISettings {
 	protected WorldMap map;
@@ -44,6 +45,8 @@ public class GameUISettings {
 	static JSpinner percentageOfGroundSpinner;
 	static JSpinner percentageOfResourceSpinner;
 	public static MyMain WINDOW;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -179,6 +182,23 @@ public class GameUISettings {
 		});
 		panelOfButton.add(buttonPanel);
 		buttonPanel.setVerticalAlignment(SwingConstants.BOTTOM);
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		
+		JLabel player1 = new JLabel("Player 1");
+		panel.add(player1);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		panel.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		panel.add(textField_1);
+		
+		JLabel player2 = new JLabel("Player 2");
+		panel.add(player2);
 	}
 
 }

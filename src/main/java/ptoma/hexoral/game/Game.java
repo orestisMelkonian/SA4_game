@@ -8,10 +8,9 @@ import java.util.List;
 
 
 
-
+import ptoma.hexoral.MyMain;
 import ptoma.hexoral.building.Building;
-import ptoma.hexoral.building.CreationBuilding;
-import ptoma.hexoral.building.ResourceBuilding;
+import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.map.MapGenerator;
@@ -116,6 +115,7 @@ public class Game {
 	 */
 	public void createUnit(Player player, Unit unit) {
 		this.units.put(unit.getPosition(), unit);
+		MyMain.addToPlayerUnitList(player);
 	}
 	
 	/**
@@ -134,19 +134,9 @@ public class Game {
 	 */
 	public final List<Unit> getPlayerUnits(Player player) {
 		final List<Unit> ret = new ArrayList<Unit>();
-		//This is for units on the map
 		for (Unit unit : this.units.values()) {
 			if (player == null || unit.owner().equals(player)) {
 				ret.add(unit);
-			}
-		}
-		
-		//This is for units inside buildings
-		for(Building b : this.buildings.values()) {
-			if(player == null || b.getOwner().equals(player)) {
-				for(Unit u : b.getUnitsInsideBuilding()) {
-					ret.add(u);
-				}
 			}
 		}
 		return ret;
@@ -157,23 +147,10 @@ public class Game {
 	 * @param where the position of the unit
 	 * @return the unit itself.
 	 */
-	public final Unit getUnit(Point where) {
+	public Unit getUnit(Point where) {
 		return this.units.get(where);
 	}
 	
-	public final Building getBuilding(Point where) {
-		return this.buildings.get(where);
-	}
-	
-	public final List<Building> getPlayerBuildings(Player player) {
-		List<Building> ret = new ArrayList<Building>();
-		for(Building b : this.buildings.values()) {
-			if(player == null || b.getOwner().equals(player)) {
-				ret.add(b);
-			}
-		}
-		return ret;
-	}
 	
 	/**
 	 * Moves the units from where to toWhere.
@@ -221,17 +198,39 @@ public class Game {
 				attack.getAction().exec();
 			} 
 		}
-		//Updates the resources
-		this.updateResources();
+		//TODO apply resources updates
 	}
 	
-	
-	private void updateResources() {
-		for(Building b : this.buildings.values()) {
-			if(b.getClass().getSimpleName().equals(CreationBuilding.class.getSimpleName())) {
-				ResourceBuilding resource = (ResourceBuilding) b; 
-				resource.getOwner().addEnergyPoints(resource.getEnergyPerTurn());
+	/**
+	 * Updates the units positions and kills dead units.
+	 */
+	private final void updateUnits() {
+		
+		//Kill dead units.
+		List<Unit> deadUnits = new ArrayList<Unit>();
+		for(Unit u : this.units.values()) {
+			if(u.getHealth() <= 0) {
+				deadUnits.add(u);
 			}
 		}
+		//update the hash map
+		for(Unit u : deadUnits) {
+			this.units.remove(u.getPreviousPosition());
+		}
+		
+		//For moved units;
+		List<Unit> movedUnits = new ArrayList<Unit>();
+		for(Unit u : this.units.values()) {
+			if(!u.getPreviousPosition().equals(u.getPosition())) {
+				movedUnits.add(u);
+			}
+		}
+		//Update the hash map
+		for(Unit u : movedUnits) {
+			this.units.remove(u.getPreviousPosition());
+			this.units.put(u.getPosition(), u);
+		}
+		
+		
 	}
 }
