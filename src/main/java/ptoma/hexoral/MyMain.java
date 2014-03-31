@@ -231,8 +231,8 @@ public class MyMain {
 		cnv.setBackground(Color.GRAY);
 		aFrame.add(cnv);
 		//aFrame.add(bottom, BorderLayout.WEST);
-		action.drawActions();
-		action.drawActions();
+		//action.drawActions();
+		//action.drawActions();
 		
 		
 		aFrame.setVisible(true);
