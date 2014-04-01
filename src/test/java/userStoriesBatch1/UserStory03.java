@@ -3,26 +3,17 @@
  */
 package userStoriesBatch1;
 
-import static org.junit.Assert.*;
-
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import ptoma.hexoral.GameUISettings;
-import ptoma.hexoral.building.CreationBuilding;
 import ptoma.hexoral.building.HQ;
 import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.CreateAction;
-import ptoma.hexoral.game.action.MoveAction;
-import ptoma.hexoral.map.MapGenerator;
-import ptoma.hexoral.units.Soldier;
-import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
 
 public class UserStory03 {

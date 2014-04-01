@@ -3,27 +3,15 @@
  */
 package userStoriesBatch1;
 
-import static org.junit.Assert.*;
-
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import ptoma.hexoral.GameUISettings;
-import ptoma.hexoral.building.CreationBuilding;
-import ptoma.hexoral.building.HQ;
-import ptoma.hexoral.building.ResourceBuilding;
 import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
-import ptoma.hexoral.game.action.CreateAction;
-import ptoma.hexoral.game.action.MoveAction;
-import ptoma.hexoral.map.MapGenerator;
-import ptoma.hexoral.units.Soldier;
-import ptoma.hexoral.units.Unit;
+import ptoma.hexoral.game.action.BuildAction;
 import ptoma.hexoral.user.Player;
 
 public class UserStory07 {
@@ -41,23 +29,65 @@ public class UserStory07 {
 	public void seeMap() {
 		Player p = new Player("Orestis", game);
 		game.addPlayer(p);
-		p.setActionPoints(100);
-		p.setEnergyPoints(100);
-		ResourceBuilding rb1 = new ResourceBuilding(p, new Point(10, 10));
-
-		ResourceBuilding rb2 = new ResourceBuilding(p, new Point(11, 11));
-
-		ResourceBuilding rb3 = new ResourceBuilding(p, new Point(11, 10));
-
-		ResourceBuilding rb4 = new ResourceBuilding(p, new Point(11, 10));
-
-		game.createBuilding(p, rb1);
-		game.createBuilding(p, rb2);
-		game.createBuilding(p, rb3);
-		game.createBuilding(p, rb4);
+		p.setActionPoints(150);
+		p.setEnergyPoints(150);
+		
 		System.out.println("Player EP = " + p.getEnergyPoints());
 		System.out.println("Player AP = " + p.getActionPoints());
-
+		try {
+			p.getSchedule().addAction(
+					new BuildAction(p, "ResourceBuilding", new Point(11, 11)));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(
+					new BuildAction(p, "ResourceBuilding", new Point(10, 10)));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(
+					new BuildAction(p, "ResourceBuilding", new Point(10, 11)));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(
+					new BuildAction(p, "ResourceBuilding", new Point(11, 10)));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(
+					new BuildAction(p, "ResourceBuilding", new Point(12, 12)));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(
+					new BuildAction(p, "ResourceBuilding", new Point(12, 11)));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		gui = new Thread(new Runnable() {
 			public void run() {
 				new GameUISettings(game);

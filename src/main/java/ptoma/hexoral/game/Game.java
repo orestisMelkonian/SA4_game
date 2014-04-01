@@ -142,24 +142,7 @@ public class Game {
 	 *            the building to be created.
 	 */
 	public void createBuilding(Player player, Building building) {
-		// Spend points
-		int energyRequired = building.getCreateEP();
-		System.out.println("energyRequired = " + energyRequired);
-		int actionRequired = building.getCreateAP();
-		System.out.println("actionRequired = " + actionRequired);
-		if ((player.getActionPoints() >= actionRequired)
-				&& (player.getEnergyPoints() >= energyRequired)) {
-			System.out.println("Before EP and AP: " + player.getEnergyPoints()
-					+ "  " + player.getActionPoints());
-			player.setEnergyPoints(
-					player.getEnergyPoints() - energyRequired);
-			player.setActionPoints(
-					player.getActionPoints() - actionRequired);
-			this.buildings.put(building.getPosition(), building);
-			System.out.println("After EP and AP: " + player.getEnergyPoints()+ "  "
-					+ player.getActionPoints());
-		} else
-			System.out.println("Can't afford to create Building");
+		this.buildings.put(building.getPosition(), building);
 	}
 
 	/**
