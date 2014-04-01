@@ -93,6 +93,10 @@ public class MyMain {
 		this.localmap = game.island;
 		cnv = new Visualize(32, localmap);
 		initializenewWindow();
+		for(int i = 0; i < game.getAllPlayers().size(); i++){
+			addToScheduleList(game.getAllPlayers().get(i));
+		}
+		addToPlayerUnitList(p1);
 		this.aFrame.setVisible(true);
 	}
 	

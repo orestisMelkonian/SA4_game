@@ -116,7 +116,7 @@ public class Game {
 		return this.players.get(username);
 	}
 
-	List<Player> getAllPlayers() {
+	public List<Player> getAllPlayers() {
 		List<Player> ret = new ArrayList<Player>();
 		ret.addAll(this.players.values());
 		return ret;
