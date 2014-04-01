@@ -56,6 +56,7 @@ public class MyMain {
 	static JList armySummaryList;
 	static JList scheduleList;
 	static DefaultListModel model = new DefaultListModel();
+	static DefaultListModel armyModel = new DefaultListModel();
 	static Game game = new Game(100, 100);
 	static Player p1;
 	static Player p2;
@@ -78,8 +79,10 @@ public class MyMain {
 		action = new AttackAction(p1, new Soldier(p1, point), new Soldier(p2, point));
 		scheduler = new Scheduler(game, p1);
 		p1.getSchedule().addAction(action);
+		game.createUnit(p1, new Soldier(p1, point));
 		initialize();
 		addToScheduleList(p1);
+		addToPlayerUnitList(p1);
 		this.aFrame.setVisible(true);
 		
 		
@@ -151,7 +154,7 @@ public class MyMain {
 		tabbedPane.addTab("User Info", null, userInfoTab, null);
 		userInfoTab.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		armySummaryList = new JList();
+		armySummaryList = new JList(armyModel);
 		userInfoTab.add(armySummaryList);
 		
 		
@@ -189,9 +192,9 @@ public class MyMain {
 	
 	public static void addToPlayerUnitList(Player player){
 		for(int i =0; i < game.getPlayerUnits(player).size() ; i++){
-			armySummaryList.add(new JMenuItem("Unit" + game.getPlayerUnits(player).get(i)));
+			armyModel.addElement("Unit: " + game.getPlayerUnits(player).get(i));
 		}
-		userInfoTab.add(armySummaryList);
+		//userInfoTab.add(armySummaryList);
 	}
 	
 	public static void addToScheduleList(Player player){
