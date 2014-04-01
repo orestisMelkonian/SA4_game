@@ -203,6 +203,7 @@ public class MapGenerator {
 						
 				}
 			}
+			resourceNo --;
 		}
 	}
 
@@ -411,5 +412,4 @@ public class MapGenerator {
 			}
 		}
 	}
-
 }
