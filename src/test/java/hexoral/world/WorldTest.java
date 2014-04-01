@@ -8,14 +8,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.AttackAction;
 import ptoma.hexoral.game.action.MoveAction;
 import ptoma.hexoral.map.Hexagon;
-import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.units.Soldier;
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;

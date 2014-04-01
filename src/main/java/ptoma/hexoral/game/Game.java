@@ -226,6 +226,7 @@ public class Game {
 		for (Player p : players.values()) {
 			for (Action e : p.getSchedule().toArray()) {
 				allActions.add(e);
+				p.getSchedule().removeAction(e);
 			}
 		}
 		Collections.sort(allActions);

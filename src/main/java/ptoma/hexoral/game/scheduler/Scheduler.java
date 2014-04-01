@@ -44,6 +44,13 @@ public class Scheduler {
 		this.energyPointsLeft += e.getEPCost();
 	}
 
+	public void removeAction(Action action) {
+		if(this.schedule.remove(action)) {
+			this.actionPointsLeft += action.getAPCost();
+			this.energyPointsLeft += action.getEPCost();	
+		}
+	}
+	
 	public int size() {
 		return this.schedule.size();
 	}
