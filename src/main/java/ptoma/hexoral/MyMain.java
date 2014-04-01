@@ -87,6 +87,115 @@ public class MyMain {
 		
 		
 	}
+	
+	public MyMain(Game game){
+		this.game = game;
+		this.localmap = game.island;
+		cnv = new Visualize(32, localmap);
+		initializenewWindow();
+		this.aFrame.setVisible(true);
+	}
+	
+	public static void initializenewWindow(){
+		
+		aFrame = new JFrame("Border Layout");
+		aFrame.setTitle("Island Generator");
+		aFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
+			}
+		});
+
+		((JFrame) aFrame).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		aFrame.pack();
+		aFrame.setVisible(true);
+		aFrame.getContentPane().setLayout(new GridLayout(1, 2));
+		JPanel left = new JPanel(new GridLayout(3, 2));
+		JPanel bottom = new JPanel(new GridLayout(4, 2));
+		aFrame.setSize(1024, 493);
+		try {
+			aFrame.setIconImage(ImageIO.read(new File(
+					"src/main/resources/Logo_w_space.png")));
+		} catch (IOException e1) {
+			System.out.println("Icon Image not found");
+		}
+								
+		localmap.setSizeY((Integer) GameUISettings.widthSpinner.getValue());
+		localmap.setSizeX((Integer) GameUISettings.heightSpinner.getValue());
+		localmap.erase();
+		String biome = "test.bio";
+		
+		gen = new MapGenerator(localmap, biome);
+		
+		gen.applyParameters((Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
+				(Integer) GameUISettings.percentageOfWaterInsideSpinner.getValue(), GameUISettings.lakeCheckBox.isSelected(),
+				GameUISettings.riverCheckBox.isSelected(),(Integer) GameUISettings.percentageOfResourceSpinner.getValue());
+		cnv.repaint();
+		Thread clean = new Thread(new Runnable() {
+
+			public void run() {
+				System.gc();
+
+			}
+		});
+		clean.start();
+		
+		JButton executeTurn = new JButton("Execute Turn");
+		
+		executeTurn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				//TODO
+			}
+		});
+		
+		
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
+		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
+		gbc_tabbedPane.gridx = 0;
+		gbc_tabbedPane.gridy = 0;
+		
+		
+		JPanel userInfoTab = new JPanel();
+		tabbedPane.addTab("User Info", null, userInfoTab, null);
+		userInfoTab.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		armySummaryList = new JList(armyModel);
+		userInfoTab.add(armySummaryList);
+		
+		
+		JPanel scheduleTab = new JPanel();
+		tabbedPane.addTab("Turn Viewer", null, scheduleTab, null);
+		
+		scheduleList = new JList(model);
+		scheduleTab.add(scheduleList);
+		anItem = new JMenuItem("Delete Action");
+		popup.add(anItem);
+		scheduleList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				popup.show(null, e.getXOnScreen(), e.getYOnScreen());
+			}
+		});
+		
+		
+		
+		JPanel unitInfoTab = new JPanel();
+		tabbedPane.addTab("Army Summary", null, unitInfoTab, null);
+		
+
+		
+		left.add(executeTurn);
+		left.add(tabbedPane, gbc_tabbedPane);
+		aFrame.getContentPane().add(left, BorderLayout.WEST);
+		cnv.setBackground(Color.GRAY);
+		aFrame.getContentPane().add(cnv);
+		aFrame.setVisible(true);
+		
+	}
+	
 
 	public static void initialize() {
 
@@ -139,6 +248,8 @@ public class MyMain {
 		
 		JButton player2 = new JButton("Player 2");
 		
+		JButton executeTurn = new JButton("Execute Turn");
+		
 		
 		
 		
@@ -178,8 +289,8 @@ public class MyMain {
 		tabbedPane.addTab("Army Summary", null, unitInfoTab, null);
 		
 
-		left.add(player1);
-		left.add(player2);
+		
+		left.add(executeTurn);
 		left.add(tabbedPane, gbc_tabbedPane);
 		aFrame.getContentPane().add(left, BorderLayout.WEST);
 		cnv.setBackground(Color.GRAY);
@@ -191,6 +302,8 @@ public class MyMain {
 	public static int counter = 0;
 	
 	public static void addToPlayerUnitList(Player player){
+		armyModel.removeAllElements();
+		
 		for(int i =0; i < game.getPlayerUnits(player).size() ; i++){
 			armyModel.addElement("Unit: " + game.getPlayerUnits(player).get(i));
 		}
@@ -199,8 +312,10 @@ public class MyMain {
 	
 	public static void addToScheduleList(Player player){
 		
+		model.removeAllElements();
+		
 		for( Action a : player.getSchedule().toArray()){
-			model.addElement(a.toString() + counter);
+			model.addElement(a.toString());
 			
 		}
 	}

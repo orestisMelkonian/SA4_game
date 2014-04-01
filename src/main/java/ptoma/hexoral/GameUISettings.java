@@ -22,12 +22,14 @@ import java.awt.Insets;
 
 import javax.swing.BoxLayout;
 
+import ptoma.hexoral.game.Game;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.Visualize;
 import ptoma.hexoral.map.WorldMap;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JTextField;
 
 public class GameUISettings {
@@ -72,6 +74,13 @@ public class GameUISettings {
 	 */
 	public GameUISettings() {
 		initialize();
+	}
+	
+	/**
+	 * Create the application.
+	 */
+	public GameUISettings(Game game) {
+		WINDOW = new MyMain(game);
 	}
 
 	/**
