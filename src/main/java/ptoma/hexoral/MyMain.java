@@ -93,10 +93,7 @@ public class MyMain {
 		this.localmap = game.island;
 		cnv = new Visualize(32, localmap);
 		initializenewWindow();
-		for(int i = 0; i < game.getAllPlayers().size(); i++){
-			addToScheduleList(game.getAllPlayers().get(i));
-		}
-		addToPlayerUnitList(p1);
+		refresh();
 		this.aFrame.setVisible(true);
 	}
 	
@@ -311,6 +308,15 @@ public class MyMain {
 			model.addElement(a.toString());
 			
 		}
+	}
+	
+	public static void refresh(){
+		
+		for(int i = 0; i < game.getAllPlayers().size(); i++){
+			addToScheduleList(game.getAllPlayers().get(i));
+			addToPlayerUnitList(game.getAllPlayers().get(i));
+		}
+		
 	}
 	
 	
