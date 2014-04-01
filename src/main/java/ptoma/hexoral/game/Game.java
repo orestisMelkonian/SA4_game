@@ -8,6 +8,8 @@ import java.util.List;
 
 import ptoma.hexoral.MyMain;
 import ptoma.hexoral.building.Building;
+import ptoma.hexoral.building.CreationBuilding;
+import ptoma.hexoral.building.ResourceBuilding;
 import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.exception.GameException;
@@ -198,6 +200,20 @@ public class Game {
 		this.buildings.remove(where);
 	}
 
+	public final Building getBuilding(Point where) {
+		return this.buildings.get(where);
+	}
+
+	public final List<Building> getPlayerBuildings(Player player) {
+		List<Building> ret = new ArrayList<Building>();
+		for (Building b : this.buildings.values()) {
+			if (player == null || b.getOwner().equals(player)) {
+				ret.add(b);
+			}
+		}
+		return ret;
+	}
+
 	/**
 	 * Executes the turn actions.
 	 * 
@@ -218,38 +234,19 @@ public class Game {
 				attack.getAction().exec();
 			}
 		}
-		// TODO apply resources updates
+		// Updates the resources
+		this.updateResources();
+
 	}
 
-	/**
-	 * Updates the units positions and kills dead units.
-	 */
-	private final void updateUnits() {
-
-		// Kill dead units.
-		List<Unit> deadUnits = new ArrayList<Unit>();
-		for (Unit u : this.units.values()) {
-			if (u.getHealth() <= 0) {
-				deadUnits.add(u);
+	private void updateResources() {
+		for (Building b : this.buildings.values()) {
+			if (b.getClass().getSimpleName()
+					.equals(CreationBuilding.class.getSimpleName())) {
+				ResourceBuilding resource = (ResourceBuilding) b;
+				resource.getOwner()
+						.addEnergyPoints(resource.getEnergyPerTurn());
 			}
 		}
-		// update the hash map
-		for (Unit u : deadUnits) {
-			this.units.remove(u.getPreviousPosition());
-		}
-
-		// For moved units;
-		List<Unit> movedUnits = new ArrayList<Unit>();
-		for (Unit u : this.units.values()) {
-			if (!u.getPreviousPosition().equals(u.getPosition())) {
-				movedUnits.add(u);
-			}
-		}
-		// Update the hash map
-		for (Unit u : movedUnits) {
-			this.units.remove(u.getPreviousPosition());
-			this.units.put(u.getPosition(), u);
-		}
-
 	}
 }
