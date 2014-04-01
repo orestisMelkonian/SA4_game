@@ -86,7 +86,7 @@ public class Visualize extends Canvas {
 				int offsetY = j * hexagonSize / 4;// j*4;//
 				String cellType = null;
 				try {
-					cellType = map.getHexagon(i, j).getType();
+					cellType = map.getHexagon(j, i).getType();
 				} catch (InvalidPointException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -122,9 +122,9 @@ public class Visualize extends Canvas {
 		//Add Soldiers
 		for(Player p : game.getAllPlayers()) {
 			for(Unit u : game.getPlayerUnits(p)) {
-				int offsetX = (u.getPosition().y % 2) * hexagonSize / 2;
-				int offsetY = u.getPosition().y * hexagonSize / 4;// j*4;//
-				g.drawImage(soldier, u.getPosition().x * hexagonSize + offsetX, u.getPosition().y
+				int offsetX = (u.getPosition().x % 2) * hexagonSize / 2;
+				int offsetY = u.getPosition().x * hexagonSize / 4;
+				g.drawImage(soldier, u.getPosition().y * hexagonSize + offsetX, u.getPosition().x
 						* hexagonSize - offsetY, hexagonSize, hexagonSize,
 						null);
 			}
@@ -136,7 +136,7 @@ public class Visualize extends Canvas {
 				} else {
 					building = mine;
 				}
-				g.drawImage(building, build.getPosition().x * hexagonSize + offsetX, build.getPosition().y
+				g.drawImage(building, build.getPosition().y * hexagonSize + offsetX, build.getPosition().x
 						* hexagonSize - offsetY, hexagonSize, hexagonSize,
 						null);
 			}
