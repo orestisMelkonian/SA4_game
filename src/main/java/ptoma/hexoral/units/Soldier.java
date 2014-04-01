@@ -53,27 +53,7 @@ public class Soldier extends Unit {
 		this.attackPower = Soldier.baseAttack;
 		this.defencePower = Soldier.baseDefence;
 		this.moveRange = Soldier.baseMoveRange;
-	}
-
-	/**
-	 * Calculates the damage to be dane.
-	 * 
-	 * @return int the damage to be done.
-	 */
-	public final int attack() {
-		return this.attackPower;
-	}
-
-	/**
-	 * Calculates the damage received and updates health.
-	 * 
-	 * @param damage
-	 *            The damage to be taken.
-	 */
-	public final void defend(final int damage) {
-		this.health -= damage;
-
-	}
+	}	
 
 	@Override
 	public final int getMoveAP(final int moves) {

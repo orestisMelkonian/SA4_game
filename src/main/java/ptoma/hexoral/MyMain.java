@@ -33,6 +33,7 @@ import javax.swing.SpinnerNumberModel;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.game.action.AttackAction;
+import ptoma.hexoral.game.scheduler.Scheduler;
 import ptoma.hexoral.map.*;
 import ptoma.hexoral.units.Soldier;
 import ptoma.hexoral.units.Unit;
@@ -56,13 +57,15 @@ public class MyMain {
 	static JList scheduleList;
 	static DefaultListModel model = new DefaultListModel();
 	static Game game = new Game(100, 100);
-	static Player player = new Player("Vitor", game);
-	static Player player2 = new Player("Lokesh", game);
-	static Action action = new AttackAction(player, new Soldier(player, new Point(10,10)), new Soldier(player2, new Point(10 ,10)));
+	static Player p1;
+	static Player p2;
+	static Point point = new Point(10, 20);
+	static Action action; 
 	static ArrayList<Action> listOfActions = new ArrayList<Action>();
 	static JMenuItem anItem;
 	static JPopupMenu popup = new JPopupMenu();
 	static JPanel userInfoTab;
+	static Scheduler scheduler;
 	
 	
 	
@@ -70,8 +73,13 @@ public class MyMain {
 		
 		this.cnv = canvas;
 		this.localmap = localMap;
-		
+		p1 = new Player(GameUISettings.textField.getText(), game);
+		p2 = new Player(GameUISettings.textField_1.getText(), game);
+		action = new AttackAction(p1, new Soldier(p1, point), new Soldier(p2, point));
+		scheduler = new Scheduler(game, p1);
+		p1.getSchedule().addAction(action);
 		initialize();
+		addToScheduleList(p1);
 		this.aFrame.setVisible(true);
 		
 		
@@ -130,6 +138,8 @@ public class MyMain {
 		
 		
 		
+		
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
@@ -146,7 +156,7 @@ public class MyMain {
 		
 		
 		JPanel scheduleTab = new JPanel();
-		tabbedPane.addTab("Schedule Actions", null, scheduleTab, null);
+		tabbedPane.addTab("Turn Viewer", null, scheduleTab, null);
 		
 		scheduleList = new JList(model);
 		scheduleTab.add(scheduleList);
@@ -162,7 +172,7 @@ public class MyMain {
 		
 		
 		JPanel unitInfoTab = new JPanel();
-		tabbedPane.addTab("Unit Info", null, unitInfoTab, null);
+		tabbedPane.addTab("Army Summary", null, unitInfoTab, null);
 		
 
 		left.add(player1);
@@ -176,16 +186,20 @@ public class MyMain {
 	}
 
 	public static int counter = 0;
-	public static void addToScheduleList(String type, Action action){
-		model.addElement(type + counter);
-		counter++;
-	}
 	
 	public static void addToPlayerUnitList(Player player){
 		for(int i =0; i < game.getPlayerUnits(player).size() ; i++){
 			armySummaryList.add(new JMenuItem("Unit" + game.getPlayerUnits(player).get(i)));
 		}
 		userInfoTab.add(armySummaryList);
+	}
+	
+	public static void addToScheduleList(Player player){
+		
+		for( Action a : player.getSchedule().toArray()){
+			model.addElement(a.toString() + counter);
+			
+		}
 	}
 	
 	

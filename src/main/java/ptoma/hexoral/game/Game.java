@@ -9,10 +9,12 @@ import java.util.List;
 import ptoma.hexoral.MyMain;
 import ptoma.hexoral.building.Building;
 import ptoma.hexoral.building.CreationBuilding;
+import ptoma.hexoral.building.HQ;
 import ptoma.hexoral.building.ResourceBuilding;
 import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.exception.GameException;
+import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.map.WorldMap;
@@ -248,5 +250,22 @@ public class Game {
 						.addEnergyPoints(resource.getEnergyPerTurn());
 			}
 		}
+	}
+	
+	public Point putHQ(Player p)	{
+		int i = (int) Math.random() * this.island.getSizeX();
+		int j = (int) Math.random() * this.island.getSizeY();
+		try {
+			while (!(this.island.getHexagon(i, j).getType().equals("LAND")))	{
+				i = (int) (Math.random() * this.island.getSizeX());
+				j = (int) (Math.random() * this.island.getSizeY());
+			}
+		} catch (InvalidPointException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HQ headquarters = new HQ(p, new Point(i, j));
+		this.createBuilding(p, headquarters);
+		return (new Point(i, j));
 	}
 }
