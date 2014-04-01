@@ -120,16 +120,7 @@ public class MyMain {
 			System.out.println("Icon Image not found");
 		}
 								
-		localmap.setSizeY((Integer) GameUISettings.widthSpinner.getValue());
-		localmap.setSizeX((Integer) GameUISettings.heightSpinner.getValue());
-		localmap.erase();
-		String biome = "test.bio";
-		
-		gen = new MapGenerator(localmap, biome);
-		
-		gen.applyParameters((Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
-				(Integer) GameUISettings.percentageOfWaterInsideSpinner.getValue(), GameUISettings.lakeCheckBox.isSelected(),
-				GameUISettings.riverCheckBox.isSelected(),(Integer) GameUISettings.percentageOfResourceSpinner.getValue());
+	
 		cnv.repaint();
 		Thread clean = new Thread(new Runnable() {
 
@@ -199,7 +190,7 @@ public class MyMain {
 
 	public static void initialize() {
 
-		localmap = new WorldMap(50, 50);
+		//localmap = new WorldMap(50, 50);
 		cnv = new Visualize(32, localmap);
 		aFrame = new JFrame("Border Layout");
 		aFrame.setTitle("Island Generator");

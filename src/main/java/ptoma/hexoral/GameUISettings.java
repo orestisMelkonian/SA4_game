@@ -81,6 +81,7 @@ public class GameUISettings {
 	 */
 	public GameUISettings(Game game) {
 		WINDOW = new MyMain(game);
+		
 	}
 
 	/**
@@ -172,4 +173,6 @@ public class GameUISettings {
 		panel.add(player2);
 	}
 
+	
+	
 }
