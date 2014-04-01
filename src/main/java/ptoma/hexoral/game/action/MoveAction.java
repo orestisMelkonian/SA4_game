@@ -24,7 +24,7 @@ public class MoveAction extends Action {
 	private Point where;
 	private Unit unit;
 	private Point fromWhere;
-
+	//TODO InvalidPoint should no be called in constructor to comply with rules
 	public MoveAction(Player actor, Unit unit, Point where)
 			throws InvalidPointException {
 		super(actor);
