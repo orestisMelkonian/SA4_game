@@ -12,13 +12,15 @@ import ptoma.hexoral.user.Player;
 import ptoma.hexoral.building.CreationBuilding;
 import ptoma.hexoral.exception.CreateException;
 import ptoma.hexoral.exception.GameException;
+import ptoma.hexoral.exception.InvalidPointException;
 
 public class CreateAction extends Action {
 
 	@Override
 	public String toString() {
-		String ret = super.toString(); 
-		ret += " of type Create from building " + this.creationBuilding.getPosition();
+		String ret = super.toString();
+		ret += " of type Create from building "
+				+ this.creationBuilding.getPosition();
 		return ret;
 	}
 
@@ -27,11 +29,12 @@ public class CreateAction extends Action {
 	private String className;
 	private Point creationPoint;
 
-	public CreateAction(Player actor, CreationBuilding creationBuilding, String className) throws GameException {
+	public CreateAction(Player actor, CreationBuilding creationBuilding,
+			String className) throws GameException {
 		super(actor);
 		this.className = className;
 		this.creationBuilding = creationBuilding;
-		if (className.equals("Soldier"))	{
+		if (className.equals("Soldier")) {
 			Soldier temp = new Soldier(actor, creationPoint);
 			this.APCost = temp.getCreateAP();
 			this.EPCost = temp.getCreateEP();
@@ -45,18 +48,32 @@ public class CreateAction extends Action {
 	 */
 	@Override
 	boolean validate() {
-		List<Point> toCheck = this.getGame().island.getNeighbours(this.creationBuilding.getPosition());
-		//Point p = new Point(this.creationBuilding.getPosition().x + 1, this.creationBuilding.getPosition().y + 1);
-		if (!(this.creationBuilding.isAvailable(this.className)))
+		List<Point> toCheck = this.getGame().island
+				.getNeighbours(this.creationBuilding.getPosition());
+		if (!(this.creationBuilding.isAvailable(this.className))) {
+			System.out.println("This type of unit cannot be created here.");
 			return false;
-		if (!(this.creationBuilding.canAfford(this.className)))
+		}
+		if (!(this.creationBuilding.canAfford(this.className))) {
+			System.out.println("Player " + this.actor.getName()
+					+ " cannot afford to create " + this.className + ".");
 			return false;
-		for(Point p : toCheck) {
-			if (this.actor.getGame().getUnit(p) == null)	{
-				this.creationPoint = p;
-				return true;
+		}
+		Soldier temp = new Soldier(this.actor, new Point(5, 5));
+		for (Point p : toCheck) {
+			try {
+				if ((this.actor.getGame().getUnit(p) == null) && temp.isValidMove((this.actor.getGame().island.getHexagon(p.x, p.y)).getType())) {
+					this.creationPoint = p;
+					return true;
+				}
+			} catch (InvalidPointException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
+		System.out.println("No room to create Unit from Building in ("
+				+ this.creationBuilding.getPosition().x + ", "
+				+ this.creationBuilding.getPosition().y + ").");
 		return false;
 	}
 
@@ -67,10 +84,12 @@ public class CreateAction extends Action {
 	 */
 	@Override
 	public boolean exec() {
-		if (this.validate())	{
+		if (this.validate()) {
 			this.unitCreated = new Soldier(actor, this.creationPoint);
-			System.out.println("creation Point is " + this.creationPoint.x + ", " + this.creationPoint.y);
+			System.out.println("creation Point is " + this.creationPoint.x
+					+ ", " + this.creationPoint.y);
 			this.update();
+			this.print();
 			return true;
 		}
 		return false;
@@ -87,7 +106,6 @@ public class CreateAction extends Action {
 		System.out.printf("Player %s created Unit of type %s and ID = #%d \n",
 				actor.getName(), unitCreated.getClass().getSimpleName(),
 				unitCreated.hashCode());
-
 	}
 
 	/*

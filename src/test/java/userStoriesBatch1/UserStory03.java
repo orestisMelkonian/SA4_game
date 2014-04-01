@@ -5,17 +5,112 @@ package userStoriesBatch1;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.Test;
+
+import ptoma.hexoral.GameUISettings;
+import ptoma.hexoral.building.CreationBuilding;
+import ptoma.hexoral.building.HQ;
+import ptoma.hexoral.exception.GameException;
+import ptoma.hexoral.exception.InvalidPointException;
+import ptoma.hexoral.game.Game;
+import ptoma.hexoral.game.action.CreateAction;
+import ptoma.hexoral.game.action.MoveAction;
+import ptoma.hexoral.map.MapGenerator;
+import ptoma.hexoral.units.Soldier;
+import ptoma.hexoral.units.Unit;
+import ptoma.hexoral.user.Player;
 
 /**
  * @author usi
- *
+ * 
  */
 public class UserStory03 {
+	
+	Game game;
+	Thread gui;
+
+	@Before
+	public void test() {
+		game = new Game(20, 20);
+		game.initializeIsland(50, 0, false, false, 10);
+	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void seeMap() {
+		Player p = new Player("Orestis",game);
+		game.addPlayer(p);
+		p.addActionPoints(10000);
+		p.addEnergyPoints(100000);
+		Point hqp = game.putHQ(p);
+		HQ hq = (HQ) game.getBuilding(hqp);
+		game.createBuilding(p, game.getBuilding(hqp));
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		gui = new Thread(new Runnable() {
+			public void run() {
+				new GameUISettings(game);
+			}
+		});
+		gui.start();
+		System.err.println("GUI Started");
+		try {
+			Thread.sleep(1000000);
+		} catch (InterruptedException e) {
+			System.err.println(e.getMessage());
+		}
+		
 	}
 
 }
