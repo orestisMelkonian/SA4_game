@@ -14,5 +14,6 @@ public class HQ extends CreationBuilding{
 	 */
 	public HQ(final Player owner, Point p){
 		super(owner, p);
+		this.baseUnitCapacity = 3;
 	}
 }

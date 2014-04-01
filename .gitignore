@@ -7,3 +7,4 @@ My*
 .gitignore
 *.db
 *.zip
+/bin
