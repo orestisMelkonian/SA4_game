@@ -51,6 +51,10 @@ public class Scheduler {
 		}
 	}
 	
+	public void clear() {
+		this.schedule.clear();
+	}
+	
 	public int size() {
 		return this.schedule.size();
 	}

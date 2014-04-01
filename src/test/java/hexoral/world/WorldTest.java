@@ -68,6 +68,7 @@ public class WorldTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		assertEquals("Actions were not reseted after execution", 0, p1.getSchedule().size());
 
 		for (Unit u : world.getPlayerUnits(p1)) {
 			System.err.println(u.toString());

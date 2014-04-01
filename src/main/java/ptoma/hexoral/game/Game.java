@@ -116,6 +116,11 @@ public class Game {
 		return this.players.get(username);
 	}
 
+	List<Player> getAllPlayers() {
+		List<Player> ret = new ArrayList<Player>();
+		ret.addAll(this.players.values());
+		return ret;
+	}
 	/**
 	 * Creates a new unit for the player.
 	 * 
@@ -226,8 +231,9 @@ public class Game {
 		for (Player p : players.values()) {
 			for (Action e : p.getSchedule().toArray()) {
 				allActions.add(e);
-				p.getSchedule().removeAction(e);
 			}
+			//Empty all of the actions of the player
+			p.getSchedule().clear();
 		}
 		Collections.sort(allActions);
 		for (Action e : allActions) {
