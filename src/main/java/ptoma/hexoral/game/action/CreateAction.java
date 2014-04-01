@@ -36,8 +36,6 @@ public class CreateAction extends Action {
 			this.APCost = temp.getCreateAP();
 			this.EPCost = temp.getCreateEP();
 		}
-		if (!(this.validate()))
-			throw new CreateException(this);
 	}
 
 	/*

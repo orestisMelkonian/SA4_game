@@ -58,18 +58,15 @@ public class Game {
 	 *            height of the game
 	 */
 	public Game(int width, int height) {
-		// The creation of the map
-		this.island = new WorldMap(width, height);
-		// Creating the generator
-		MapGenerator generator = new MapGenerator(island, "test.bio");
-		// TODO add parameters for water and land percentage etcetera
-		// initialization of players and their units
-		this.players = new HashMap<String, Player>();
-		this.units = new HashMap<Point, Unit>();
-		this.buildings = new HashMap<Point, Building>();
-
+		island = new WorldMap(width, height);
+		players = new HashMap<String, Player>();
+		units = new HashMap<Point, Unit>();
+		buildings = new HashMap<Point, Building>();
 	}
-
+	
+	public void initializeIsland(int groundPer, int waterPer, boolean lakes, boolean rivers, int resourcePer)	{
+		island.randomizeIsland(groundPer, waterPer, lakes, rivers, resourcePer);
+	}
 	public HashMap<String, Player> getPlayersHashMap() {
 		return players;
 	}
