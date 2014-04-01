@@ -30,7 +30,6 @@ public class UserStory01 {
 		WorldMap myMap = new WorldMap(width, height);
 		
 		myMap.randomizeIsland(groundPer, waterPer, lakes, rivers, resourcePer);
-		System.out.println("Map randomized!");
 		System.out.println("Map generated with "+ width +" width, " + height + " height, " + groundPer + "% ground, " + waterPer + "% water inside the island, " + resourcePer + "% resources in the island.");
 	}
 
