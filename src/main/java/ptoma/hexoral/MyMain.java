@@ -217,11 +217,9 @@ public class MyMain {
 		localmap.setSizeY((Integer) GameUISettings.widthSpinner.getValue());
 		localmap.setSizeX((Integer) GameUISettings.heightSpinner.getValue());
 		localmap.erase();
-		String biome = "test.bio";
 		
-		gen = new MapGenerator(localmap, biome);
 		
-		gen.applyParameters((Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
+		localmap.randomizeIsland((Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
 				(Integer) GameUISettings.percentageOfWaterInsideSpinner.getValue(), GameUISettings.lakeCheckBox.isSelected(),
 				GameUISettings.riverCheckBox.isSelected(),(Integer) GameUISettings.percentageOfResourceSpinner.getValue());
 		cnv.repaint();
