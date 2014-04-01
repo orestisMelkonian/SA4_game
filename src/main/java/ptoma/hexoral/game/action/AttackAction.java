@@ -7,6 +7,13 @@ import ptoma.hexoral.user.Player;
 
 public class AttackAction extends Action {
 
+	@Override
+	public String toString() {
+		String ret = super.toString(); 
+		ret += " of type Attack from unit in" + this.attacker.getPosition() + " to " + this.defender.getPosition();
+		return ret;
+	}
+
 	private Unit attacker;
 	private IAttackable defender;
 

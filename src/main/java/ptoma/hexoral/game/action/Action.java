@@ -85,6 +85,10 @@ public abstract class Action implements Comparable<Action> {
 	 */
 	abstract public boolean exec() throws GameException;
 	
+	@Override
+	public String toString() {
+		return "Action from player " + this.actor.getName(); 
+	}
 	abstract protected void print();
 	
 	abstract protected void update();

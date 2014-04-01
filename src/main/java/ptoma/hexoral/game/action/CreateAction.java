@@ -15,6 +15,13 @@ import ptoma.hexoral.exception.GameException;
 
 public class CreateAction extends Action {
 
+	@Override
+	public String toString() {
+		String ret = super.toString(); 
+		ret += " of type Create from building " + this.creationBuilding.getPosition();
+		return ret;
+	}
+
 	private CreationBuilding creationBuilding;
 	private Unit unitCreated;
 	private String className;

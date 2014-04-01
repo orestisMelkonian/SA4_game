@@ -14,6 +14,13 @@ import ptoma.hexoral.user.Player;
 
 public class MoveAction extends Action {
 
+	@Override
+	public String toString() {
+		String ret = super.toString(); 
+		ret += " of type Move from " + this.unit.getPosition() + " to " + this.where.toString();
+		return ret;
+	}
+
 	private Point where;
 	private Unit unit;
 	private Point fromWhere;
