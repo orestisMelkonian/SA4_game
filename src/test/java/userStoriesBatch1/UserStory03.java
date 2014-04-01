@@ -25,12 +25,8 @@ import ptoma.hexoral.units.Soldier;
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
 
-/**
- * @author usi
- * 
- */
 public class UserStory03 {
-	
+
 	Game game;
 	Thread gui;
 
@@ -42,7 +38,7 @@ public class UserStory03 {
 
 	@Test
 	public void seeMap() {
-		Player p = new Player("Orestis",game);
+		Player p = new Player("Orestis", game);
 		game.addPlayer(p);
 		p.addActionPoints(10000);
 		p.addEnergyPoints(100000);
@@ -97,7 +93,7 @@ public class UserStory03 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		gui = new Thread(new Runnable() {
 			public void run() {
 				new GameUISettings(game);
@@ -110,7 +106,7 @@ public class UserStory03 {
 		} catch (InterruptedException e) {
 			System.err.println(e.getMessage());
 		}
-		
+
 	}
 
 }

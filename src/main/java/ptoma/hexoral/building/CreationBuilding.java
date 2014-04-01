@@ -18,7 +18,16 @@ public class CreationBuilding extends Building {
 	 * The units that can be produced in the HQ.
 	 */
 	private String availableUnit;
-	//private ArrayList<String> availableUnits;
+
+	/**
+	 * The action points required to create it.
+	 */
+	private static int createAP = 50;
+
+	/**
+	 * The energy points required to create it.
+	 */
+	private static int createEP = 50;
 
 	/**
 	 * @param storedUnits
@@ -28,35 +37,26 @@ public class CreationBuilding extends Building {
 	 */
 	public CreationBuilding(Player owner, Point p) {
 		super(owner, p);
-		//List<String> availableUnits = new ArrayList<String>();
-		//availableUnits.add(Soldier.class.getSimpleName());
 		availableUnit = "Soldier";
 	}
 
 	public boolean isAvailable(String className) {
-		//for (String s : availableUnits) {
-			if (className.equals(availableUnit))
-				return true;
-		//}
+		if (className.equals(availableUnit))
+			return true;
 		return false;
 	}
 
-	public boolean canAfford(String className) {
-		Soldier temp = new Soldier(this.getOwner(), new Point(0, 0));
-		int energyRequired = 0;
-		int actionPointsRequired = 0;
-		if (className.equals("Soldier")) {
-			energyRequired = temp.getCreateEP();
-			actionPointsRequired = temp.getCreateAP();
-		}
-		if ((isAvailable(className))
-				&& ((energyRequired <= this.getOwner().getEnergyPoints()) && (actionPointsRequired <= this
-						.getOwner().getActionPoints()))) {
-			System.out.println("Setting EP and AP");
-			this.getOwner().setEnergyPoints(this.getOwner().getEnergyPoints() - energyRequired);
-			this.getOwner().setActionPoints(this.getOwner().getActionPoints() - actionPointsRequired);
-			return true;
-		}
-		return false;
+	/**
+	 * @return the action points required to create it.
+	 */
+	public int getCreateAP() {
+		return createAP;
+	}
+
+	/**
+	 * @return the energy points required to create it.
+	 */
+	public int getCreateEP() {
+		return createEP;
 	}
 }

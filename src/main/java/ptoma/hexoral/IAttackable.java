@@ -24,4 +24,14 @@ public interface IAttackable {
 	 * @return the position of the IAttackable.
 	 */
 	public Point getPosition();
+	
+	/**
+	 * @return the action points required to create it.
+	 */
+	public int getCreateAP();
+	
+	/**
+	 * @return the action points required to create it.
+	 */
+	public int getCreateEP();
 }

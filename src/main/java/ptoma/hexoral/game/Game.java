@@ -63,10 +63,12 @@ public class Game {
 		units = new HashMap<Point, Unit>();
 		buildings = new HashMap<Point, Building>();
 	}
-	
-	public void initializeIsland(int groundPer, int waterPer, boolean lakes, boolean rivers, int resourcePer)	{
+
+	public void initializeIsland(int groundPer, int waterPer, boolean lakes,
+			boolean rivers, int resourcePer) {
 		island.randomizeIsland(groundPer, waterPer, lakes, rivers, resourcePer);
 	}
+
 	public HashMap<String, Player> getPlayersHashMap() {
 		return players;
 	}
@@ -118,6 +120,7 @@ public class Game {
 		ret.addAll(this.players.values());
 		return ret;
 	}
+
 	/**
 	 * Creates a new unit for the player.
 	 * 
@@ -139,7 +142,24 @@ public class Game {
 	 *            the building to be created.
 	 */
 	public void createBuilding(Player player, Building building) {
-		this.buildings.put(building.getPosition(), building);
+		// Spend points
+		int energyRequired = building.getCreateEP();
+		System.out.println("energyRequired = " + energyRequired);
+		int actionRequired = building.getCreateAP();
+		System.out.println("actionRequired = " + actionRequired);
+		if ((player.getActionPoints() >= actionRequired)
+				&& (player.getEnergyPoints() >= energyRequired)) {
+			System.out.println("Before EP and AP: " + player.getEnergyPoints()
+					+ "  " + player.getActionPoints());
+			player.setEnergyPoints(
+					player.getEnergyPoints() - energyRequired);
+			player.setActionPoints(
+					player.getActionPoints() - actionRequired);
+			this.buildings.put(building.getPosition(), building);
+			System.out.println("After EP and AP: " + player.getEnergyPoints()+ "  "
+					+ player.getActionPoints());
+		} else
+			System.out.println("Can't afford to create Building");
 	}
 
 	/**
@@ -229,7 +249,7 @@ public class Game {
 			for (Action e : p.getSchedule().toArray()) {
 				allActions.add(e);
 			}
-			//Empty all of the actions of the player
+			// Empty all of the actions of the player
 			p.getSchedule().clear();
 		}
 		Collections.sort(allActions);
@@ -248,19 +268,19 @@ public class Game {
 	private void updateResources() {
 		for (Building b : this.buildings.values()) {
 			if (b.getClass().getSimpleName()
-					.equals(CreationBuilding.class.getSimpleName())) {
+					.equals(ResourceBuilding.class.getSimpleName())) {
 				ResourceBuilding resource = (ResourceBuilding) b;
 				resource.getOwner()
 						.addEnergyPoints(resource.getEnergyPerTurn());
 			}
 		}
 	}
-	
-	public Point putHQ(Player p)	{
+
+	public Point putHQ(Player p) {
 		int i = (int) Math.random() * this.island.getSizeX();
 		int j = (int) Math.random() * this.island.getSizeY();
 		try {
-			while (!(this.island.getHexagon(i, j).getType().equals("LAND")))	{
+			while (!(this.island.getHexagon(i, j).getType().equals("LAND"))) {
 				i = (int) (Math.random() * this.island.getSizeX());
 				j = (int) (Math.random() * this.island.getSizeY());
 			}

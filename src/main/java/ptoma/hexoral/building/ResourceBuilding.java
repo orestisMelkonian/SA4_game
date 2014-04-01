@@ -12,31 +12,46 @@ import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
 
+public class ResourceBuilding extends Building {
 
+	/**
+	 * The action points required to create it.
+	 */
+	private static int createAP = 50;
 
-public class ResourceBuilding extends Building{
-	
-	
+	/**
+	 * The energy points required to create it.
+	 */
+	private static int createEP = 20;
+
+	/**
+	 * The amount of energy it produces every turn.
+	 */
 	private int energyPerTurn;
+
+	/**
+	 * The base amount of energy it gets from each neighboring resource cell.
+	 */
 	static private int baseEnergyPerTurn = 25;
-	
-	
-	public ResourceBuilding (Player owner, Point p) {
+
+	public ResourceBuilding(Player owner, Point p) {
 		super(owner, p);
 		baseUnitCapacity = 1;
-		
+
 		energyPerTurn = 0;
 		try {
-			if	(this.getOwner().getGame().island.getType(p.x, p.y).equals("RESOURCE"))
+			if (this.getOwner().getGame().island.getType(p.x, p.y).equals(
+					"RESOURCE"))
 				energyPerTurn += baseEnergyPerTurn;
 		} catch (InvalidPointException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<Point> toCheck = this.getOwner().getGame().island.getNeighbours(p);
-		for (Point i : toCheck)	{
+		for (Point i : toCheck) {
 			try {
-				if (this.getOwner().getGame().island.getType(i.x, i.y).equals("RESOURCE"))
+				if (this.getOwner().getGame().island.getType(i.x, i.y).equals(
+						"RESOURCE"))
 					energyPerTurn += baseEnergyPerTurn;
 			} catch (InvalidPointException e) {
 				// TODO Auto-generated catch block
@@ -45,26 +60,19 @@ public class ResourceBuilding extends Building{
 		}
 	}
 
-	
-
-
-	
-	
 	/**
 	 * Gets the energyPerTurn.
 	 * 
 	 */
-	
 
 	public int getEnergyPerTurn() {
-		//if the building is still alive,it returns the value of energy it produces, otherwise it will return 0
-		if(buildingDestroyed) return 0;
+		// if the building is still alive,it returns the value of energy it
+		// produces, otherwise it will return 0
+		if (buildingDestroyed)
+			return 0;
 		return energyPerTurn;
 	}
-	
-	
 
-	
 	/**
 	 * sets the energyPerTurn.
 	 * 
@@ -72,12 +80,10 @@ public class ResourceBuilding extends Building{
 	public void setEnergyPerTurn(int energyPerTurn) {
 		this.energyPerTurn = energyPerTurn;
 	}
-	
-	
-	
 
 	/**
 	 * Return the attack force of a unit.
+	 * 
 	 * @return the attack force.
 	 */
 
@@ -86,14 +92,23 @@ public class ResourceBuilding extends Building{
 		return 0;
 	}
 
-
-
-
 	public void defend(int damage) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
-	
+	/**
+	 * @return the action points required to create it.
+	 */
+	public int getCreateAP() {
+		return createAP;
+	}
+
+	/**
+	 * @return the energy points required to create it.
+	 */
+	public int getCreateEP() {
+		return createEP;
+	}
+
 }

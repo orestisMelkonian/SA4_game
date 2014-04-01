@@ -48,7 +48,9 @@ public abstract class Building implements IAttackable {
 	 */
 	public boolean buildingDestroyed;
 	
+	private int createAP;
 	
+	private int createEP;
 		
 	
 	

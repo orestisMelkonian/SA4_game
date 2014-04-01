@@ -30,6 +30,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerNumberModel;
 
+import ptoma.hexoral.building.Building;
 import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.Action;
@@ -302,6 +303,9 @@ public class MyMain {
 		
 		for(int i =0; i < game.getPlayerUnits(player).size() ; i++){
 			armyModel.addElement("Unit: " + game.getPlayerUnits(player).get(i));
+		}
+		for (Building b : game.getPlayerBuildings(player))	{
+			armyModel.addElement("Building: " + b);
 		}
 		//userInfoTab.add(armySummaryList);
 	}
