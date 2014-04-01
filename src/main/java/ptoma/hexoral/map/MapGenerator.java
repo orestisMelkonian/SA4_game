@@ -195,15 +195,14 @@ public class MapGenerator {
 		int resourceNo = (resourcePer * islandNo) / 100;
 
 		while (resourceNo > 0) {
-			for (int i = 0; i < this.myMap.sizeX; i++)	{
-				for (int j = 0; j < this.myMap.sizeY; j++)	{
-					if (this.myMap.getType(i, j).equals("LAND"))	{
-						
-					}
-						
-				}
+			int i = (int) (Math.random() * this.myMap.sizeX);
+			int j = (int) (Math.random() * this.myMap.sizeY);
+			while (!(this.myMap.getType(i, j).equals("LAND")))	{
+				i = (int) (Math.random() * this.myMap.sizeX);
+				j = (int) (Math.random() * this.myMap.sizeY);
 			}
-			resourceNo --;
+			this.myMap.getHexagon(i, j).setResource(true);	
+			resourceNo--;
 		}
 	}
 
