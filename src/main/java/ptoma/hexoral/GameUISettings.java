@@ -45,8 +45,8 @@ public class GameUISettings {
 	static JSpinner percentageOfGroundSpinner;
 	static JSpinner percentageOfResourceSpinner;
 	public static MyMain WINDOW;
-	private JTextField textField;
-	private JTextField textField_1;
+	static JTextField textField;
+	static JTextField textField_1;
 
 	/**
 	 * Launch the application.
