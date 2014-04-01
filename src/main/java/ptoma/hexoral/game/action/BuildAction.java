@@ -79,7 +79,7 @@ public class BuildAction extends Action {
 	@Override
 	public void print() {
 		System.out.printf(
-				"Player %s created Building of type %s and ID = #%d \n",
+				"Player %s created Building of type %s in (" + buildingToBeBuilt.getPosition().x + ", "+ buildingToBeBuilt.getPosition().y +")" + "and ID = #%d \n",
 				actor.getName(), buildingToBeBuilt.getClass().getSimpleName(),
 				buildingToBeBuilt.hashCode());
 	}

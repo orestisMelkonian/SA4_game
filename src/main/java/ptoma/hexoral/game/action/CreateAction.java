@@ -87,7 +87,7 @@ public class CreateAction extends Action {
 	@Override
 	public void print() {
 		// TODO Auto-generated method stub
-		System.out.printf("Player %s created Unit of type %s and ID = #%d \n",
+		System.out.printf("Player %s created Unit of type %s in (" + creationPoint.x + ", "+ creationPoint.y +")" + " and ID = #%d \n",
 				actor.getName(), unitCreated.getClass().getSimpleName(),
 				unitCreated.hashCode());
 	}

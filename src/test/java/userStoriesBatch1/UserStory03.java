@@ -1,6 +1,4 @@
-/**
- * 
- */
+ 
 package userStoriesBatch1;
 
 import java.awt.Point;
@@ -31,8 +29,8 @@ public class UserStory03 {
 	public void seeMap() {
 		Player p = new Player("Orestis", game);
 		game.addPlayer(p);
-		p.addActionPoints(10000);
-		p.addEnergyPoints(100000);
+		p.setActionPoints(100);
+		p.setEnergyPoints(100);
 		Point hqp = game.putHQ(p);
 		HQ hq = (HQ) game.getBuilding(hqp);
 		game.createBuilding(p, game.getBuilding(hqp));
