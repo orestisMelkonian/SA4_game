@@ -97,7 +97,6 @@ public class UserStory03 {
 		} catch (InterruptedException e) {
 			System.err.println(e.getMessage());
 		}
-
 	}
 
 }
