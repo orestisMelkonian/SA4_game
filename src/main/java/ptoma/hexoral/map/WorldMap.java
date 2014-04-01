@@ -235,7 +235,7 @@ public class WorldMap {
 			if (w.x < this.sizeX - 1) {
 				// BOTTOM LEFT
 				ret.add(new Point(w.x + 1, w.y));
-				if (w.y > this.sizeY - 1) {
+				if (w.y < this.sizeY - 1) {
 					// BOTTOM RIGHT
 					ret.add(new Point(w.x + 1, w.y + 1));
 				}

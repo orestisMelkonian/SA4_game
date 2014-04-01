@@ -3,6 +3,8 @@ package hexoral.world;
 import static org.junit.Assert.*;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,11 +26,7 @@ public class WorldTest {
 
 	@BeforeClass
 	public static void testSetup() {
-		world = new Game(2, 2);
-		assertEquals("The map is not of expected size X",
-				world.island.getSizeX(), 2);
-		assertEquals("The map is not of expected size Y",
-				world.island.getSizeY(), 2);
+		world = new Game(4, 4);
 	}
 
 	@Before
@@ -76,6 +74,29 @@ public class WorldTest {
 		world.removePlayer(p1);
 		assertEquals("The unit was not deleted.", 0, world.getPlayerUnits(p1)
 				.size());
+	}
+	
+	@Test
+	public void testNeighhbours() {
+		List<Point> even = world.island.getNeighbours(new Point(1,1));
+		List<Point> evenCorrect = new ArrayList<Point>();
+		List<Point> odd = world.island.getNeighbours(new Point(2,1));
+		List<Point> oddCorrect = new ArrayList<Point>();
+		evenCorrect.add(new Point(0,1));
+		evenCorrect.add(new Point(0,2));
+		evenCorrect.add(new Point(1,2));
+		evenCorrect.add(new Point(2,2));
+		evenCorrect.add(new Point(2,1));
+		evenCorrect.add(new Point(1,0));
+		//---------------------------
+		oddCorrect.add(new Point(1,0));
+		oddCorrect.add(new Point(1,1));
+		oddCorrect.add(new Point(2,2));
+		oddCorrect.add(new Point(3,1));
+		oddCorrect.add(new Point(3,0));
+		oddCorrect.add(new Point(2,0));
+		assertTrue("Odd neighbours error",oddCorrect.containsAll(odd));
+		assertTrue("Even neighbours error",evenCorrect.containsAll(even));		
 	}
 
 }

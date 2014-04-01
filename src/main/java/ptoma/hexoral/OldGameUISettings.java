@@ -43,7 +43,7 @@ public class OldGameUISettings {
 	 */
 	public static void main(String[] args) {
 		localmap = new WorldMap(50, 50);
-		cnv = new Visualize(32, localmap);
+		//cnv = new Visualize(32, localmap);
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
