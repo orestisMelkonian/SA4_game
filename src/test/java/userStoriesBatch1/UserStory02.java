@@ -15,6 +15,7 @@ import org.junit.Test;
 import ptoma.hexoral.GameUISettings;
 import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
+import ptoma.hexoral.game.action.AttackAction;
 import ptoma.hexoral.game.action.MoveAction;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.units.Soldier;
@@ -48,6 +49,7 @@ public class UserStory02 {
 		} catch (InvalidPointException e1) {
 			System.err.println(e1.getMessage());
 		}
+		//p.getSchedule().addAction(new AttackAction(p, u1, u1));
 		
 		gui = new Thread(new Runnable() {
 			public void run() {

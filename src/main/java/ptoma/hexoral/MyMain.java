@@ -30,6 +30,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerNumberModel;
 
+import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.Action;
 import ptoma.hexoral.game.action.AttackAction;
@@ -137,7 +138,12 @@ public class MyMain {
 		executeTurn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e){
-				//TODO
+				try {
+					game.executeTurn();
+				} catch (GameException e1) {
+					System.err.println(e1.getAction().toString());
+				}
+				refresh();
 			}
 		});
 		
