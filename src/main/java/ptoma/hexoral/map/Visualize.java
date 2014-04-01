@@ -48,6 +48,7 @@ public class Visualize extends Canvas {
 	private Image internalPaint() {
 		WorldMap map = this.getMap();
 		int hexagonSize = this.getHexSize();
+		BufferedImage resource = null;
 		BufferedImage sea = null;
 		BufferedImage land = null;
 		BufferedImage mountain = null;
@@ -56,10 +57,12 @@ public class Visualize extends Canvas {
 				+ hexagonSize / 2, map.sizeY * hexagonSize - map.sizeY
 				* hexagonSize / 6, BufferedImage.TYPE_INT_RGB);
 		try {
+			File r = new File("src/main/resources/resourcestroke.png");
 			File s = new File("src/main/resources/seastroke.png");
 			File d = new File("src/main/resources/grassstroke.png");
 			File m = new File("src/main/resources/mountainstroke.png");
 			File l = new File("src/main/resources/lakestroke.png");
+			resource = ImageIO.read(r);
 			sea = ImageIO.read(s);
 			land = ImageIO.read(d);
 			mountain = ImageIO.read(m);
@@ -81,21 +84,29 @@ public class Visualize extends Canvas {
 					e.printStackTrace();
 					System.exit(1);
 				}
-				if (cellType == "SEA") {
-					g.drawImage(sea, i * hexagonSize + offsetX, j * hexagonSize
-							- offsetY, hexagonSize, hexagonSize, null);
-				} else if (cellType == "LAND") {
-					g.drawImage(land, i * hexagonSize + offsetX, j
-							* hexagonSize - offsetY, hexagonSize, hexagonSize,
-							null);
-				} else if (cellType == "MOUNTAIN") {
-					g.drawImage(mountain, i * hexagonSize + offsetX, j
-							* hexagonSize - offsetY, hexagonSize, hexagonSize,
-							null);
-				} else if (cellType == "LAKE") {
-					g.drawImage(lake, i * hexagonSize + offsetX, j
-							* hexagonSize - offsetY, hexagonSize, hexagonSize,
-							null);
+				try {
+					if (map.getHexagon(i, j).isResource()){
+						g.drawImage(resource, i * hexagonSize + offsetX, j * hexagonSize
+								- offsetY, hexagonSize, hexagonSize, null);
+					}else if (cellType == "SEA") {
+						g.drawImage(sea, i * hexagonSize + offsetX, j * hexagonSize
+								- offsetY, hexagonSize, hexagonSize, null);
+					} else if (cellType == "LAND") {
+						g.drawImage(land, i * hexagonSize + offsetX, j
+								* hexagonSize - offsetY, hexagonSize, hexagonSize,
+								null);
+					} else if (cellType == "MOUNTAIN") {
+						g.drawImage(mountain, i * hexagonSize + offsetX, j
+								* hexagonSize - offsetY, hexagonSize, hexagonSize,
+								null);
+					} else if (cellType == "LAKE") {
+						g.drawImage(lake, i * hexagonSize + offsetX, j
+								* hexagonSize - offsetY, hexagonSize, hexagonSize,
+								null);
+					}
+				} catch (InvalidPointException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 
 			}
