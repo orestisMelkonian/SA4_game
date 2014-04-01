@@ -5,40 +5,44 @@ import ptoma.hexoral.IAttackable;
 import ptoma.hexoral.units.Unit;
 
 public class Combat {
-	
+
 	public Unit attacker;
 	public IAttackable defender;
-	
-	
+
 	/**
 	 * Constructor for Combat.
 	 */
-	public Combat(Unit attacker, IAttackable defender){
+	public Combat(Unit attacker, IAttackable defender) {
 		this.attacker = attacker;
 		this.defender = defender;
 	}
-	
-	
+
 	/**
 	 * Returns the unit who is attacking.
 	 * 
 	 * @return Unit the attacker.
 	 */
-	public Unit getAttacker(){
+	public Unit getAttacker() {
 		return this.attacker;
 	}
-	
+
 	/**
 	 * Returns the unit who is defending.
 	 * 
 	 * @return Unit the defender.
 	 */
-	public IAttackable getDefender(){
+	public IAttackable getDefender() {
 		return this.defender;
 	}
-	
-	public boolean exec(){
-		this.defender.defend(this.attacker.attack());
+
+	public boolean exec() {
+		while ((defender.getHealth() > 0) && (attacker.getHealth() > 0)) {
+			this.defender.defend(this.attacker.attack());
+			if ((defender.getHealth() > 0) && (attacker.getHealth() > 0))
+				this.attacker.defend(this.defender.attack());
+			else
+				break;
+		}
 		return true;
 	}
 }

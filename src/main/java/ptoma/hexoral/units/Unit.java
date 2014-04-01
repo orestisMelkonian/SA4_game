@@ -180,5 +180,24 @@ public abstract class Unit implements IAttackable {
 	public boolean isValidMove(String type) {
 		return true;
 	}
+	
+	/**
+	 * Calculates the damage to be dane.
+	 * 
+	 * @return int the damage to be done.
+	 */
+	public final int attack() {
+		return this.attackPower;
+	}
+	
+	/**
+	 * Calculates the damage received and updates health.
+	 * 
+	 * @param damage
+	 *            The damage to be taken.
+	 */
+	public final void defend(final int damage) {
+		this.health -= damage;
 
+	}
 }

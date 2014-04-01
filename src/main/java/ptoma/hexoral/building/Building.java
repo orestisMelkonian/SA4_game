@@ -149,7 +149,11 @@ public abstract class Building implements IAttackable {
 	 * @return int the attack force.
 	 */
 	public int attack(){
-		return 0;
+		int ret = 0;
+		for (Unit u : storedUnits)	{
+			ret += u.attack();
+		}
+		return ret;
 	}
 	
 	
