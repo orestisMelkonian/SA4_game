@@ -39,6 +39,7 @@ public class MapGenerator {
 			this.applyGroundPercentage(groundPer);
 			this.cleanUp();
 			this.applyWaterPercentage(waterPer, lakes, rivers);
+			this.applyResourcePercentage(resourcePer);
 			this.cleanIsland();
 			this.cleanIsland();
 			this.cleanSea();
