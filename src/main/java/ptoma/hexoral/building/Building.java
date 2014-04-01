@@ -153,7 +153,7 @@ public abstract class Building implements IAttackable {
 		for (Unit u : storedUnits)	{
 			ret += u.attack();
 		}
-		return ret;
+		return (int) (ret * Math.random());
 	}
 	
 	
