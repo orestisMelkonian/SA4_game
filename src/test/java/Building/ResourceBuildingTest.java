@@ -5,10 +5,13 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ptoma.hexoral.building.ResourceBuilding;
 import ptoma.hexoral.game.Game;
+import ptoma.hexoral.map.Hexagon;
 import ptoma.hexoral.units.Soldier;
 import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
@@ -19,18 +22,22 @@ public class ResourceBuildingTest {
 	static Game world;
 
 	
+	@BeforeClass
+	public static void testSetup() {
+		world = new Game(2, 2);
+	}
+
 	@Test
 	public void test() {
 		Player p1 = new Player("Hanieh", world);
-		Player p2 = new Player("lokesh",world);
+		Player p2 = new Player("Lokesh",world);
 		world.addPlayer(p1);
 		world.addPlayer(p2);
 		Unit u1 = new Soldier(p1, new Point(0,0));
 		Unit u2 = new Soldier(p1, new Point(0,1));
 		world.createUnit(p1, u1);
 		world.createUnit(p1, u2);
-		//world.createUnit(p2, u3);
-		//world.createUnit(p2, u4);
+		
 
 		ResourceBuilding b2 = new ResourceBuilding(p1, new Point(1,1) );
 		
