@@ -369,5 +369,13 @@ public class WorldMap {
 	public final int getMountainNo() {
 		return this.count[Hexagon.type.MOUNTAIN.ordinal()];
 	}
+	
+	public void randomizeIsland(int groundPer, int waterPer, boolean lakes, boolean rivers, int resourcePer)	{
+		MapGenerator mapGen = new MapGenerator(this, "test.bio");
+		System.out.println("mapGen created");
+		mapGen.applyParameters(groundPer, waterPer, lakes, rivers, resourcePer);
 
+		System.out.println("parameters applied");
+	}
+	
 }

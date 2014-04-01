@@ -48,7 +48,6 @@ public class MapGenerator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
