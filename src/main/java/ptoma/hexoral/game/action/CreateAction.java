@@ -75,8 +75,6 @@ public class CreateAction extends Action {
 	public boolean exec() {
 		if (this.validate()) {
 			unitCreated = new Soldier(actor, this.creationPoint);
-			System.out.println("creation Point is " + this.creationPoint.x
-					+ ", " + this.creationPoint.y);
 			this.update();
 			this.print();
 			return true;

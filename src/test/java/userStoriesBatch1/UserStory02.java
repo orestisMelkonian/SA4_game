@@ -13,9 +13,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ptoma.hexoral.GameUISettings;
+import ptoma.hexoral.building.HQ;
+import ptoma.hexoral.exception.GameException;
 import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.AttackAction;
+import ptoma.hexoral.game.action.CreateAction;
 import ptoma.hexoral.game.action.MoveAction;
 import ptoma.hexoral.map.MapGenerator;
 import ptoma.hexoral.units.Soldier;
@@ -42,14 +45,35 @@ public class UserStory02 {
 	public void seeMap() {
 		Player p = new Player("Steve",game);
 		game.addPlayer(p);
-		Unit u1 = new Soldier(p, new Point(10,10));
-		game.createUnit(p, u1);
+		Point hqp = game.putHQ(p);
+		HQ hq = (HQ) game.getBuilding(hqp);
+		game.createBuilding(p, game.getBuilding(hqp));
+		System.out.println("Player AP: " + p.getActionPoints());
+		System.out.println("Player EP: " + p.getEnergyPoints());
 		try {
-			p.getSchedule().addAction(new MoveAction(p, u1, new Point(11,11)));
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
 		} catch (InvalidPointException e1) {
 			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		//p.getSchedule().addAction(new AttackAction(p, u1, u1));
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			p.getSchedule().addAction(new CreateAction(p, hq, "Soldier"));
+		} catch (InvalidPointException e1) {
+			System.err.println(e1.getMessage());
+		} catch (GameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		gui = new Thread(new Runnable() {
 			public void run() {

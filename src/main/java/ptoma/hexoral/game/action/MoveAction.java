@@ -17,7 +17,7 @@ public class MoveAction extends Action {
 	@Override
 	public String toString() {
 		String ret = super.toString(); 
-		ret += " of type Move from " + this.unit.getPosition() + " to " + this.where.toString();
+		ret += " of type Move from (" + this.unit.getPosition().x + ", " + unit.getPosition().y +  "). to " + "(" + where.x + ", " + where.y + ").";
 		return ret;
 	}
 
@@ -53,7 +53,7 @@ public class MoveAction extends Action {
 				this.update();
 				unit.move(this.where);
 				this.print();
-			} else if (!this.unit.owner().equals(destUnit.owner())) {
+			} else 	{
 				// If the destination unit is an oponent unit then attack
 				//TODO We have to move the unit somewhere near the attack
 				throw new AttackException(new AttackAction(this.actor,
@@ -61,10 +61,30 @@ public class MoveAction extends Action {
 			}
 			
 		} else {
-			System.err.printf("NOT VALID MOVE\n");
-			return false;
+			System.err.printf("NOT VALID MOVE in (%d, %d) [occupied by annother unit]\n", where.x, where.y);
 		}
 		return true;
+		/*
+		if (this.validate()) {
+			Unit destUnit = this.getGame().getUnit(this.where);
+			if (destUnit == null) {
+				this.update();
+				unit.move(this.where);
+				this.print();
+			} else if (!(this.unit.owner().equals(destUnit.owner()))) {
+				// If the destination unit is an oponent unit then attack
+				//TODO We have to move the unit somewhere near the attack
+				throw new AttackException(new AttackAction(this.actor,
+						this.unit, destUnit));
+			}
+			
+		} else {
+			Unit destUnit = this.getGame().getUnit(this.where);
+			System.err.printf("NOT VALID MOVE in (%d, %d) [occupied by annother unit]\n", where.x, where.y);
+			throw new AttackException(new AttackAction(this.actor,
+					this.unit, destUnit));
+		}
+		return true;*/
 	}
 
 	protected void print() {

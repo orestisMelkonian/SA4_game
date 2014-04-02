@@ -15,6 +15,11 @@ import ptoma.hexoral.user.Player;
 
 public abstract class Building implements IAttackable {
 	
+	@Override
+	public String toString()	{
+		return (this.getClass().getSimpleName() + " in (" + getPosition().x + ", " + getPosition().y +
+				")     Health:" + getHealth() + "/" + baseHealth);
+	}
 	/**
 	 * The units that the building contains.
 	 */

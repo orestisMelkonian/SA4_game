@@ -3,7 +3,8 @@ package ptoma.hexoral;
 import java.awt.Point;
 
 public interface IAttackable {
-
+	
+	
 	/**
 	 * Return the attack force of a unit.
 	 * @return int the attack force.

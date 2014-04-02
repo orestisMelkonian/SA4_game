@@ -12,7 +12,13 @@ import java.awt.Point;
  * 
  */
 public class Soldier extends Unit {
-
+	
+	@Override
+	public String toString()	{
+		return (this.getClass().getSimpleName() + " in (" + getPosition().x + ", " + getPosition().y +
+				")     Health:" + getHealth() + "/" + baseHealth);
+	}
+	
 	/**
 	 * Starting attack power.
 	 */
