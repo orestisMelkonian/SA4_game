@@ -27,7 +27,7 @@ public class UserStory12b {
 	@Before
 	public void test() {
 		game = new Game(20, 20);
-		game.initializeIsland(50, 0, false, false, 90);
+		game.initializeIsland(50, 0, false, false, 30);
 	}
 
 	@Test

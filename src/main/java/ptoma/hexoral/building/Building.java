@@ -83,7 +83,7 @@ public abstract class Building implements IAttackable {
 	 */
 	
 	public long getHealth(){
-		return baseHealth;
+		return health;
 	}
 	/**
 	 * Returns a reference of the owner of the unit.
@@ -176,11 +176,12 @@ public abstract class Building implements IAttackable {
 			//the building does not take damage, since there are units in it.
 			for(int i = 0; i < storedUnits.size(); i++){
 				storedUnits.get(i).defend(damage);
+				damage = 0;
 			}
 		}else {
 			//the building itself takes damage, since there is no units inside
-			baseHealth = baseHealth - (damage);
-			if(baseHealth < 0){
+			health = health - (damage);
+			if(health < 0){
 				buildingDestroyed = true; 
 				
 			}
@@ -192,7 +193,6 @@ public abstract class Building implements IAttackable {
 	 * 
 	 * @return	the list of units which are stored inside.
 	 */
-	
 	public List<Unit> getUnitsInsideBuilding(){
 		return this.storedUnits;
 	}

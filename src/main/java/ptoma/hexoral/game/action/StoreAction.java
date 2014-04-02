@@ -64,6 +64,6 @@ public class StoreAction extends Action {
 	@Override
 	protected void update() {
 		storeBuilding.storeUnit(unitToBeStored);
-		actor.getGame().destroyUnit(unitToBeStored.getPosition());
+		actor.getGame().destroyUnit(unitToBeStored.getPreviousPosition());
 	}
 }

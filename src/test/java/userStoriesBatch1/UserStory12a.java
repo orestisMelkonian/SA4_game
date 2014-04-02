@@ -24,7 +24,7 @@ public class UserStory12a {
 	@Before
 	public void test() {
 		game = new Game(20, 20);
-		game.initializeIsland(50, 0, false, false, 90);
+		game.initializeIsland(50, 0, false, false, 40);
 	}
 
 	@Test
@@ -83,10 +83,7 @@ public class UserStory12a {
 				new GameUISettings(game);
 			}
 		});
-		System.out
-				.printf("\n (%d, %d) \n", game.getUnit(new Point(1, 0))
-						.getPosition().x, game.getUnit(new Point(1, 0))
-						.getPosition().y);
+
 		gui.start();
 		System.err.println("GUI Started");
 		try {
