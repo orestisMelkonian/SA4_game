@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -15,6 +17,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -63,22 +66,21 @@ public class MyMain {
 	static Player p1;
 	static Player p2;
 	static Point point = new Point(10, 20);
-	static Action action; 
+	static Action action;
 	static ArrayList<Action> listOfActions = new ArrayList<Action>();
 	static JMenuItem anItem;
 	static JPopupMenu popup = new JPopupMenu();
 	static JPanel userInfoTab;
 	static Scheduler scheduler;
-	
-	
-	
-	public MyMain(Canvas canvas, WorldMap localMap){
-		
+
+	public MyMain(Canvas canvas, WorldMap localMap) {
+
 		this.cnv = canvas;
 		this.localmap = localMap;
 		p1 = new Player(GameUISettings.textField.getText(), game);
 		p2 = new Player(GameUISettings.textField_1.getText(), game);
-		action = new AttackAction(p1, new Soldier(p1, point), new Soldier(p2, point));
+		action = new AttackAction(p1, new Soldier(p1, point), new Soldier(p2,
+				point));
 		scheduler = new Scheduler(game, p1);
 		p1.getSchedule().addAction(action);
 		game.createUnit(p1, new Soldier(p1, point));
@@ -86,21 +88,21 @@ public class MyMain {
 		addToScheduleList(p1);
 		addToPlayerUnitList(p1);
 		this.aFrame.setVisible(true);
-		
-		
+
 	}
-	
-	public MyMain(Game game){
+
+	public MyMain(Game game) {
 		this.game = game;
 		this.localmap = game.island;
 		cnv = new Visualize(32, game);
+		p1 = game.getAllPlayers().get(0);
 		initializenewWindow();
 		refresh();
 		this.aFrame.setVisible(true);
 	}
-	
-	public static void initializenewWindow(){
-		
+
+	public static void initializenewWindow() {
+
 		aFrame = new JFrame("Border Layout");
 		aFrame.setTitle("Island Generator");
 		aFrame.addWindowListener(new WindowAdapter() {
@@ -122,8 +124,7 @@ public class MyMain {
 		} catch (IOException e1) {
 			System.out.println("Icon Image not found");
 		}
-								
-	
+
 		cnv.repaint();
 		Thread clean = new Thread(new Runnable() {
 
@@ -133,12 +134,12 @@ public class MyMain {
 			}
 		});
 		clean.start();
-		
+
 		JButton executeTurn = new JButton("Execute Turn");
-		
+
 		executeTurn.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e){
+			public void mouseClicked(MouseEvent e) {
 				try {
 					game.executeTurn();
 					cnv.repaint();
@@ -148,58 +149,89 @@ public class MyMain {
 				refresh();
 			}
 		});
-		
-		
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 0;
-		
-		
+
 		JPanel userInfoTab = new JPanel();
 		tabbedPane.addTab("User Info", null, userInfoTab, null);
 		userInfoTab.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		armySummaryList = new JList(armyModel);
 		userInfoTab.add(armySummaryList);
-		
-		
+
 		JPanel scheduleTab = new JPanel();
 		tabbedPane.addTab("Turn Viewer", null, scheduleTab, null);
-		
+
 		scheduleList = new JList(model);
 		scheduleTab.add(scheduleList);
+		scheduleList.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_W) {
+					int actionIndex = (Integer) scheduleList.getSelectedIndex();
+					if(actionIndex > 0) {
+						p1.getSchedule().swapAction(actionIndex, actionIndex-1);
+						refresh();
+						scheduleList.setSelectedIndex(actionIndex-1);
+					}
+				} 
+				if (e.getKeyCode() == KeyEvent.VK_S) {
+					int actionIndex = (Integer) scheduleList.getSelectedIndex();
+					if(actionIndex < scheduleList.getModel().getSize()-1) {
+						p1.getSchedule().swapAction(actionIndex, actionIndex+1);
+						refresh();
+						scheduleList.setSelectedIndex(actionIndex+1);
+					}
+				}
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					int actionIndex = (Integer) scheduleList.getSelectedIndex();
+					if(actionIndex <= scheduleList.getModel().getSize()) {
+						p1.getSchedule().removeAction(actionIndex);
+						refresh();
+						scheduleList.setSelectedIndex(actionIndex);
+					}
+				}
+
+			}
+
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		anItem = new JMenuItem("Delete Action");
 		popup.add(anItem);
 		scheduleList.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e){
-				popup.show(null, e.getXOnScreen(), e.getYOnScreen());
+			public void mouseClicked(MouseEvent e) {
+				//popup.show(null, e.getXOnScreen(), e.getYOnScreen());
 			}
 		});
-		
-		
-		
+
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("Army Summary", null, unitInfoTab, null);
-		
 
-		
 		left.add(executeTurn);
 		left.add(tabbedPane, gbc_tabbedPane);
 		aFrame.getContentPane().add(left, BorderLayout.WEST);
 		cnv.setBackground(Color.GRAY);
 		aFrame.getContentPane().add(cnv);
 		aFrame.setVisible(true);
-		
+
 	}
-	
 
 	public static void initialize() {
 
-		//localmap = new WorldMap(50, 50);
+		// localmap = new WorldMap(50, 50);
 		cnv = new Visualize(32, game);
 		aFrame = new JFrame("Border Layout");
 		aFrame.setTitle("Island Generator");
@@ -222,15 +254,17 @@ public class MyMain {
 		} catch (IOException e1) {
 			System.out.println("Icon Image not found");
 		}
-								
+
 		localmap.setSizeY((Integer) GameUISettings.widthSpinner.getValue());
 		localmap.setSizeX((Integer) GameUISettings.heightSpinner.getValue());
 		localmap.erase();
-		
-		
-		localmap.randomizeIsland((Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
-				(Integer) GameUISettings.percentageOfWaterInsideSpinner.getValue(), GameUISettings.lakeCheckBox.isSelected(),
-				GameUISettings.riverCheckBox.isSelected(),(Integer) GameUISettings.percentageOfResourceSpinner.getValue());
+
+		localmap.randomizeIsland(
+				(Integer) GameUISettings.percentageOfGroundSpinner.getValue(),
+				(Integer) GameUISettings.percentageOfWaterInsideSpinner
+						.getValue(), GameUISettings.lakeCheckBox.isSelected(),
+				GameUISettings.riverCheckBox.isSelected(),
+				(Integer) GameUISettings.percentageOfResourceSpinner.getValue());
 		cnv.repaint();
 		Thread clean = new Thread(new Runnable() {
 
@@ -241,94 +275,82 @@ public class MyMain {
 		});
 		clean.start();
 
-		
 		JButton player1 = new JButton("Player 1");
-		
+
 		JButton player2 = new JButton("Player 2");
-		
+
 		JButton executeTurn = new JButton("Execute Turn");
-		
-		
-		
-		
-		
+
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 0;
-		
-		
+
 		JPanel userInfoTab = new JPanel();
 		tabbedPane.addTab("User Info", null, userInfoTab, null);
 		userInfoTab.setLayout(new GridLayout(0, 1, 0, 0));
-		
+
 		armySummaryList = new JList(armyModel);
 		userInfoTab.add(armySummaryList);
-		
-		
+
 		JPanel scheduleTab = new JPanel();
 		tabbedPane.addTab("Turn Viewer", null, scheduleTab, null);
-		
+
 		scheduleList = new JList(model);
 		scheduleTab.add(scheduleList);
 		anItem = new JMenuItem("Delete Action");
 		popup.add(anItem);
 		scheduleList.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e){
+			public void mouseClicked(MouseEvent e) {
 				popup.show(null, e.getXOnScreen(), e.getYOnScreen());
 			}
 		});
-		
-		
-		
+
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("Army Summary", null, unitInfoTab, null);
-		
 
-		
 		left.add(executeTurn);
 		left.add(tabbedPane, gbc_tabbedPane);
 		aFrame.getContentPane().add(left, BorderLayout.WEST);
 		cnv.setBackground(Color.GRAY);
 		aFrame.getContentPane().add(cnv);
 		aFrame.setVisible(true);
-		
+
 	}
 
 	public static int counter = 0;
-	
-	public static void addToPlayerUnitList(Player player){
+
+	public static void addToPlayerUnitList(Player player) {
 		armyModel.removeAllElements();
-		
-		for(int i =0; i < game.getPlayerUnits(player).size() ; i++){
+
+		for (int i = 0; i < game.getPlayerUnits(player).size(); i++) {
 			armyModel.addElement("Unit: " + game.getPlayerUnits(player).get(i));
 		}
-		for (Building b : game.getPlayerBuildings(player))	{
+		for (Building b : game.getPlayerBuildings(player)) {
 			armyModel.addElement("Building: " + b);
 		}
-		//userInfoTab.add(armySummaryList);
+		// userInfoTab.add(armySummaryList);
 	}
-	
-	public static void addToScheduleList(Player player){
-		
+
+	public static void addToScheduleList(Player player) {
+
 		model.removeAllElements();
-		
-		for( Action a : player.getSchedule().toArray()){
+
+		for (Action a : player.getSchedule().toArray()) {
 			model.addElement(a.toString());
-			
+
 		}
 	}
-	
-	public static void refresh(){
-		
-		for(int i = 0; i < game.getAllPlayers().size(); i++){
+
+	public static void refresh() {
+
+		for (int i = 0; i < game.getAllPlayers().size(); i++) {
 			addToScheduleList(game.getAllPlayers().get(i));
 			addToPlayerUnitList(game.getAllPlayers().get(i));
 		}
-		
+
 	}
-	
-	
+
 }

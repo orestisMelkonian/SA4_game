@@ -241,6 +241,8 @@ public class Game {
 				e.exec();
 			} catch (AttackException attack) {
 				attack.getAction().exec();
+			} finally {
+				
 			}
 		}
 		// Updates the resources
