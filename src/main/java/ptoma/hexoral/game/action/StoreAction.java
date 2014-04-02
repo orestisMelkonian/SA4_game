@@ -65,5 +65,6 @@ public class StoreAction extends Action {
 	protected void update() {
 		storeBuilding.storeUnit(unitToBeStored);
 		actor.getGame().destroyUnit(unitToBeStored.getPosition());
+		//System.out.println("unit is " + )
 	}
 }

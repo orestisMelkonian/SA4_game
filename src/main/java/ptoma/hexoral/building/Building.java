@@ -137,13 +137,6 @@ public abstract class Building implements IAttackable {
 		if(buildingDestroyed ){
 			return false;
 		}
-		/*
-		if (storedUnits.size() == baseUnitCapacity) {
-			System.err.println("The building does not have place for the new unit");
-			return true;
-		}
-		else{}
-		*/
 		storedUnits.add(e);
 		this.defenseBonus += 5;
 		return true;			
