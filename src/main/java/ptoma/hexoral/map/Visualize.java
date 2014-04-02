@@ -9,7 +9,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JSpinner;
 
+import ptoma.hexoral.building.Building;
 import ptoma.hexoral.exception.InvalidPointException;
+import ptoma.hexoral.game.Game;
+import ptoma.hexoral.units.Unit;
+import ptoma.hexoral.user.Player;
 
 @SuppressWarnings("serial")
 public class Visualize extends Canvas {
@@ -17,6 +21,7 @@ public class Visualize extends Canvas {
 	static JFrame aFrame;
 	JSpinner widthArea;
 	protected WorldMap map;
+	protected Game game;
 	protected int hexagonSize;
 	JSpinner HeightArea;
 	JSpinner groundArea;
@@ -24,10 +29,11 @@ public class Visualize extends Canvas {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public Visualize(int hexSize, WorldMap m) {
+	public Visualize(int hexSize, Game m) {
 		// setSize(map.sizeX * hexagonSize + hexagonSize, map.sizeY *
 		// hexagonSize);
-		this.map = m;
+		this.game = m;
+		this.map = m.island;
 		this.hexagonSize = hexSize;
 
 		this.print();
@@ -53,20 +59,22 @@ public class Visualize extends Canvas {
 		BufferedImage land = null;
 		BufferedImage mountain = null;
 		BufferedImage lake = null;
+		BufferedImage soldier = null;
+		BufferedImage building = null;
+		BufferedImage HQ = null;
+		BufferedImage mine = null;
 		BufferedImage output = new BufferedImage(map.sizeX * hexagonSize
 				+ hexagonSize / 2, map.sizeY * hexagonSize - map.sizeY
 				* hexagonSize / 6, BufferedImage.TYPE_INT_RGB);
 		try {
-			File r = new File("src/main/resources/resourcestroke.png");
-			File s = new File("src/main/resources/seastroke.png");
-			File d = new File("src/main/resources/grassstroke.png");
-			File m = new File("src/main/resources/mountainstroke.png");
-			File l = new File("src/main/resources/lakestroke.png");
-			resource = ImageIO.read(r);
-			sea = ImageIO.read(s);
-			land = ImageIO.read(d);
-			mountain = ImageIO.read(m);
-			lake = ImageIO.read(l);
+			resource = ImageIO.read(new File("src/main/resources/resourcestroke.png"));
+			sea = ImageIO.read(new File("src/main/resources/seastroke.png"));
+			land = ImageIO.read(new File("src/main/resources/grassstroke.png"));
+			mountain = ImageIO.read(new File("src/main/resources/mountainstroke.png"));
+			lake = ImageIO.read(new File("src/main/resources/lakestroke.png"));
+			soldier = ImageIO.read(new File("src/main/resources/soldier.png"));
+			mine = ImageIO.read(new File("src/main/resources/resource.png"));
+			HQ = ImageIO.read(new File("src/main/resources/HQ.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +86,7 @@ public class Visualize extends Canvas {
 				int offsetY = j * hexagonSize / 4;// j*4;//
 				String cellType = null;
 				try {
-					cellType = map.getHexagon(i, j).getType();
+					cellType = map.getHexagon(j, i).getType();
 				} catch (InvalidPointException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -110,6 +118,29 @@ public class Visualize extends Canvas {
 				}
 
 			}
+		}
+		//Add Soldiers
+		for(Player p : game.getAllPlayers()) {
+			for(Unit u : game.getPlayerUnits(p)) {
+				int offsetX = (u.getPosition().x % 2) * hexagonSize / 2;
+				int offsetY = u.getPosition().x * hexagonSize / 4;
+				g.drawImage(soldier, u.getPosition().y * hexagonSize + offsetX, u.getPosition().x
+						* hexagonSize - offsetY, hexagonSize, hexagonSize,
+						null);
+			}
+			for(Building build : game.getPlayerBuildings(p)) {
+				int offsetX = (build.getPosition().x % 2) * hexagonSize / 2;
+				int offsetY = build.getPosition().x * hexagonSize / 4;
+				if(build.getClass().getName().contains("HQ")) {
+					building = HQ;
+				} else {
+					building = mine;
+				}
+				g.drawImage(building, build.getPosition().y * hexagonSize + offsetX, build.getPosition().x
+						* hexagonSize - offsetY, hexagonSize, hexagonSize,
+						null);
+			}
+			
 		}
 		return output;
 	}

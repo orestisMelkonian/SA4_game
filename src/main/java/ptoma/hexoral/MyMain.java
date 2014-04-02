@@ -93,7 +93,7 @@ public class MyMain {
 	public MyMain(Game game){
 		this.game = game;
 		this.localmap = game.island;
-		cnv = new Visualize(32, localmap);
+		cnv = new Visualize(32, game);
 		initializenewWindow();
 		refresh();
 		this.aFrame.setVisible(true);
@@ -141,6 +141,7 @@ public class MyMain {
 			public void mouseClicked(MouseEvent e){
 				try {
 					game.executeTurn();
+					cnv.repaint();
 				} catch (GameException e1) {
 					System.err.println(e1.getAction().toString());
 				}
@@ -199,7 +200,7 @@ public class MyMain {
 	public static void initialize() {
 
 		//localmap = new WorldMap(50, 50);
-		cnv = new Visualize(32, localmap);
+		cnv = new Visualize(32, game);
 		aFrame = new JFrame("Border Layout");
 		aFrame.setTitle("Island Generator");
 		aFrame.addWindowListener(new WindowAdapter() {
