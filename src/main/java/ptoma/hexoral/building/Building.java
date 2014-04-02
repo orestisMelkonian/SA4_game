@@ -137,6 +137,7 @@ public abstract class Building implements IAttackable {
 		if(buildingDestroyed ){
 			return false;
 		}
+		e.move(this.position);
 		storedUnits.add(e);
 		this.defenseBonus += 5;
 		return true;			
