@@ -41,13 +41,13 @@ public class ResourceBuilding extends Building {
 	public ResourceBuilding(Player owner, Point p) {
 		super(owner, p);
 		baseUnitCapacity = 1;
-
-		energyPerTurn = 0;
+		energyPerTurn = 25;
 		try {
-			if (this.getOwner().getGame().island.getType(p.x, p.y).equals(
-					"RESOURCE"))
+			if (this.getOwner().getGame().island.getHexagon(p.x, p.y)
+					.isResource()) {
 				energyPerTurn += baseEnergyPerTurn;
-		} catch (InvalidPointException e) {
+			}
+		}  catch (InvalidPointException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

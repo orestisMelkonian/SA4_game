@@ -159,6 +159,14 @@ public class Game {
 				ret.add(unit);
 			}
 		}
+		//Additionally
+		for (Building build : this.buildings.values())	{
+			for (Unit unit : build.getUnitsInsideBuilding())	{
+				if (player == null || unit.owner().equals(player)) {
+					ret.add(unit);
+				}
+			}
+		}
 		return ret;
 	}
 
@@ -247,14 +255,22 @@ public class Game {
 		}
 		// Updates the resources
 		this.updateResources();
+		for(Player player : this.getAllPlayers()) {
+			player.getSchedule().reset();
+		}
 
 	}
 
 	private void updateResources() {
+		for(Player player : this.players.values()) {
+			player.setActionPoints(Player.BASE_ACTION); 	//TODO Make them variables
+			player.addEnergyPoints(Player.BASE_ENERGY);	//TODO make them variables
+		}
 		for (Building b : this.buildings.values()) {
 			if (b.getClass().getSimpleName()
 					.equals(ResourceBuilding.class.getSimpleName())) {
 				ResourceBuilding resource = (ResourceBuilding) b;
+				int delete = resource.getEnergyPerTurn();
 				resource.getOwner()
 						.addEnergyPoints(resource.getEnergyPerTurn());
 			}

@@ -60,8 +60,10 @@ public class MyMain {
 	static JSpinner waterArea;
 	static JList armySummaryList;
 	static JList scheduleList;
+	static JList userList;
 	static DefaultListModel model = new DefaultListModel();
 	static DefaultListModel armyModel = new DefaultListModel();
+	static DefaultListModel userModel = new DefaultListModel();
 	static Game game = new Game(100, 100);
 	static Player p1;
 	static Player p2;
@@ -170,26 +172,28 @@ public class MyMain {
 		scheduleTab.add(scheduleList);
 		scheduleList.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e) {
-				
+
 				if (e.getKeyCode() == KeyEvent.VK_W) {
 					int actionIndex = (Integer) scheduleList.getSelectedIndex();
-					if(actionIndex > 0) {
-						p1.getSchedule().swapAction(actionIndex, actionIndex-1);
+					if (actionIndex > 0) {
+						p1.getSchedule().swapAction(actionIndex,
+								actionIndex - 1);
 						refresh();
-						scheduleList.setSelectedIndex(actionIndex-1);
+						scheduleList.setSelectedIndex(actionIndex - 1);
 					}
-				} 
+				}
 				if (e.getKeyCode() == KeyEvent.VK_S) {
 					int actionIndex = (Integer) scheduleList.getSelectedIndex();
-					if(actionIndex < scheduleList.getModel().getSize()-1) {
-						p1.getSchedule().swapAction(actionIndex, actionIndex+1);
+					if (actionIndex < scheduleList.getModel().getSize() - 1) {
+						p1.getSchedule().swapAction(actionIndex,
+								actionIndex + 1);
 						refresh();
-						scheduleList.setSelectedIndex(actionIndex+1);
+						scheduleList.setSelectedIndex(actionIndex + 1);
 					}
 				}
 				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					int actionIndex = (Integer) scheduleList.getSelectedIndex();
-					if(actionIndex <= scheduleList.getModel().getSize()) {
+					if (actionIndex <= scheduleList.getModel().getSize()) {
 						p1.getSchedule().removeAction(actionIndex);
 						refresh();
 						scheduleList.setSelectedIndex(actionIndex);
@@ -213,12 +217,14 @@ public class MyMain {
 		scheduleList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//popup.show(null, e.getXOnScreen(), e.getYOnScreen());
+				// popup.show(null, e.getXOnScreen(), e.getYOnScreen());
 			}
 		});
 
 		JPanel unitInfoTab = new JPanel();
 		tabbedPane.addTab("User Info", null, unitInfoTab, null);
+		userList = new JList(userModel);
+		unitInfoTab.add(userList);
 
 		left.add(executeTurn);
 		left.add(tabbedPane, gbc_tabbedPane);
@@ -308,7 +314,7 @@ public class MyMain {
 			}
 		});
 
-		JPanel unitInfoTab = new JPanel();
+		JList unitInfoTab = new JList(userModel);
 		tabbedPane.addTab("UserInfo", null, unitInfoTab, null);
 
 		left.add(executeTurn);
@@ -344,12 +350,24 @@ public class MyMain {
 		}
 	}
 
+	public static void addToUserList() {
+
+		userModel.removeAllElements();
+		for (Player player : game.getAllPlayers()) {
+
+			userModel.addElement(player.getName() + " AP : "
+					+ player.getSchedule().getActionPointsLeft() + " EP : "
+					+ player.getSchedule().getEnergyPointsLeft());
+		}
+	}
+
 	public static void refresh() {
 
 		for (int i = 0; i < game.getAllPlayers().size(); i++) {
 			addToScheduleList(game.getAllPlayers().get(i));
 			addToPlayerUnitList(game.getAllPlayers().get(i));
 		}
+		addToUserList();
 
 	}
 

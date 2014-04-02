@@ -16,8 +16,8 @@ public class Player extends User {
 	private Game gamePlaying;
 
 	private long energyPoints;
-	static private long BASE_ENERGY = 100;
-	static private long BASE_ACTION = 100;
+	static public long BASE_ENERGY = 100;
+	static public long BASE_ACTION = 100;
 	private long actionPoints;
 
 	public Player(String username, final Game gamePLaying) {

@@ -23,14 +23,14 @@ public class Scheduler {
 		this.game = game;
 		this.actor = actor;
 		this.schedule = new ArrayList<Action>();
-		this.actionPointsLeft = actor.getActionPoints();
-		this.energyPointsLeft = actor.getEnergyPoints();
+		this.setActionPointsLeft(actor.getActionPoints());
+		this.setEnergyPointsLeft(actor.getEnergyPoints());
 		
 	}
 
 	public void addAction(Action e) {
-		this.actionPointsLeft -= e.getAPCost();
-		this.energyPointsLeft -= e.getEPCost();
+		this.setActionPointsLeft(this.getActionPointsLeft() - e.getAPCost());
+		this.setEnergyPointsLeft(this.getEnergyPointsLeft() - e.getEPCost());
 		this.schedule.add(e);
 
 	}
@@ -41,14 +41,14 @@ public class Scheduler {
 
 	public void removeAction(int index) {
 		Action e = this.schedule.remove(index);
-		this.actionPointsLeft += e.getAPCost();
-		this.energyPointsLeft += e.getEPCost();
+		this.setActionPointsLeft(this.getActionPointsLeft() + e.getAPCost());
+		this.setEnergyPointsLeft(this.getEnergyPointsLeft() + e.getEPCost());
 	}
 
 	public void removeAction(Action action) {
 		if(this.schedule.remove(action)) {
-			this.actionPointsLeft += action.getAPCost();
-			this.energyPointsLeft += action.getEPCost();	
+			this.setActionPointsLeft(this.getActionPointsLeft() + action.getAPCost());
+			this.setEnergyPointsLeft(this.getEnergyPointsLeft() + action.getEPCost());	
 		}
 	}
 	
@@ -81,6 +81,27 @@ public class Scheduler {
 
 	public void swapAction(int e1, int e2) {
 		Collections.swap(schedule, e1, e2);
+	}
+
+	public long getActionPointsLeft() {
+		return actionPointsLeft;
+	}
+
+	public void setActionPointsLeft(long actionPointsLeft) {
+		this.actionPointsLeft = actionPointsLeft;
+	}
+
+	public long getEnergyPointsLeft() {
+		return energyPointsLeft;
+	}
+
+	public void setEnergyPointsLeft(long energyPointsLeft) {
+		this.energyPointsLeft = energyPointsLeft;
+	}
+
+	public void reset() {
+		this.setActionPointsLeft(actor.getActionPoints());
+		this.setEnergyPointsLeft(actor.getEnergyPoints());
 	}
 
 }
