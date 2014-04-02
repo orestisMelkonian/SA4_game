@@ -157,7 +157,7 @@ public class MyMain {
 		gbc_tabbedPane.gridy = 0;
 
 		JPanel userInfoTab = new JPanel();
-		tabbedPane.addTab("User Info", null, userInfoTab, null);
+		tabbedPane.addTab("Army Summary", null, userInfoTab, null);
 		userInfoTab.setLayout(new GridLayout(0, 1, 0, 0));
 
 		armySummaryList = new JList(armyModel);
@@ -218,7 +218,7 @@ public class MyMain {
 		});
 
 		JPanel unitInfoTab = new JPanel();
-		tabbedPane.addTab("Army Summary", null, unitInfoTab, null);
+		tabbedPane.addTab("User Info", null, unitInfoTab, null);
 
 		left.add(executeTurn);
 		left.add(tabbedPane, gbc_tabbedPane);
@@ -288,7 +288,7 @@ public class MyMain {
 		gbc_tabbedPane.gridy = 0;
 
 		JPanel userInfoTab = new JPanel();
-		tabbedPane.addTab("User Info", null, userInfoTab, null);
+		tabbedPane.addTab("Army Summary", null, userInfoTab, null);
 		userInfoTab.setLayout(new GridLayout(0, 1, 0, 0));
 
 		armySummaryList = new JList(armyModel);
@@ -309,7 +309,7 @@ public class MyMain {
 		});
 
 		JPanel unitInfoTab = new JPanel();
-		tabbedPane.addTab("Army Summary", null, unitInfoTab, null);
+		tabbedPane.addTab("UserInfo", null, unitInfoTab, null);
 
 		left.add(executeTurn);
 		left.add(tabbedPane, gbc_tabbedPane);

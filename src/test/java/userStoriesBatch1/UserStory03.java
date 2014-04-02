@@ -29,8 +29,8 @@ public class UserStory03 {
 	public void seeMap() {
 		Player p = new Player("Orestis", game);
 		game.addPlayer(p);
-		p.setActionPoints(10000);
-		p.setEnergyPoints(10000);
+		p.setActionPoints(100);
+		p.setEnergyPoints(100);
 		Point hqp = game.putHQ(p);
 		HQ hq = (HQ) game.getBuilding(hqp);
 		game.createBuilding(p, game.getBuilding(hqp));
