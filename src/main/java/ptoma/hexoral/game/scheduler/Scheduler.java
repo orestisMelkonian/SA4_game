@@ -1,6 +1,7 @@
 package ptoma.hexoral.game.scheduler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ptoma.hexoral.game.Game;
 import ptoma.hexoral.game.action.Action;
@@ -79,9 +80,7 @@ public class Scheduler {
 	 */
 
 	public void swapAction(int e1, int e2) {
-		Action a1 = this.schedule.get(e1);
-		this.schedule.add(e1, this.schedule.get(e2));
-		this.schedule.add(e2, a1);
+		Collections.swap(schedule, e1, e2);
 	}
 
 }
