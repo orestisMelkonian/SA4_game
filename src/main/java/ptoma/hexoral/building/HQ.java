@@ -16,4 +16,9 @@ public class HQ extends CreationBuilding{
 		super(owner, p);
 		this.baseUnitCapacity = 3;
 	}
+	@Override
+	public String toString()	{
+		return (this.getClass().getSimpleName() + " in (" + getPosition().x + ", " + getPosition().y +
+				")     Health:" + getHealth() + "/" + baseHealth + "    Owner: " + this.getOwner().getName());
+	}
 }

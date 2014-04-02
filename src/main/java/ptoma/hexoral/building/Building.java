@@ -18,7 +18,7 @@ public abstract class Building implements IAttackable {
 	@Override
 	public String toString()	{
 		return (this.getClass().getSimpleName() + " in (" + getPosition().x + ", " + getPosition().y +
-				")     Health:" + getHealth() + "/" + baseHealth);
+				")     Health:" + getHealth() + "/" + baseHealth + "    Owner: " + this.getOwner().getName());
 	}
 	/**
 	 * The units that the building contains.
@@ -44,9 +44,14 @@ public abstract class Building implements IAttackable {
 	private int defenseBonus;
 	
 	/**
-	 * The health of the HQ.
+	 * The base health of the HQ.
 	 */
 	protected static long baseHealth = 1000;
+	
+	/**
+	 * The  health of the HQ.
+	 */
+	protected long health = 1000;
 	
 	/**
 	 * true:destroyed 	false:not destroyed
@@ -87,6 +92,13 @@ public abstract class Building implements IAttackable {
 	 */
 	public final Player getOwner() {
 		return owner;
+	}
+	
+	/**
+	 * Set a new owner to hte building.
+	 */
+	public void setOwner(Player p) {
+		owner = p;
 	}
 	
 	/**

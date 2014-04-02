@@ -16,7 +16,7 @@ public class Soldier extends Unit {
 	@Override
 	public String toString()	{
 		return (this.getClass().getSimpleName() + " in (" + getPosition().x + ", " + getPosition().y +
-				")     Health:" + getHealth() + "/" + baseHealth);
+				")     Health:" + getHealth() + "/" + baseHealth + "    Owner: " + this.getOwner().getName());
 	}
 	
 	/**

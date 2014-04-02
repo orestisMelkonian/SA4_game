@@ -42,6 +42,10 @@ public class Combat {
 				this.attacker.defend(this.defender.attack());
 			else
 				break;
+			if (defender.getClass().getSimpleName().equals("HQ"))	{
+				if (attacker.getOwner().getGame().getBuilding(defender.getPosition()).getUnitsInsideBuilding().size() == 0)
+					break;
+			}
 		}
 		return true;
 	}

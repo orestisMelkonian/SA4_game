@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import ptoma.hexoral.building.Building;
 import ptoma.hexoral.exception.AttackException;
 import ptoma.hexoral.exception.InvalidPointException;
 import ptoma.hexoral.units.Unit;
@@ -49,15 +50,19 @@ public class MoveAction extends Action {
 		// TODO Auto-generated method stub
 		if (this.validate()) {
 			Unit destUnit = this.getGame().getUnit(this.where);
-			if (destUnit == null) {
+			Building destBuild = this.getGame().getBuilding(this.where);
+			if ((destUnit == null) && (destBuild == null)){
 				this.update();
 				unit.move(this.where);
 				this.print();
-			} else 	{
+			} else 	if (destBuild == null){
 				// If the destination unit is an oponent unit then attack
 				//TODO We have to move the unit somewhere near the attack
 				throw new AttackException(new AttackAction(this.actor,
 						this.unit, destUnit));
+			} else	{
+				throw new AttackException(new AttackAction(this.actor,
+						this.unit, destBuild));
 			}
 			
 		} else {

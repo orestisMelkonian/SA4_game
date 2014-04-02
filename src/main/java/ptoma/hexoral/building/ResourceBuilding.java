@@ -13,7 +13,11 @@ import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
 
 public class ResourceBuilding extends Building {
-
+	@Override
+	public String toString()	{
+		return (this.getClass().getSimpleName() + " in (" + getPosition().x + ", " + getPosition().y +
+				")     Health:" + getHealth() + "/" + baseHealth + "    Owner: " + this.getOwner().getName());
+	}
 	/**
 	 * The action points required to create it.
 	 */

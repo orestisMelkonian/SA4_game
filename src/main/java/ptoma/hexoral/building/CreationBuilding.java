@@ -13,7 +13,11 @@ import ptoma.hexoral.units.Unit;
 import ptoma.hexoral.user.Player;
 
 public class CreationBuilding extends Building {
-
+	@Override
+	public String toString()	{
+		return (this.getClass().getSimpleName() + " in (" + getPosition().x + ", " + getPosition().y +
+				")     Health:" + getHealth() + "/" + baseHealth + "    Owner: " + this.getOwner().getName());
+	}
 	/**
 	 * The units that can be produced in the HQ.
 	 */

@@ -22,12 +22,12 @@ public abstract class Unit implements IAttackable {
 	/**
 	 * Action points needed to create.
 	 */
-	protected int createAP;
+	protected int createAP = 25;
 
 	/**
 	 * Energy points needed to create.
 	 */
-	protected int createEP;
+	protected int createEP = 50;
 
 	/**
 	 * The health of the unit.
@@ -78,9 +78,6 @@ public abstract class Unit implements IAttackable {
 		this.position = p;
 		this.previousPosition = this.position;
 		this.moveAP = 0;
-		this.createAP = 25;
-		this.createEP = 50;
-
 	}
 
 	/**
