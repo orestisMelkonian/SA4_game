@@ -159,6 +159,14 @@ public class Game {
 				ret.add(unit);
 			}
 		}
+		//Additionally
+		for (Building build : this.buildings.values())	{
+			for (Unit unit : build.getUnitsInsideBuilding())	{
+				if (player == null || unit.owner().equals(player)) {
+					ret.add(unit);
+				}
+			}
+		}
 		return ret;
 	}
 
